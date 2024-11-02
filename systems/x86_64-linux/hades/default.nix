@@ -36,11 +36,12 @@ with lib.${namespace};
 
   plusultra = {
 
+
     apps = {
-      rpcs3 = enabled;
-      ubports-installer = enabled;
-      steamtinkerlaunch = enabled;
-      r2modman = enabled;
+      # rpcs3 = enabled;
+      # ubports-installer = enabled;
+      # steamtinkerlaunch = enabled;
+      # r2modman = enabled;
     };
 
     services = {

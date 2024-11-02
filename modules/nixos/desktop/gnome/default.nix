@@ -64,10 +64,10 @@ in
   config = mkIf cfg.enable {
     plusultra.system.xkb.enable = true;
     plusultra.desktop.addons = {
-      gtk = enabled;
+      # gtk = enabled;
       wallpapers = enabled;
       electron-support = enabled;
-      foot = enabled;
+      # foot = enabled;
     };
 
     environment.systemPackages =
@@ -170,12 +170,12 @@ in
               ];
             favorite-apps =
               [ "org.gnome.Nautilus.desktop" ]
-              ++ optional config.${namespace}.apps.firefox.enable "firefox.desktop"
-              ++ optional config.${namespace}.apps.vscode.enable "code.desktop"
-              ++ optional config.${namespace}.desktop.addons.foot.enable "foot.desktop"
-              ++ optional config.${namespace}.apps.logseq.enable "logseq.desktop"
+              # ++ optional config.${namespace}.apps.firefox.enable "firefox.desktop"
+              # ++ optional config.${namespace}.apps.vscode.enable "code.desktop"
+              # ++ optional config.${namespace}.desktop.addons.foot.enable "foot.desktop"
+              # ++ optional config.${namespace}.apps.logseq.enable "logseq.desktop"
               ++ optional config.${namespace}.apps.discord.enable "discord.desktop"
-              ++ optional config.${namespace}.apps.element.enable "element-desktop.desktop"
+              # ++ optional config.${namespace}.apps.element.enable "element-desktop.desktop"
               ++ optional config.${namespace}.apps.steam.enable "steam.desktop";
           };
 

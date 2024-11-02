@@ -11,7 +11,7 @@ with lib.${namespace};
 let
   cfg = config.${namespace}.suites.development;
   apps = {
-    vscode = enabled;
+    # vscode = enabled;
     yubikey = enabled;
   };
   cli-apps = {

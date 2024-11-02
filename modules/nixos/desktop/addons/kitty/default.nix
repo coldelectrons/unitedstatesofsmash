@@ -17,10 +17,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    plusultra.desktop.addons.term = {
-      enable = true;
-      pkg = pkgs.kitty;
-    };
+    environment.systemPackages = [
+      pkgs.kitty
+    ];
 
     # plusultra.home.configFile."kitty/kitty.ini".source = ./kitty.ini;
   };

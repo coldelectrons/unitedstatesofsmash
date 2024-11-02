@@ -8,15 +8,9 @@
     # NixPkgs Unstable
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-<<<<<<< HEAD
+    # Lix
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
-||||||| parent of d20e02c (chore: update inputs)
-=======
-    # Lix
-    lix = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
->>>>>>> d20e02c (chore: update inputs)
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -26,12 +20,6 @@
 
     # Hardware Configuration
     nixos-hardware.url = "github:nixos/nixos-hardware";
-
-    # improved Wine variants
-    nix-gaming = {
-      url = "github:fufexan/nix-gaming";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # Generate System Images
     nixos-generators.url = "github:nix-community/nixos-generators";
@@ -70,16 +58,17 @@
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "unstable";
 
+    # TODO LATER
     # Neovim
-    neovim.url = "github:coldelectrons/neovim";
-    neovim.inputs.nixpkgs.follows = "unstable";
+    # neovim.url = "github:coldelectrons/neovim";
+    # neovim.inputs.nixpkgs.follows = "unstable";
 
     # Tmux
-    tmux.url = "github:coldelectrons/tmux";
-    tmux.inputs = {
-      nixpkgs.follows = "nixpkgs";
-      unstable.follows = "unstable";
-    };
+    # tmux.url = "github:coldelectrons/tmux";
+    # tmux.inputs = {
+    #   nixpkgs.follows = "nixpkgs";
+    #   unstable.follows = "unstable";
+    # };
 
     # Binary Cache
     attic = {
@@ -121,11 +110,6 @@
       flake = false;
     };
 
-    bibata-cursors = {
-      url = "github:suchipi/Bibata_Cursor";
-      flake = false;
-    };
-
   };
 
   outputs =
@@ -135,7 +119,6 @@
         inherit inputs;
         src = ./.;
 
-        # snowfallorg.user.name = "coldelectrons";
         snowfall = {
           meta = {
             name = "plusultra";
@@ -158,62 +141,18 @@
 
         overlays = with inputs; [
           avalanche.overlays.default
-          aux-website.overlays.default
-          neovim.overlays.default
-          tmux.overlay
+          # neovim.overlays.default
+          # tmux.overlay
           flake.overlays.default
           thaw.overlays.default
           drift.overlays.default
-          cowsay.overlays.default
           icehouse.overlays.default
-          rf.overlays.default
           attic.overlays.default
-          snowfall-docs.overlays.default
-          nixpkgs-news.overlays.default
-          lix.overlays.default
+          # snowfall-docs.overlays.default
+          # nixpkgs-news.overlays.default
+          lix-module.overlays.default
         ];
 
-<<<<<<< HEAD
-      overlays = with inputs; [
-        avalanche.overlays.default
-        neovim.overlays.default
-        tmux.overlay
-        flake.overlays.default
-        thaw.overlays.default
-        drift.overlays.default
-        icehouse.overlays.default
-        attic.overlays.default
-      ];
-||||||| parent of d20e02c (chore: update inputs)
-      overlays = with inputs; [
-        avalanche.overlays.default
-        aux-website.overlays.default
-        neovim.overlays.default
-        tmux.overlay
-        flake.overlays.default
-        thaw.overlays.default
-        drift.overlays.default
-        cowsay.overlays.default
-        icehouse.overlays.default
-        rf.overlays.default
-        attic.overlays.default
-        snowfall-docs.overlays.default
-        nixpkgs-news.overlays.default
-      ];
-=======
-        systems.modules.nixos = with inputs; [
-          avalanche.nixosModules."avalanche/desktop"
-          home-manager.nixosModules.home-manager
-          nix-ld.nixosModules.nix-ld
-          vault-service.nixosModules.nixos-vault-service
-          # lix.nixosModules.default
-          # TODO: Replace plusultra.services.attic now that vault-agent
-          # exists and can force override environment files.
-          # attic.nixosModules.atticd
-        ];
->>>>>>> d20e02c (chore: update inputs)
-
-<<<<<<< HEAD
       systems.modules.nixos = with inputs; [
         avalanche.nixosModules."avalanche/desktop"
         home-manager.nixosModules.home-manager
@@ -224,31 +163,10 @@
         # exists and can force override environment files.
         # attic.nixosModules.atticd
       ];
-||||||| parent of d20e02c (chore: update inputs)
-      systems.modules.nixos = with inputs; [
-        avalanche.nixosModules."avalanche/desktop"
-        home-manager.nixosModules.home-manager
-        nix-ld.nixosModules.nix-ld
-        vault-service.nixosModules.nixos-vault-service
-        # TODO: Replace plusultra.services.attic now that vault-agent
-        # exists and can force override environment files.
-        # attic.nixosModules.atticd
-      ];
-=======
-        systems.hosts.jasper.modules = with inputs; [
-          nixos-hardware.nixosModules.framework-11th-gen-intel
-        ];
->>>>>>> d20e02c (chore: update inputs)
-
-<<<<<<< HEAD
-      deploy = lib.mkDeploy { inherit (inputs) self; };
-||||||| parent of d20e02c (chore: update inputs)
-      systems.hosts.jasper.modules = with inputs; [
-        nixos-hardware.nixosModules.framework-11th-gen-intel
+      systems.hosts.hades.modules = with inputs; [
+        # nixos-hardware.nixosModules.framework-11th-gen-intel
       ];
 
-      deploy = lib.mkDeploy { inherit (inputs) self; };
-=======
         deploy = lib.mkDeploy { inherit (inputs) self; };
 
         checks = builtins.mapAttrs
@@ -256,7 +174,6 @@
             system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
           )
           inputs.deploy-rs.lib;
->>>>>>> d20e02c (chore: update inputs)
 
         outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
       }

@@ -19,9 +19,6 @@ in
   config = mkIf cfg.enable {
     plusultra = {
       apps = {
-        yuzu = enabled;
-        pcsx2 = enabled;
-        dolphin = enabled;
       };
     };
   };

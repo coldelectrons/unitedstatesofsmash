@@ -33,13 +33,10 @@ in
   config = mkIf cfg.enable {
     plusultra.system.xkb.enable = true;
     plusultra.desktop.addons = {
-      gtk = enabled;
+      # gtk = enabled;
       wallpapers = enabled;
       electron-support = enabled;
       kitty = enabled;
-      # audio = enabled;
-      # printing = enabled;
-      # spacenav = enabled;
     };
 
     plusultra.hardware  = {

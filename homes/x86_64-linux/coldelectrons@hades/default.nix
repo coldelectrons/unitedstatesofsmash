@@ -13,6 +13,7 @@ with lib.${namespace};
     user = {
       enable = true;
       name = "coldelectrons";
+      home = "/home/coldelectrons/";
     };
 
     cli-apps = {
