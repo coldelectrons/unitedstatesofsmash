@@ -21,8 +21,7 @@ in
       apps = {
         gimp = enabled;
         inkscape = enabled;
-        blender = enabled;
-				aseprite = enabled;
+        # blender = enabled;
       };
 
       system.fonts.fonts = with pkgs; [ google-fonts ];

@@ -18,8 +18,6 @@ with lib.${namespace};
 
     cli-apps = {
       zsh = enabled;
-      tmux = enabled;
-      neovim = enabled;
       lunarvim = enabled;
       home-manager = disabled;
     };

@@ -41,10 +41,10 @@ in
 
       tools = {
         # attic = enabled;
-        at = enabled;
+        # at = enabled;
         direnv = enabled;
         # go = enabled;
-        http = enabled;
+        # http = enabled;
         # k8s = enabled;
         # node = enabled;
         # titan = enabled;

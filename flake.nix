@@ -1,5 +1,5 @@
 {
-  description = "Plus Ultra";
+  description = "United States of Smash";
 
   inputs = {
     # NixPkgs
@@ -150,7 +150,7 @@
           attic.overlays.default
           # snowfall-docs.overlays.default
           # nixpkgs-news.overlays.default
-          lix-module.overlays.default
+          # lix-module.overlays.default
         ];
 
       systems.modules.nixos = with inputs; [

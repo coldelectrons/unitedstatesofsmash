@@ -98,26 +98,28 @@ in
       # kdePackages.elisa
     ];
 
+    # TODO is this even necessary
     # Create system services for KDE connect
-    systemd.user.services.kdeconnect = {
-      description = "Adds communication between your desktop and your smartphone";
-      after = [ "graphical-session-pre.target" ];
-      partOf = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
+    # systemd.user.services.kdeconnect = {
+    #   description = "Adds communication between your desktop and your smartphone";
+    #   after = [ "graphical-session-pre.target" ];
+    #   partOf = [ "graphical-session.target" ];
+    #   wantedBy = [ "graphical-session.target" ];
 
-      serviceConfig = {
-        #Environment = "PATH=${config.home.profileDirectory}/bin";
-        ExecStart = "${kdeconnect-pkg}/libexec/kdeconnectd";
-        Restart = "on-abort";
-      };
-    };
-    systemd.tmpfiles.rules =
-      [ "d ${kdeHome}/.config 0711 sddm sddm" ]
-      ++ (
-        # "./monitors.xml" comes from ~/.config/monitors.xml when plasma
-        # display information is updated.
-        lib.optional (cfg.monitors != null) "L+ ${kdeHome}/.config/monitors.xml - - - - ${cfg.monitors}"
-      );
+    #   serviceConfig = {
+    #     #Environment = "PATH=${config.home.profileDirectory}/bin";
+    #     ExecStart = "${kdeconnect-pkg}/libexec/kdeconnectd";
+    #     Restart = "on-abort";
+    #   };
+    # };
+    # TODO is this even necessary
+    # systemd.tmpfiles.rules =
+    #   [ "d ${kdeHome}/.config 0711 sddm sddm" ]
+    #   ++ (
+    #     # "./monitors.xml" comes from ~/.config/monitors.xml when plasma
+    #     # display information is updated.
+    #     lib.optional (cfg.monitors != null) "L+ ${kdeHome}/.config/monitors.xml - - - - ${cfg.monitors}"
+    #   );
 
     systemd.services.plusultra-user-icon = {
       before = [ "display-manager.service" ];
@@ -183,7 +185,13 @@ in
       enable = true;
     };
 
+    # TODO Is this even necessary
+    # TODO and isn't there a more Nix-y way to do this
     # Open firewall for samba connections to work.
-    networking.firewall.extraCommands = "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns";
+    # networking.firewall.extraCommands = "iptables -t raw -A OUTPUT -p udp -m udp --dport 137 -j CT --helper netbios-ns";
+    services.samba.openFirewall = true;
+    services.samba.enable = true;
+    
+
   };
 }

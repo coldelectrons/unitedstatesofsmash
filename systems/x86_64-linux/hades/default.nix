@@ -46,6 +46,7 @@ with lib.${namespace};
 
     services = {
       avahi = enabled;
+      printing = enabled;
     };
 
     archetypes = {

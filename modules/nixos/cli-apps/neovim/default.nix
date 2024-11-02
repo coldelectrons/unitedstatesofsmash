@@ -21,7 +21,9 @@ in
       # FIXME: As of today (2022-12-09), `page` no longer works with my Neovim
       # configuration. Either something in my configuration is breaking it or `page` is busted.
       # page
-      plusultra.neovim
+      # TODO see what Jake did for his neovim
+      # plusultra.neovim
+      neovim
     ];
 
     environment.variables = {

@@ -15,5 +15,11 @@ in
     enable = mkEnableOption "Tmux";
   };
 
-  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ plusultra.tmux ]; };
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      # TODO see what the heck Jake did to jazz up his tmux
+      # plusultra.tmux
+      tmux
+    ];
+  };
 }
