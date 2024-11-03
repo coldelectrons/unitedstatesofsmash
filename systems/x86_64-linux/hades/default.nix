@@ -38,6 +38,7 @@ with lib.${namespace};
 
 
     apps = {
+      simula = enabled;
       # rpcs3 = enabled;
       # ubports-installer = enabled;
       # steamtinkerlaunch = enabled;

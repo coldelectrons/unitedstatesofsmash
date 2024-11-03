@@ -22,7 +22,7 @@ in
         plasma6 = enabled;
 
         addons = {
-          wallpapers = enabled;
+          # wallpapers = enabled;
         };
       };
 

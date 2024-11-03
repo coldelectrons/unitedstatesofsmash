@@ -33,7 +33,7 @@ in
   config = mkIf cfg.enable {
     plusultra.system.xkb.enable = true;
     plusultra.desktop.addons = {
-      gtk = enabled;
+      # gtk = enabled;
       # wallpapers = enabled;
       electron-support = enabled;
       kitty = enabled;
@@ -65,7 +65,7 @@ in
         clinfo # for kinfocenter for OpenCL page
         glxinfo # for kinfocenter for OpenGL EGL and GLX page
         vulkan-tools # for kinfocenter for Vulkan page
-        gpu-info
+        gpu-viewer
         wayland-utils # for kinfocenter for Wayland page
         ffmpegthumbnailer # for video thumbnails
         linuxquota # for plasma-disks

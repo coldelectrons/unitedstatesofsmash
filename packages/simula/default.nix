@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   namespace,
   ...
@@ -22,4 +23,4 @@ let
     externalSrc = simulaSrc;
   };
 in
-override-meta new-meta package
+override-meta simula
