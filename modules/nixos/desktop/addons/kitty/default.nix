@@ -17,8 +17,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      pkgs.kitty
+    environment.systemPackages = with pkgs; [
+      kitty
+      kitty-img
+      pixcat
     ];
 
     # plusultra.home.configFile."kitty/kitty.ini".source = ./kitty.ini;

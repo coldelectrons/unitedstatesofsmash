@@ -27,12 +27,10 @@
 
     # Snowfall Lib
     snowfall-lib.url = "github:snowfallorg/lib?ref=v3.0.3";
-    # snowfall-lib.url = "path:/home/short/work/@snowfallorg/lib";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
     # Avalanche
     avalanche.url = "github:snowfallorg/avalanche";
-    # avalanche.url = "path:/home/short/work/@snowfallorg/avalanche";
     avalanche.inputs.nixpkgs.follows = "unstable";
 
     # Snowfall Flake
@@ -127,6 +125,12 @@
 
           namespace = "plusultra";
         };
+        
+        snowfallorg.user = {
+          enable = true;
+          name = "coldelectrons";
+        };
+
       };
     in
     lib.mkFlake

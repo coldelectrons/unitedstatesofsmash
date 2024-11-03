@@ -29,12 +29,15 @@ let
       "/home/${cfg.name}";
 in
 {
+  # XXX Why put defaults here?
+  # I understand the practicality, but it's confusing
+  # especially in context of having assertion against nullity further down
   options.${namespace}.user = {
-    enable = mkOpt types.bool true "Whether to configure the user account.";
-    name = mkOpt (types.nullOr types.str) (config.snowfallorg.user.name or "short") "The user account.";
+    enable = mkOpt types.bool false "Whether to configure the user account.";
+    name = mkOpt (types.nullOr types.str) config.snowfallorg.user.name "The user account.";
 
-    fullName = mkOpt types.str "Jake Hamilton" "The full name of the user.";
-    email = mkOpt types.str "jake.hamilton@hey.com" "The email of the user.";
+    fullName = mkOpt types.str "" "The full name of the user.";
+    email = mkOpt types.str "" "The email of the user.";
 
     home = mkOpt (types.nullOr types.str) home-directory "The user's home directory.";
   };

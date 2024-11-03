@@ -33,10 +33,16 @@ in
   config = mkIf cfg.enable {
     plusultra.system.xkb.enable = true;
     plusultra.desktop.addons = {
-      # gtk = enabled;
-      wallpapers = enabled;
+      gtk = enabled;
+      # wallpapers = enabled;
       electron-support = enabled;
       kitty = enabled;
+      bitwarden = enabled;
+      clipboard = enabled;
+      disk-tools = enabled;
+      rpi-imager = enabled;
+      signal = enabled;
+      xdg-portal = enabled;
     };
 
     plusultra.hardware  = {
@@ -59,6 +65,7 @@ in
         clinfo # for kinfocenter for OpenCL page
         glxinfo # for kinfocenter for OpenGL EGL and GLX page
         vulkan-tools # for kinfocenter for Vulkan page
+        gpu-info
         wayland-utils # for kinfocenter for Wayland page
         ffmpegthumbnailer # for video thumbnails
         linuxquota # for plasma-disks
@@ -68,8 +75,6 @@ in
         skanpage # Scanner
         kdePackages.print-manager
         # plasma-welcome # Welcome screen
-        kdePackages.plasma-vault
-        kdePackages.plasma-disks
 
         # Libraries/Utilities
         kdePackages.kdegraphics-thumbnailers
@@ -77,6 +82,7 @@ in
         xwaylandvideobridge
         kdePackages.qtwayland
         strawberry-qt6
+        # TODO move this to app module
         kdePackages.skanlite
         paperwork
         gscan2pdf
