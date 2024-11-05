@@ -55,9 +55,9 @@ in
 
   config = {
     environment.systemPackages = with pkgs; [
-      fortune
-      lolcat
-      propagatedIcon
+      # fortune
+      # lolcat
+      # propagatedIcon
     ];
 
     programs.zsh = {

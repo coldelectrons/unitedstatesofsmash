@@ -33,12 +33,27 @@ with lib.${namespace};
     vivaldi
   ];
 
+  nix.settings.trusted-users = [ "root" "coldelectrons"];
 
   plusultra = {
 
+    user.extraGroups = [ 
+      "networkmanager"
+      "wheel"
+      "input"
+      "plugdev"
+      "dialout"
+      "video"
+      "audio"
+      "libvirtd"
+      "scanner"
+      "i2c"
+      "git"
+      "gamemode"
+    ];
 
     apps = {
-      simula = enabled;
+      # simula = enabled;
       # rpcs3 = enabled;
       # ubports-installer = enabled;
       # steamtinkerlaunch = enabled;
