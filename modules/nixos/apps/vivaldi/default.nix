@@ -30,9 +30,7 @@ in
   };
 
   config = mkIf cfg.enable {
-
     plusultra.home = {
-
       extraOptions = {
         programs.vivaldi = {
           enable = true;

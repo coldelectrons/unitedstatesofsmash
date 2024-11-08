@@ -2,11 +2,10 @@
 
 final: prev:
 
-{ inherit (channels.unstable) #vivaldi; 
-(vivaldi.overrideAttrs
-      (oldAttrs: {
-        dontWrapQtApps = false;
-        dontPatchELF = true;
-        nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [pkgs.kdePackages.wrapQtAppsHook];
-      }));
-      }
+{ final.vivaldi = prev.vivaldi.overrideAttrs
+  (oldAttrs: {
+    dontWrapQtApps = false;
+    dontPatchELF = true;
+    nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [prev.pkgs.kdePackages.wrapQtAppsHook];
+  });
+}

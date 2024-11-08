@@ -78,6 +78,17 @@ in
         cfg.port
       ];
     };
+    environment.extraInit = ''
+      # Do not want this in the environment. NixOS always sets it and does not
+      # provide any option not to, so I must unset it myself via the
+      # environment.extraInit option.
+      # This is because when I was trying Hyprland and working in a terminal,
+      # anytime I'd try to ssh somewhere, I'd lose input focus, and then I'd
+      # have to hunt for some popup window - that is, after I figured out
+      # what was going on.
+      unset -v SSH_ASKPASS
+      unset -v GIT_ASKPASS
+    '';
 
     programs.ssh.extraConfig = ''
       Host *
