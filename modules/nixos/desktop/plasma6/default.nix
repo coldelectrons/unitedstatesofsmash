@@ -45,6 +45,8 @@ in
       xdg-portal = enabled;
     };
 
+    qt = enabled;
+
     plusultra.hardware  = {
       audio = enabled;
       spacenav = enabled;
@@ -89,7 +91,6 @@ in
         unpaper
         noteshrink
         deskew
-        paperless-ngx
         sane-frontends
         ocrmypdf
         brscan5

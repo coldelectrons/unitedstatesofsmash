@@ -28,13 +28,14 @@ in
 
       apps = {
         _1password = enabled;
-        # firefox = enabled;
+        firefox = enabled;
         vlc = enabled;
         # logseq = enabled;
         # hey = enabled;
         # pocketcasts = enabled;
         gparted = enabled;
-        # paperless = enabled;
+        paperless = enabled;
+        vivaldi = enabled;
       };
     };
   };

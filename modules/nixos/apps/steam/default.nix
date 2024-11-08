@@ -20,6 +20,12 @@ in
   config = mkIf cfg.enable {
     programs.steam.enable = true;
     programs.steam.remotePlay.openFirewall = true;
+    programs.steam.extraPackages = with pkgs; [
+      firefox
+      mangohud
+      gamescope
+      gamemode
+    ];
 
     hardware.steam-hardware.enable = true;
 
@@ -33,6 +39,10 @@ in
 
     environment.systemPackages = with pkgs; [
       plusultra.steam # add desktop items
+      steam-run
+      # steamcontroller
+      sc-controller
+      protonup
     ];
 
     environment.sessionVariables = {

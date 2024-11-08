@@ -30,7 +30,7 @@ with lib.${namespace};
   };
 
   environment.systemPackages = with pkgs; [
-    vivaldi
+    # vivaldi
   ];
 
   nix.settings.trusted-users = [ "root" "coldelectrons"];
@@ -54,6 +54,8 @@ with lib.${namespace};
     nix = enabled;
 
     cli-apps = {
+      extras = enabled;
+      gurk-rs = enabled;
     };
 
     security = {
@@ -63,6 +65,7 @@ with lib.${namespace};
     apps = {
       steam = enabled;
       vivaldi = enabled;
+      syncthing = enabled;
       # simula = enabled;
       # rpcs3 = enabled;
       # ubports-installer = enabled;

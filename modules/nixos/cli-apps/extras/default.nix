@@ -93,6 +93,19 @@ in
       signald
       signal-export
       scli
+
+      # terminal file managers, because while I like mc
+      # it doesn't seem to work right with fish or zsh
+      mc
+      lf
+      walk
+      fm-go
+      joshuto
+      superfile
+      sfm
     ];
+    programs.yazi = {
+      enable = true;
+    };
   };
 }

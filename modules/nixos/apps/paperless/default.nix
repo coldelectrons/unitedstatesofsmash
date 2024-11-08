@@ -17,6 +17,19 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ paperless ];
+    services.paperless.enable = true;
+    services.paperless.settings = {
+      PAPERLESS_CONSUMER_IGNORE_PATTERN = [
+        ".DS_STORE/*"
+        "desktop.ini"
+      ];
+      PAPERLESS_DBHOST = "/run/postgresql";
+      PAPERLESS_OCR_LANGUAGE = "eng";
+      PAPERLESS_OCR_USER_ARGS = {
+        optimize = 1;
+        pdfa_image_compression = "lossless";
+      };
+    };
+    services.paperless.consumptionDirIsPublic = true;
   };
 }

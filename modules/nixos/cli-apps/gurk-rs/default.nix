@@ -19,7 +19,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       # gurk is too old in 24.05, use overlay
-      plusultra.gurk-rs
+      gurk-rs
     ];
   };
 }

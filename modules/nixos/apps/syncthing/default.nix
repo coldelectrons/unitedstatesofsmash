@@ -10,6 +10,9 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.apps.syncthing;
+  stcfg = config.services.syncthing;
+  user = config.${namespace}.user.name;
+
 in
 {
   options.${namespace}.apps.syncthing = with types; {
@@ -18,11 +21,13 @@ in
 
   config = mkIf cfg.enable {
     services.syncthing = {
-      user = lib.mkForce config.variables.username;
+      user = lib.mkForce user;
       enable = true;
-      dataDir = "/home/${config.services.syncthing.user}/Sync";
+      # dataDir = "/home/${cfg.services.syncthing.user}/Sync";
+      dataDir = "/home/${user}/Sync";
       group = "users";
-      configDir = "/home/${config.services.syncthing.user}/.config/syncthing";
+      # configDir = "/home/${stcfg.services.syncthing.user}/.config/syncthing";
+      configDir = "/home/${user}/.config/syncthing";
       openDefaultPorts = true;
     };
 

@@ -30,6 +30,20 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs.plusultra; [
+      vivaldi
+      (makeDesktopItem {
+        name = "Vivaldi (wayland)";
+        desktopName = "Vivaldi (wayland)";
+        genericName = "Vivaldi web browser (wayland)";
+        categories = [ "Network" "WebBrowser" ];
+        type = "Application";
+        icon = "vivaldi";
+        exec = "vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland --use-cmd-decoder=validating --use-gl=egl";
+        terminal = false;
+      };)
+  };
+    ];
     plusultra.home = {
       extraOptions = {
         programs.vivaldi = {
