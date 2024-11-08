@@ -30,19 +30,16 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs.plusultra; [
-      vivaldi
-      (makeDesktopItem {
-        name = "Vivaldi (wayland)";
-        desktopName = "Vivaldi (wayland)";
-        genericName = "Vivaldi web browser (wayland)";
-        categories = [ "Network" "WebBrowser" ];
-        type = "Application";
-        icon = "vivaldi";
-        exec = "vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland --use-cmd-decoder=validating --use-gl=egl";
-        terminal = false;
-      };)
-  };
+    environment.systemPackages = with pkgs; [
+      (vivaldi.overrideAttrs
+        (oldAttrs: {
+          dontWrapQtApps = false;
+          dontPatchELF = true;
+          proprietaryCodecs = true;
+          enableWidevine = true;
+          nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [pkgs.kdePackages.wrapQtAppsHook];
+      }))
+      plusultra.vivaldi
     ];
     plusultra.home = {
       extraOptions = {

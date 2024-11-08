@@ -19,7 +19,7 @@ with lib.${namespace};
     cli-apps = {
       zsh = enabled;
       lunarvim = enabled;
-      home-manager = disabled;
+      home-manager = enabled;
     };
 
     tools = {

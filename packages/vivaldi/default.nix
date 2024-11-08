@@ -1,35 +1,27 @@
 {
   lib,
   makeDesktopItem,
-  symlinkJoin,
   namespace,
   ...
 }:
 let
-  inherit (lib.${namespace}) override-meta;
+  with-meta = lib.${namespace}.override-meta {
+    platforms = lib.platforms.linux;
+    description = "A desktop item to open Vivaldi in Plasma6 Wayland.";
+    license = lib.licenses.asl20;
+    maintainers = with lib.maintainers; [ coldelectrons ];
+  };
 
-#   vivaldi-wayland = makeDesktopItem {
-#     name = "Vivaldi (wayland)";
-#     desktopName = "Vivaldi (wayland)";
-#     genericName = "Vivaldi web browser (wayland)";
-#     categories = [ "Network" "WebBrowser" ];
-#     type = "Application";
-#     icon = "vivaldi";
-#     exec = "vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland --use-cmd-decoder=validating --use-gl=egl";
-#     terminal = false;
-#   };
-
-#   new-meta = with lib; {
-#     description = "Extra desktop items for running Vivaldi with wayland options.";
-#     license = licenses.asl20;
-#     maintainers = with maintainers; [ coldelectrons ];
-#   };
-
-#   package = symlinkJoin {
-#     name = "vivaldi-desktop-items";
-#     paths = [
-#       vivaldi-wayland
-#     ];
-#   };
+  vivaldi = makeDesktopItem {
+    name = "Vivaldi";
+    desktopName = "Vivaldi";
+    genericName = "Vivaldi web browser";
+    exec = ''${firefox}/bin/firefox "https://twitter.com/home?plusultra.app=true"'';
+    icon = ./icon.svg;
+    type = "Application";
+    categories = [ "Network" "WebBrowser" ];
+    exec = "vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland --use-cmd-decoder=validating --use-gl=egl";
+    terminal = false;
+  };
 in
-# override-meta new-meta package
+with-meta vivaldi 
