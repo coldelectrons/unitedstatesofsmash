@@ -54,6 +54,7 @@ in
   };
 
   config = {
+    environment.localBinInPath = true;
     environment.systemPackages = with pkgs; [
       # fortune
       # lolcat
