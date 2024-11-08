@@ -25,6 +25,9 @@ in
         zk
         stylua
         libclang
+        fzf
+        ripgrep
+
       ];
 
       sessionVariables = {
@@ -45,10 +48,13 @@ in
 
     home.file = {
       ".config/lvim/config.lua" = {
+        enable = true;
         source = ./config.lua;
-      };
+      }; 
       ".local/bin/lvimide" = {
+        enable = true;
         source = ./lvimide;
+        executable = true;
       };
     };
   };

@@ -17,17 +17,17 @@ with lib.${namespace};
   # condition when the system is coming up that causes this.
   networking.dhcpcd.enable = false;
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  # NOTE: This _may_ be required for openvpn to work. However, I have
-  # not confirmed that...
-  boot.kernelModules = [ "tun" ];
-
-  # hades has had issues with FS corruption in the past and has now experienced
-  # extremely strange errors when attempting to install NixOS. There may be some
-  # memory problems and memtest86 can help to confirm.
-  boot.loader.systemd-boot.memtest86.enable = true;
-
+  boot = {
+    binfmt.emulatedSystems = [ "aarch64-linux" "i686-linux" "armv7l-linux" "armv6l-linux" "riscv64-linux" ];
+    consoleLogLevel = 0;
+    kernelParams = [ 
+    ];                                                                                                                                   
+    plymouth.enable = true;
+    # Swapfile hibernate
+    # resumeDevice = "${MAIN_PART}";
+    # kernelParams = [ "resume_offset=${RESUME_OFFSET}" "nvidia_drm.fbdev=1" ];
+  };
 
   environment.systemPackages = with pkgs; [
     vivaldi
@@ -36,7 +36,6 @@ with lib.${namespace};
   nix.settings.trusted-users = [ "root" "coldelectrons"];
 
   plusultra = {
-
     user.extraGroups = [ 
       "networkmanager"
       "wheel"
@@ -51,8 +50,19 @@ with lib.${namespace};
       "git"
       "gamemode"
     ];
+    
+    nix = enabled;
+
+    cli-apps = {
+    };
+
+    security = {
+      acme = enabled;
+    };
 
     apps = {
+      steam = enabled;
+      vivaldi = enabled;
       # simula = enabled;
       # rpcs3 = enabled;
       # ubports-installer = enabled;
@@ -60,9 +70,16 @@ with lib.${namespace};
       # r2modman = enabled;
     };
 
+    hardware = {
+      vr = enabled;
+      spacenav = enabled;
+    };
+
     services = {
+      openssh = enabled;
       avahi = enabled;
       printing = enabled;
+      tailscale = enabled;
     };
 
     archetypes = {
@@ -70,7 +87,9 @@ with lib.${namespace};
       workstation = enabled;
     };
 
-    desktop.plasma6 = enabled;
+    desktop = {
+      plasma6 = enabled;  
+    };
 
     virtualisation.kvm = {
       enable = true;
@@ -83,6 +102,13 @@ with lib.${namespace};
     #     "1002:aaf0"
     #   ];
     #   machineUnits = [ "machine-qemu\\x2d1\\x2dwin10.scope" ];
+    };
+
+    system = {
+      fonts = enabled;
+      locale = enabled;
+      time = enabled;
+      # xcb = enabled;
     };
   };
   

@@ -23,7 +23,10 @@ with lib.${namespace};
     };
 
     tools = {
-      git = enabled;
+      git = enabled // {
+        userEmail = "frithomas@gmail.com";
+        userName = "coldelectrons";
+      };
       direnv = enabled;
     };
   };

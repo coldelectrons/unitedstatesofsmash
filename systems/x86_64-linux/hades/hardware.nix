@@ -19,7 +19,7 @@ in
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
 
     initrd = {
       availableKernelModules = [
@@ -30,9 +30,13 @@ in
         "usb_storage"
         "sd_mod"
       ];
+      kernelModules = [ "amdgpu" "tun" ];
+      systemd.enable = true;
     };
-
-    extraModulePackages = [ ];
+    kernelModules = [ "kvm-amd" ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      zenpower
+    ];
   };
 
   fileSystems."/" = {
