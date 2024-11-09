@@ -16,8 +16,7 @@ let
     name = "Vivaldi";
     desktopName = "Vivaldi";
     genericName = "Vivaldi web browser";
-    exec = ''${firefox}/bin/firefox "https://twitter.com/home?plusultra.app=true"'';
-    icon = ./icon.svg;
+    icon = ./logo.svg;
     type = "Application";
     categories = [ "Network" "WebBrowser" ];
     exec = "vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland --use-cmd-decoder=validating --use-gl=egl";
