@@ -29,6 +29,8 @@ in
       # basalt-monado
       envision
       opencomposite
+      opencomposite-hand-fixes
+      opencomposite-vendored
     ];
   };
 }

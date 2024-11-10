@@ -56,6 +56,8 @@
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "unstable";
 
+    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+    
     # TODO LATER
     # Neovim
     # neovim.url = "github:coldelectrons/neovim";
@@ -157,29 +159,30 @@
           # lix-module.overlays.default
         ];
 
-      systems.modules.nixos = with inputs; [
-        avalanche.nixosModules."avalanche/desktop"
-        home-manager.nixosModules.home-manager
-        nix-ld.nixosModules.nix-ld
-        lix-module.nixosModules.default
-        vault-service.nixosModules.nixos-vault-service
-        # TODO: Replace plusultra.services.attic now that vault-agent
-        # exists and can force override environment files.
-        # attic.nixosModules.atticd
-      ];
-      systems.hosts.hades.modules = with inputs; [
-        # nixos-hardware.nixosModules.framework-11th-gen-intel
-      ];
+        systems.modules.nixos = with inputs; [
+          avalanche.nixosModules."avalanche/desktop"
+          home-manager.nixosModules.home-manager
+          nix-ld.nixosModules.nix-ld
+          lix-module.nixosModules.default
+          nixpkgs-xr.nixosModules.nixpkgs-xr
+          vault-service.nixosModules.nixos-vault-service
+          # TODO: Replace plusultra.services.attic now that vault-agent
+          # exists and can force override environment files.
+          # attic.nixosModules.atticd
+        ];
+        systems.hosts.hades.modules = with inputs; [
+          # nixos-hardware.nixosModules.framework-11th-gen-intel
+        ];
 
-        deploy = lib.mkDeploy { inherit (inputs) self; };
+          deploy = lib.mkDeploy { inherit (inputs) self; };
 
-        checks = builtins.mapAttrs
-          (
-            system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
-          )
-          inputs.deploy-rs.lib;
+          checks = builtins.mapAttrs
+            (
+              system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
+            )
+            inputs.deploy-rs.lib;
 
-        outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
+          outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
       }
     // {
       self = inputs.self;
