@@ -33,6 +33,7 @@ in
         #   key = cfg.signingKey;
         #   signByDefault = mkIf gpg.enable true;
         # };
+        credential.useHttpPath = true;
         extraConfig = {
           init = {
             defaultBranch = "main";
