@@ -18,6 +18,7 @@ with lib.${namespace};
 
     cli-apps = {
       zsh = enabled;
+      atui = enabled;
       lunarvim = enabled;
       home-manager = enabled;
     };
