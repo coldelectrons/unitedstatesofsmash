@@ -62,16 +62,19 @@ with lib.${namespace};
     cli-apps = {
       extras = enabled;
       gurk-rs = enabled;
+      yubikey = enabled;
     };
 
     security = {
       acme = enabled;
+      gpg = enabled;
     };
 
     apps = {
       steam = enabled;
       vivaldi = enabled;
       syncthing = enabled;
+      yubikey = enabled;
       # simula = enabled;
       # rpcs3 = enabled;
       # ubports-installer = enabled;

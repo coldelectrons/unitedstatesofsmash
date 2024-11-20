@@ -29,6 +29,7 @@ with lib.${namespace};
         userName = "coldelectrons";
       };
       direnv = enabled;
+      yubikeyTouchDetector = enabled;
     };
   };
 
