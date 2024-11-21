@@ -47,9 +47,10 @@ in
           core = {
             whitespace = "trailing-space,space-before-tab";
           };
-          safe = {
-            directory = "${config.users.users.${user.name}.home}/work/config";
-          };
+          # FIXME(wtf) what is this and why does it break my nixos config
+          # safe = {
+          #   directory = "${config.users.users.${user.name}.home}/work/config";
+          # };
         };
       };
       # Enable git authentication handler for OAuth

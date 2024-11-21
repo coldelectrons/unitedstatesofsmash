@@ -19,7 +19,7 @@ with lib.${namespace};
 
 
   boot = {
-    binfmt.emulatedSystems = [ "aarch64-linux" "i686-linux" "armv7l-linux" "armv6l-linux" "riscv64-linux" ];
+    binfmt.emulatedSystems = [ "aarch64-linux" "i686-linux" ];
     consoleLogLevel = 0;
     kernelParams = [ 
     ];                                                                                                                                   
@@ -62,7 +62,6 @@ with lib.${namespace};
     cli-apps = {
       extras = enabled;
       gurk-rs = enabled;
-      yubikey = enabled;
     };
 
     security = {
@@ -74,7 +73,6 @@ with lib.${namespace};
       steam = enabled;
       vivaldi = enabled;
       syncthing = enabled;
-      yubikey = enabled;
       # simula = enabled;
       # rpcs3 = enabled;
       # ubports-installer = enabled;

@@ -43,9 +43,9 @@ in
         core = {
           whitespace = "trailing-space,space-before-tab";
         };
-        safe = {
-          directory = "${user.home}/work/config/.git";
-        };
+        # safe = {
+        #   directory = "${user.home}/work/config/.git";
+        # };
       };
     };
   };

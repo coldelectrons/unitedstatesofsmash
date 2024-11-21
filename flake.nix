@@ -110,12 +110,11 @@
       flake = false;
     };
 
-    # Secrets management. See ./docs/secretsmgmt.md
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
     };
-
   };
 
   outputs =

@@ -17,8 +17,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.atuin.enable = true;
-    environment.systemPackages = with pkgs; [ atuin ];
+    # services.atuin.enable = true;
+    # environment.systemPackages = with pkgs; [ atuin ];
     programs.atuin = {
       enable = true;
       settings = {
