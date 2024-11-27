@@ -22,8 +22,8 @@ in
     services.printing.cups-pdf.enable = true;
     hardware.sane.enable = true;
     services.avahi.enable = true;
-    services.avahi.nssmdns = true;
-    environment.systemPackages = with pkgs; [ hplipWithPlugin gutenprint foomaticdb ];
+    services.avahi.nssmdns4 = true;
+    environment.systemPackages = with pkgs; [ hplipWithPlugin gutenprint foomatic-db ];
     hardware.printers = {
       ensurePrinters = [
         {
