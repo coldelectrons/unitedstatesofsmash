@@ -50,7 +50,7 @@ in
       nix-index
       nix-prefetch-git
       nix-output-monitor
-      flake-checker
+      # flake-checker # FIXME 20241126 fails to build with 24.11
       snowfallorg.drift
     ];
 

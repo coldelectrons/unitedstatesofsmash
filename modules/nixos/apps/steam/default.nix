@@ -35,7 +35,7 @@ in
         "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep /home/${user}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
     };
     # Enable GameCube controller support.
-    services.udev.packages = [ pkgs.dolphinEmu ];
+    services.udev.packages = [ pkgs.dolphin-emu ];
 
     environment.systemPackages = with pkgs; [
       plusultra.steam # add desktop items

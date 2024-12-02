@@ -20,7 +20,7 @@ in
     environment.systemPackages = with pkgs; [
       smartmontools
       aha
-      # toilet # Display fancy text in terminal
+      toilet # Display fancy text in terminal
       # dwt1-shell-color-scripts # Display cool graphics in terminal
       # cmatrix # Show off the Matrix
       timer # Cooler timer in terminal
@@ -51,7 +51,7 @@ in
       appimage-run
       lvm2
       ctmg
-      cryptomator
+      # cryptomator
       dnsutils
       dnstracer
       zdns

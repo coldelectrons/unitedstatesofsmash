@@ -7,10 +7,10 @@
   ...
 }:
 let
-  cfg = config.${namespace}.services.steam;
+  cfg = config.${namespace}.services.steamworks;
 in
 {
-  options.${namespace}.services.steam = {
+  options.${namespace}.services.steamworks = {
     enable = lib.mkEnableOption "Steam";
   };
 
