@@ -21,7 +21,7 @@ in
       # Bootloader
       loader = {
         grub = {
-          enable = true;
+          enable = lib.mkForce true;
           efiSupport = true;
           device = "nodev";
           memtest86.enable = true;

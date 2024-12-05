@@ -32,8 +32,9 @@ with lib.${namespace};
     # Good for Windows games running through Wine or Steam
     # kernel.sysctl."vm.max_map_count" = 1048576; # Arch default
     kernel.sysctl."vm.max_map_count" = 2147483642; # Valve Steamdeck default
-
   };
+
+  hardware.logitech.wireless.enable = true;
 
   environment.systemPackages = with pkgs; [
     # vivaldi
@@ -64,9 +65,16 @@ with lib.${namespace};
       gurk-rs = enabled;
     };
 
+    tools = {
+      git = enabled;
+      misc = enabled;
+      http = enabled;
+    };
+
     security = {
       acme = enabled;
       gpg = enabled;
+      doas = enabled;
     };
 
     apps = {
@@ -115,26 +123,14 @@ with lib.${namespace};
     };
 
     system = {
+      boot = enabled;
       fonts = enabled;
       locale = enabled;
       time = enabled;
-      # xcb = enabled;
+      xkb = enabled;
     };
   };
   
-  hardware = {
-    steam-hardware.enable = true;
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        rocmPackages.clr.icd
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-extension-layer
-      ];
-    };
-  };
   hardware.amdgpu.amdvlk = {
     enable = true;
     support32Bit.enable = true;

@@ -33,8 +33,9 @@ in
     };
 
     # Add an alias to the shell for backward-compat and convenience.
-    environment.shellAliases = {
-      sudo = "doas";
-    };
+    # environment.shellAliases = {
+    #   sudo = "doas";
+    # };
+    environment.systemPackages = with pkgs; [ doas-sudo-shim ];
   };
 }

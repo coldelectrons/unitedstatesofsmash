@@ -26,8 +26,10 @@ in
       file
       jq
       clac
-      wget
       glow
+      htop
+      bottom
+      ripgrep
     ];
   };
 }
