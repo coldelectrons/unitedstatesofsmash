@@ -12,7 +12,7 @@ let
   cfg = config.${namespace}.hardware.graphics;
 in
 {
-  options.${namespace}.hardware.networking = with types; {
+  options.${namespace}.hardware.graphics = with types; {
     enable = mkBoolOpt false "Whether or not to enable graphics support";
     vulkan = mkBoolOpt false "Whether or not to enable vulkan support";
     amd = mkBoolOpt false "Whether or not to enable amd support";
