@@ -67,6 +67,7 @@ with lib.${namespace};
     security = {
       acme = enabled;
       gpg = enabled;
+      doas = enabled;
     };
 
     apps = {
@@ -83,6 +84,8 @@ with lib.${namespace};
     hardware = {
       vr = enabled;
       spacenav = enabled;
+      graphics = enabled;
+      networking = enabled;
     };
 
     services = {
@@ -118,22 +121,12 @@ with lib.${namespace};
       fonts = enabled;
       locale = enabled;
       time = enabled;
-      # xcb = enabled;
+      xkb = enabled;
     };
   };
   
   hardware = {
     steam-hardware.enable = true;
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        rocmPackages.clr.icd
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-extension-layer
-      ];
-    };
   };
   hardware.amdgpu.amdvlk = {
     enable = true;

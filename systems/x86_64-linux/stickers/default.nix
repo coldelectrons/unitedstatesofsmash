@@ -67,22 +67,18 @@ with lib.${namespace};
     security = {
       acme = enabled;
       gpg = enabled;
+      doas = enabled;
     };
 
     apps = {
       # steam = enabled;
       vivaldi = enabled;
       syncthing = enabled;
-      # simula = enabled;
-      # rpcs3 = enabled;
-      # ubports-installer = enabled;
-      # steamtinkerlaunch = enabled;
-      # r2modman = enabled;
     };
 
     hardware = {
-      # vr = enabled;
-      # spacenav = enabled;
+      graphics = enabled;
+      networking = enabled;
     };
 
     services = {
@@ -95,58 +91,31 @@ with lib.${namespace};
     archetypes = {
       # gaming = enabled;
       # workstation = enabled;
+      # laptop = enabled;
     };
 
     desktop = {
       plasma6 = enabled;  
     };
 
-    virtualisation.kvm = {
-      enable = true;
-      platform = "intel";
-    #   # RX480 when in the bottom slot:
-    #   # IOMMU Group 23 23:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere [Radeon RX 470/480/570/570X/580/580X/590] [1002:67df] (rev c7)
-    #   # IOMMU Group 23 23:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] [1002:aaf0]
-    #   vfioIds = [
-    #     "1002:67df"
-    #     "1002:aaf0"
-    #   ];
-    #   machineUnits = [ "machine-qemu\\x2d1\\x2dwin10.scope" ];
-    };
-
     system = {
       fonts = enabled;
       locale = enabled;
       time = enabled;
-      # xcb = enabled;
+      xkb = enabled;
     };
   };
   
-  hardware = {
-    # steam-hardware.enable = true;
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-extension-layer
-      ];
-    };
+  hardware.nvidia.open = true;
+  hardware.nvidia.prime = {
+    offload.enable = true;
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:1:0:0";
   };
-  # hardware.amdgpu.amdvlk = {
-  #   enable = true;
-  #   support32Bit.enable = true;
-  #   supportExperimental.enable = true;
-  # };
-  # hardware.amdgpu.opencl.enable = true;
-
-    # Force radv
-  # environment.variables.AMD_VULKAN_ICD = "RADV";
 
   # WiFi is typically unused on the desktop. Enable this service
   # if it's no longer only using a wired connection.
-  # systemd.services.network-addresses-wlp41s0.enable = false;
+  systemd.services.network-addresses-wlp41s0.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
