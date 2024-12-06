@@ -43,6 +43,7 @@ with lib.${namespace};
 
   plusultra = {
     user.extraGroups = [ 
+      "networkmanager"
       "wheel"
       "input"
       "plugdev"
@@ -66,7 +67,6 @@ with lib.${namespace};
     security = {
       acme = enabled;
       gpg = enabled;
-      doas = enabled;
     };
 
     apps = {
@@ -83,7 +83,6 @@ with lib.${namespace};
     hardware = {
       # vr = enabled;
       # spacenav = enabled;
-      networking = enabled;
     };
 
     services = {
@@ -96,7 +95,6 @@ with lib.${namespace};
     archetypes = {
       # gaming = enabled;
       # workstation = enabled;
-      # laptop = enabled;
     };
 
     desktop = {
@@ -117,15 +115,15 @@ with lib.${namespace};
     };
 
     system = {
-      boot = enabled;
       fonts = enabled;
       locale = enabled;
       time = enabled;
-      xkb = enabled;
+      # xcb = enabled;
     };
   };
   
   hardware = {
+    # steam-hardware.enable = true;
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -135,12 +133,6 @@ with lib.${namespace};
         vulkan-extension-layer
       ];
     };
-  };
-  hardware.nvidia.open = true;
-  hardware.nvidia.prime = {
-    offload.enable = true;
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
   };
   # hardware.amdgpu.amdvlk = {
   #   enable = true;
@@ -154,7 +146,7 @@ with lib.${namespace};
 
   # WiFi is typically unused on the desktop. Enable this service
   # if it's no longer only using a wired connection.
-  systemd.services.network-addresses-wlp41s0.enable = true;
+  # systemd.services.network-addresses-wlp41s0.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
