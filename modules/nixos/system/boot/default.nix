@@ -21,13 +21,13 @@ in
       # Bootloader
       loader = {
         grub = {
-          enable = lib.mkForce true;
+          enable = false;
           efiSupport = true;
-          device = "nodev";
+          devices = [ "nodev" ];
           memtest86.enable = true;
         };
         systemd-boot = {
-          enable = false;
+          enable = true;
           memtest86.enable = true;
           consoleMode = "max";
           graceful = true;

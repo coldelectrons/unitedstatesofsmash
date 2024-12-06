@@ -43,7 +43,6 @@ with lib.${namespace};
 
   plusultra = {
     user.extraGroups = [ 
-      "networkmanager"
       "wheel"
       "input"
       "plugdev"
@@ -99,6 +98,7 @@ with lib.${namespace};
     };
 
     system = {
+      boot = enabled;
       fonts = enabled;
       locale = enabled;
       time = enabled;
