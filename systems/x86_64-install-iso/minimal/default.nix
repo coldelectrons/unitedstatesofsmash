@@ -18,7 +18,7 @@ with lib.${namespace};
     nix = enabled;
 
     cli-apps = {
-      neovim = enabled;
+      # neovim = enabled;
       tmux = enabled;
     };
 

@@ -42,6 +42,7 @@ with lib.${namespace};
   nix.settings.trusted-users = [ "root" "coldelectrons"];
 
   plusultra = {
+    
     user.extraGroups = [ 
       "networkmanager"
       "wheel"

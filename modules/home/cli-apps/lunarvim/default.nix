@@ -21,25 +21,19 @@ in
         less
         lunarvim
         neovide
-        neovim
+        # neovim
         zk
         stylua
         libclang
         fzf
         ripgrep
-
       ];
 
       sessionVariables = {
-        PAGER = "less";
-        MANPAGER = "less";
         NPM_CONFIG_PREFIX = "$HOME/.npm-global";
-        EDITOR = "nvim";
+        EDITOR = "lvim";
       };
 
-      shellAliases = {
-        vimdiff = "nvim -d";
-      };
     };
 
     xdg.configFile = {

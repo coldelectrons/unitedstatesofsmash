@@ -24,13 +24,14 @@ in
       steam-run
       lighthouse-steamvr
       monado
-      # monado-vulkan-layers # TODO enable when 24.11
-      # motoc # TODO enable when 24.11
+      monado-vulkan-layers # TODO enable when 24.11
+      motoc # TODO enable when 24.11
       # basalt-monado
-      envision
+      envision-unwrapped
       opencomposite
       # opencomposite-hand-fixes
       # opencomposite-vendored
+      index_camera_passthrough
     ];
   };
 }

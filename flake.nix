@@ -168,6 +168,11 @@
         systems.modules.nixos = with inputs; [
           avalanche.nixosModules."avalanche/desktop"
           home-manager.nixosModules.home-manager
+          {
+            # home-manager.useGlobalPkgs = true;
+            # home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "backup"; # Set backup file extension
+          }
           nix-ld.nixosModules.nix-ld
           lix-module.nixosModules.default
           nixpkgs-xr.nixosModules.nixpkgs-xr
