@@ -58,6 +58,11 @@ with lib.${namespace};
     
     nix = enabled;
 
+    suites = {
+      common = enabled;
+      desktop = enabled;
+    };
+
     cli-apps = {
       extras = enabled;
       # gurk-rs = enabled;
@@ -106,12 +111,12 @@ with lib.${namespace};
     };
   };
   
-  hardware.nvidia.open = true;
-  hardware.nvidia.prime = {
-    offload.enable = true;
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
-  };
+  # hardware.nvidia.open = true;
+  # hardware.nvidia.prime = {
+  #   offload.enable = true;
+  #   intelBusId = "PCI:0:2:0";
+  #   nvidiaBusId = "PCI:1:0:0";
+  # };
 
   # WiFi is typically unused on the desktop. Enable this service
   # if it's no longer only using a wired connection.

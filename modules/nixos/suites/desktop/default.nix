@@ -34,7 +34,7 @@ in
         # hey = enabled;
         # pocketcasts = enabled;
         gparted = enabled;
-        paperless = enabled;
+        # paperless = enabled;
         vivaldi = enabled;
       };
     };
