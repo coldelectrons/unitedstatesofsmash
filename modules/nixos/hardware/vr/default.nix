@@ -31,7 +31,7 @@ in
       opencomposite
       # opencomposite-hand-fixes
       # opencomposite-vendored
-      index_camera_passthrough
+      # index_camera_passthrough # TODO doesn't seem to be available from nixpkgs-xr 20241206
     ];
   };
 }

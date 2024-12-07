@@ -7,13 +7,6 @@
 with lib;
 with lib.${namespace};
 {
-  # `install-iso` adds wireless support that
-  # is incompatible with networkmanager.
-  networking.wireless.enable = mkForce false;
-
-  # because I often use a logitech wireless combo to install with
-  hardware.logitech.wireless.enable = true;
-
   plusultra = {
     nix = enabled;
 
@@ -23,8 +16,8 @@ with lib.${namespace};
     };
 
     tools = {
-      git = enabled;
       misc = enabled;
+      git = enabled;
       http = enabled;
     };
 
@@ -34,6 +27,7 @@ with lib.${namespace};
 
     services = {
       openssh = enabled;
+      avahi = enabled;
     };
 
     security = {
@@ -49,6 +43,7 @@ with lib.${namespace};
     };
   };
 
+  nix.settings.trusted-users = [ "root" "coldelectrons"];
   users.users.coldelectrons = {
     extraGroups = [ "networkmanager" ];
     openssh.authorizedKeys.keys = [
