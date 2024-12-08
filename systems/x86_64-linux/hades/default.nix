@@ -68,7 +68,7 @@ with lib.${namespace};
     security = {
       acme = enabled;
       gpg = enabled;
-      doas = enabled;
+      # doas = enabled;
     };
 
     apps = {

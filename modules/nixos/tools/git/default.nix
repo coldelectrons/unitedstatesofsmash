@@ -9,31 +9,31 @@
 with lib;
 with lib.${namespace};
 let
+  inherit (lib) types mkEnableOption mkIf;
+  inherit (lib.${namespace}) mkOpt enabled;
+
   cfg = config.${namespace}.tools.git;
-  gpg = config.${namespace}.security.gpg;
   user = config.${namespace}.user;
 in
 {
-  options.${namespace}.tools.git = with types; {
-    enable = mkBoolOpt false "Whether or not to install and configure git.";
+  options.${namespace}.tools.git = {
+    enable = mkEnableOption "Install and configure Git";
     userName = mkOpt types.str user.fullName "The name to configure git with.";
     userEmail = mkOpt types.str user.email "The email to configure git with.";
-    # signingKey = mkOpt types.str "9762169A1B35EA68" "The key ID to sign commits with.";
+    # signingKey = mkOpt types.str "The key ID to sign commits with.";
+    # signByDefault = mkOpt types.bool true "Whether to sign commits by default.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ git ];
-
-    plusultra.home.extraOptions = {
+    ${namespace}.home.extraOptions = {
       programs.git = {
         enable = true;
         inherit (cfg) userName userEmail;
         lfs = enabled;
         # signing = {
         #   key = cfg.signingKey;
-        #   signByDefault = mkIf gpg.enable true;
+        #   inherit (cfg) signByDefault;
         # };
-        credential.useHttpPath = true;
         extraConfig = {
           init = {
             defaultBranch = "main";
@@ -46,15 +46,14 @@ in
           };
           core = {
             whitespace = "trailing-space,space-before-tab";
-          };
-          # FIXME(wtf) what is this and why does it break my nixos config
-          # safe = {
-          #   directory = "${config.users.users.${user.name}.home}/work/config";
-          # };
         };
+        # safe = {
+        #   directory = "${user.home}/work/config/.git";
+        # };
       };
       # Enable git authentication handler for OAuth
       programs.git-credential-oauth.enable = true;
+      };
     };
   };
 }

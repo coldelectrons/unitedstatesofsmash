@@ -49,7 +49,7 @@ in
       };
 
       security = {
-        doas = enabled;
+        # doas = enabled;
       };
 
       system = {

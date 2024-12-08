@@ -30,10 +30,10 @@ with lib.${namespace};
     };
 
     tools = {
-      git = enabled // {
-        userEmail = "frithomas@gmail.com";
-        userName = "coldelectrons";
-      };
+      # git = enabled // {
+      #   userEmail = "frithomas@gmail.com";
+      #   userName = "coldelectrons";
+      # };
       direnv = enabled;
       # yubikeyTouchDetector = enabled;
     };

@@ -31,15 +31,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      (vivaldi.overrideAttrs
-        (oldAttrs: {
-          dontWrapQtApps = false;
-          dontPatchELF = true;
-          proprietaryCodecs = true;
-          enableWidevine = true;
-          nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [pkgs.kdePackages.wrapQtAppsHook];
-      }))
-      plusultra.vivaldi
+      vivaldi
     ];
     plusultra.home = {
       extraOptions = {
@@ -47,6 +39,10 @@ in
           enable = true;
           dictionaries = with pkgs; [ hunspellDictsChromium.en_US ];
           commandLineArgs = [
+            "--enable-features=UseOzonePlatform"
+            "--ozone-platform=wayland"
+            "--ozone-platform-hint=auto"
+            "--enable-features=WaylandWindowDecorations"
             "--force-dark-mode"
             "--enable-force-dark"
             "--enable-features=WebUIDarkMode"

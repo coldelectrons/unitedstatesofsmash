@@ -71,7 +71,7 @@ with lib.${namespace};
     security = {
       acme = enabled;
       gpg = enabled;
-      doas = enabled;
+      # doas = enabled;
     };
 
     apps = {
@@ -100,6 +100,10 @@ with lib.${namespace};
 
     desktop = {
       plasma6 = enabled;  
+    };
+
+    tools = {
+      git = enabled;
     };
 
     system = {

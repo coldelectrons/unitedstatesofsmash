@@ -37,7 +37,7 @@ with lib.${namespace};
     };
 
     security = {
-      doas = enabled;
+      # doas = enabled;
     };
 
     system = {

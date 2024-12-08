@@ -42,7 +42,11 @@ in
       message = "plusultra.nix.extra-substituters.${name}.key must be set";
     }) cfg.extra-substituters;
 
+    security.sudo.enable = true;
+
     environment.systemPackages = with pkgs; [
+      git
+      wget
       plusultra.nixos-revision
       (plusultra.nixos-hosts.override { hosts = inputs.self.nixosConfigurations; })
       deploy-rs
