@@ -13,6 +13,7 @@ with lib.${namespace};
     user = {
       enable = true;
       name = "coldelectrons";
+      email = "frithomas@gmail.com"; # TODO put this into secrets
       # home = "/home/coldelectrons";
     };
 

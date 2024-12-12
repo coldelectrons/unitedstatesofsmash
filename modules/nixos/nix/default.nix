@@ -42,7 +42,13 @@ in
       message = "plusultra.nix.extra-substituters.${name}.key must be set";
     }) cfg.extra-substituters;
 
-    security.sudo.enable = true;
+    # TODO use sudo-rs instead?
+    # XXX doas seems too...weird and broken
+    security.sudo = {
+      enable = true;
+      wheelNeedsPassword = false;
+    };
+
 
     environment.systemPackages = with pkgs; [
       git

@@ -12,7 +12,7 @@ let
 in
 {
   options.${namespace}.cli-apps.lunarvim = {
-    enable = mkEnableOption "lunarvim";
+    enable = mkEnableOption "lunarvim user config";
   };
 
   config = mkIf cfg.enable {

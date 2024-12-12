@@ -12,9 +12,9 @@ rec {
   ## ```nix
   ## mkDeploy {
   ##   inherit self;
-  ##   overrides = {
-  ##     my-host.system.sudo = "doas -u";
-  ##   };
+  ##   #overrides = {
+  ##   #  my-host.system.sudo = "doas -u"; # please don't use doas
+  ##   #};
   ## }
   ## ```
   ##

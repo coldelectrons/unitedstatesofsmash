@@ -14,10 +14,11 @@ let
 
   cfg = config.${namespace}.tools.git;
   user = config.${namespace}.user;
+  # gpg = config.${namespace}.security.gpg;
 in
 {
   options.${namespace}.tools.git = {
-    enable = mkEnableOption "Install and configure Git";
+    enable = mkEnableOption "Install and configure global git config";
     userName = mkOpt types.str user.fullName "The name to configure git with.";
     userEmail = mkOpt types.str user.email "The email to configure git with.";
     # signingKey = mkOpt types.str "The key ID to sign commits with.";
@@ -25,16 +26,20 @@ in
   };
 
   config = mkIf cfg.enable {
-    ${namespace}.home.extraOptions = {
+    environment.systemPackages = with pkgs; [ git lazygit ];
+    plusultra.home.extraOptions = {
       programs.git = {
-        enable = true;
-        inherit (cfg) userName userEmail;
+        inherit (cfg) enable userName userEmail;
         lfs = enabled;
         # signing = {
         #   key = cfg.signingKey;
         #   inherit (cfg) signByDefault;
         # };
-        extraConfig = {
+        config = {
+          user = {
+            name = cfg.userName;
+            email = cfg.userEmail;
+          };
           init = {
             defaultBranch = "main";
           };
@@ -46,14 +51,12 @@ in
           };
           core = {
             whitespace = "trailing-space,space-before-tab";
+          };
         };
-        # safe = {
-        #   directory = "${user.home}/work/config/.git";
-        # };
       };
       # Enable git authentication handler for OAuth
-      programs.git-credential-oauth.enable = true;
-      };
+      programs.git-credential-oauth.enable = inherit (cfg) enable;
+      programs.lazygit.enable = inherit (cfg) enable;
     };
   };
 }

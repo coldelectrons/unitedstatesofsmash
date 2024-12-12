@@ -31,7 +31,7 @@ with lib.${namespace};
     };
 
     security = {
-      # doas = enabled;
+      
     };
 
     system = {
@@ -45,7 +45,7 @@ with lib.${namespace};
 
   nix.settings.trusted-users = [ "root" "coldelectrons"];
   users.users.coldelectrons = {
-    extraGroups = [ "networkmanager" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNLc53xO8V/nzz1ebEGRplW0AeWhTUcYB1ZuWlRYDV1"
     ];

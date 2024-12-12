@@ -34,7 +34,7 @@ let
 in
 {
   options.${namespace}.cli-apps.zsh = {
-    enable = mkEnableOption "ZSH";
+    enable = mkEnableOption "ZSH user config";
   };
 
   config = mkIf cfg.enable {

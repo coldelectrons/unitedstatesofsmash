@@ -68,7 +68,6 @@ with lib.${namespace};
     security = {
       acme = enabled;
       gpg = enabled;
-      # doas = enabled;
     };
 
     apps = {
@@ -94,6 +93,14 @@ with lib.${namespace};
       avahi = enabled;
       printing = enabled;
       tailscale = enabled;
+      usbip = enabled // {
+        devices = [
+          {
+            host = "usbproxy.local";
+            device = "whatisthissupposedtobe";
+          };
+        ];
+      };
     };
 
     archetypes = {

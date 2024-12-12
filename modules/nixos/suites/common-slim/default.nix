@@ -46,10 +46,10 @@ in
       services = {
         openssh = enabled;
         tailscale = enabled;
+        avahi = enabled;
       };
 
       security = {
-        # doas = enabled;
       };
 
       system = {

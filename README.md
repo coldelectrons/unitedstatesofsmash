@@ -21,6 +21,8 @@ See [Jake Hamilton's Config](https://github.com/jakehamilton/config) for details
 
 ## What's up with this config?
 
+Beware: NixOS has a learning curve similar to Dwarf Fortress. That is, it's a learning cliff.
+
 I was just going to do a github-fork of `jakehamilton/config` (then called 'plusultra'), but because Nix configs are as personal as underwear and there was no reason for me to ever want to merge or make pull requests, I cut that link and started over.
 
 I'm calling this config `unitedstatesofsmash`, because of the `plusultra` name/namespace, which made me think of All Might from My Hero Academy.
@@ -30,21 +32,30 @@ I'm not aiming for super-duper-autism-sparkly-Hyprland configs, hence no reason 
 Things I want out of this:
 * Stick with stable channel for most things
     * Some things are too annoying when broken!
-        * Steam (20241101, decimation PR in unstable, made it so Vulkan/Proton was borked)
+        * (now fixed) Steam (20241101, decimation PR in unstable, made it so Vulkan/Proton was borked)
 * Overlay for newer packages <- this is the primary reason I wanted to copy `jakehamilton`'s snowfall config
-    * Kicad 8
-    * FreeCAD 1.0
-    * KDE Plasma 6.x
+    - (landed in 24.11) Kicad 8
+    - (landed in 24.11) FreeCAD 1.0
+    - (landed in 24.11) KDE Plasma 6.x
 * Maybe a few of my own custom configs or dotfiles
     * Lunarvim
-* Required system deployments/configs
-    * desktop
-    * laptop
-    * file server
+- Required system deployments/configs
+    - desktop
+    - laptop
+    - file server
+    - remote deployment ISOs
+
 * Eventually, some other full system deployments
-    * raspberry pi 4/5 with Klipper configs
+    * ~~raspberry pi 4/5 with Klipper configs~~ Argh screw pis
+    * some tiny amd64 with Klipper configs
 
 Things I have to figure out:
-* How to bootstrap with a snowfall flake config
-* how to configure a user/users in a snowfall flake config
-* how to deploy to a remote system using a snowfall flake config
+- [x] How to bootstrap with a snowfall flake config
+    It's not hard, but there are many points of customization, NixAnon can't just clone this and expect it to work for them.
+- [x] how to configure a user/users in a snowfall flake config
+    I swear this wasn't in the snowfall docs when I first looked.
+    This is one customization point: making a profile in `homes/<system_type>/<username>/default.nix`
+- [x] how to deploy to a remote system using a snowfall flake config
+    This isn't a mystery, all the known methods can work.
+    There Is No One True Way(tm)
+
