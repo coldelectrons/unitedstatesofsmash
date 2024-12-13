@@ -15,8 +15,34 @@ with lib.${namespace};
     raspberry-pi-3
   ];
 
+  nix.package = lib.mkForce pkgs.nix; 
+
   nixpkgs.config.allowUnsupportedSystem = true;
+
   nixpkgs.crossSystem.system = "aarch64-linux";
+  nixpkgs.buildPlatform = "x86_64-linux";
+  nixpkgs.hostPlatform = "aarch64-linux";
+
+  # TODO move this to a nixos module just for arm stuff
+  nix.buildMachines = [
+    {
+      hostName = "pi4builder";
+      system = "aarch64-linux";
+      protocol = "ssh-ng";
+      # if the builder supports building for multiple architectures, 
+      # replace the previous line by, e.g.
+      # systems = ["x86_64-linux" "aarch64-linux"];
+      maxJobs = 4;
+      speedFactor = 2;
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      mandatoryFeatures = [ ];
+    }
+  ];
+  nix.distributedBuilds = true;
+  # optional, useful when the builder has a faster internet connection than yours
+  nix.extraOptions = ''
+    builders-use-substitutes = true
+  '';
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi3;

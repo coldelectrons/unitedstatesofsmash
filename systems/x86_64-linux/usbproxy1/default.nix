@@ -10,10 +10,10 @@
 with lib;
 with lib.${namespace};
 {
-  imports = [ ./hardware.nix ];
 
 
   imports = with inputs.nixos-hardware.nixosModules; [
+    ./hardware.nix 
     (modulesPath + "/installer/scan/not-detected.nix")
     common-cpu-intel
     common-gpu-intel
@@ -22,7 +22,7 @@ with lib.${namespace};
 
 
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux;
+    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   };
 
   plusultra = {
@@ -86,6 +86,8 @@ with lib.${namespace};
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILNLc53xO8V/nzz1ebEGRplW0AeWhTUcYB1ZuWlRYDV1"
     ];
   };
+
+  nix.settings.trusted-users = [ "root" "coldelectrons" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

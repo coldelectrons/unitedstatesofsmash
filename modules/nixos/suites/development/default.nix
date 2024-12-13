@@ -39,15 +39,11 @@ in
       inherit apps cli-apps;
 
       tools = {
-        # attic = enabled;
-        # at = enabled;
+        attic = enabled;
         direnv = enabled;
-        # go = enabled;
-        # http = enabled;
-        # k8s = enabled;
-        # node = enabled;
-        # titan = enabled;
+        http = enabled;
         # qmk = enabled;
+        bottom = enabled;
       };
 
       virtualisation = {
