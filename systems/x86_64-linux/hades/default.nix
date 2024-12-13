@@ -98,7 +98,7 @@ with lib.${namespace};
           {
             host = "usbproxy.local";
             device = "whatisthissupposedtobe";
-          };
+          }
         ];
       };
     };
@@ -126,6 +126,7 @@ with lib.${namespace};
     };
 
     system = {
+      boot = enabled;
       fonts = enabled;
       locale = enabled;
       time = enabled;

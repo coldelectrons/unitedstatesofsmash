@@ -10,24 +10,26 @@
 with lib;
 with lib.${namespace};
 {
+  imports = [ ./hardware.nix ];
+
+
   imports = with inputs.nixos-hardware.nixosModules; [
     (modulesPath + "/installer/scan/not-detected.nix")
-    raspberry-pi-3
+    common-cpu-intel
+    common-gpu-intel
+    common-pc-ssd
   ];
 
-  nixpkgs.config.allowUnsupportedSystem = true;
-  nixpkgs.crossSystem.system = "aarch64-linux";
 
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_rpi3;
+    kernelPackages = pkgs.linuxKernel.packages.linux;
   };
 
   plusultra = {
+    nix = enabled;
+
     system = {
-      boot = {
-        # Raspberry Pi requires a specific bootloader.
-        enable = mkForce false;
-      };
+      boot = enabled;
     };
 
     archetypes = {
@@ -59,12 +61,18 @@ with lib.${namespace};
           }
         ];
       };
+      openssh = enabled;
+      avahi = enabled;
     };
 
+    hardware = {
+      networking = enabled;
+    };
   };
 
   environment.systemPackages = with pkgs; [
     kitty # TODO find a better way to get kitty-terminfo into a server
+    pciutils
   ];
 
   users.users.coldelectrons = {

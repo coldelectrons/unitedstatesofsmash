@@ -12,8 +12,8 @@ let
 
   device = types.submodule {
     options = {
-      productid = mkOption types.str;
-      vendorid = mkOption types.str;
+      productid = mkOption { type = types.str; };
+      vendorid = mkOption { type = types.str; };
     };
   };
 in
@@ -22,23 +22,23 @@ in
     enable = mkEnableOption "usbipd server";
     kernelPackage = mkOption {
       type = types.package;
-      default = config.boot.kernelPackage.usbip;
+      default = config.boot.kernelPackages.usbip;
       description = "The kernel module package to install";
     };
     devices = mkOption {
       type = types.listOf device;
       default = [];
       description = "List of USB devices to watch and automatically export.";
-    };
-    example = {
-      productid = "xxxx";
-      vendorid = "xxxx";
+      example = {
+        productid = "xxxx";
+        vendorid = "xxxx";
+      };
     };
     openFirewall = mkEnableOption "Open port 3240 for usbipd";
   };
 
   config = mkIf cfg.enable {
-    boot.extraModulesPackages = [ cfg.kernelPackage ];
+    boot.extraModulePackages = [ cfg.kernelPackage ];
     boot.kernelModules = [ "usbip-core" "usbip-host" ];
     networking.firewall.allowedTCPPorts = mkIf cfg.openFirewall [ 3240 ];
     services.udev.extraRules = strings.concatLines

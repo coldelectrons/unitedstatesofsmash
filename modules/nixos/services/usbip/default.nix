@@ -12,8 +12,8 @@ let
 
   device = types.submodule {
     options = {
-      host = mkOption types.str;
-      device = mkOption types.str;
+      host = mkOption { type = types.str; };
+      device = mkOption { type = types.str; };
     };
   };
 in
@@ -25,7 +25,7 @@ in
       default = config.boot.kernelPackages.usbip;
     };
     devices = mkOption {
-      type = types.listOf devcie;
+      type = types.listOf device;
       default = [];
       description = "list of host/devices to attach";
       example = {
@@ -38,7 +38,7 @@ in
   config = mkIf cfg.enable {
     boot.extraModulePackages = [ cfg.kernelModule ];
     boot.kernelModules = [ "vhci-hcd" ];
-    systemd.services = (builtins.listToAttrs (map (dev: { name = "usbip-${dev.host}-${dev.device}" }; value = {
+    systemd.services = (builtins.listToAttrs (map (dev: { name = "usbip-${dev.host}-${dev.device}"; value = {
           wantedBy = [ "network.target" ];
           script = ''
             devices=$(${cfg.kernelModule}/bin/usbip list -r ${dev.host} | grep -E ".*(${dev.device})" )

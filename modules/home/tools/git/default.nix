@@ -53,7 +53,7 @@ in
       };
     };
     # Enable git authentication handler for OAuth
-    programs.git-credential-oauth.enable = inherit (cfg) enable;
-    programs.lazygit.enable = inherit (cfg) enable;
+    programs.git-credential-oauth.enable = true;
+    programs.lazygit.enable = true;
   };
 }
