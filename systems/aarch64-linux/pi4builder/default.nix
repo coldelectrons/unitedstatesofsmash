@@ -35,6 +35,8 @@ with lib.${namespace};
     };
   };
 
+  # FIXME it seems that install kitty.terminfo alone doesn't work
+  environment.systemPackages = with pkgs; [ kitty ];
   users.users.coldelectrons = {
     extraGroups = [ "networkmanager" ];
     openssh.authorizedKeys.keys = [

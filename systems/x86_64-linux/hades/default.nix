@@ -39,7 +39,7 @@ with lib.${namespace};
     # vivaldi
   ];
 
-  nix.settings.trusted-users = [ "root" "coldelectrons"];
+  nix.settings.trusted-users = [ "root" "coldelectrons" "nix-ssh" ];
 
   plusultra = {
     
@@ -95,9 +95,13 @@ with lib.${namespace};
       tailscale = enabled;
       usbip = enabled // {
         devices = [
-          {
-            host = "usbproxy.local";
-            device = "whatisthissupposedtobe";
+          { # omtech galvo laser
+            host = "usbproxy1.localdomain";
+            device = "9588:9899";
+          }
+          { # grblhal teensy4
+            host = "usbproxy1.local";
+            device = "16c0:0483";
           }
         ];
       };

@@ -30,7 +30,7 @@ in
       description = "list of host/devices to attach";
       example = {
         host = "myhost.local";
-        device = "blah";
+        device = "1000:0201";
       };
     };
   };

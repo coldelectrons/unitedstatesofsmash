@@ -17,7 +17,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.plusultra.list-iommu ];
+    environment.systemPackages = [
+      pkgs.plusultra.list-iommu
+      pkgs.kitty.terminfo
+    ];
 
     plusultra = {
       nix = enabled;

@@ -71,8 +71,8 @@ with lib.${namespace};
   };
 
   environment.systemPackages = with pkgs; [
-    kitty # TODO find a better way to get kitty-terminfo into a server
     pciutils
+    usbutils
   ];
 
   users.users.coldelectrons = {
