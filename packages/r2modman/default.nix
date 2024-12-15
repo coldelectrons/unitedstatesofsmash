@@ -10,7 +10,7 @@
 }:
 let
   pname = "r2modman";
-  version = "3.1.48";
+  version = "3.1.55";
   name = "${pname}-${version}";
 
   src = pkgs.fetchurl {

@@ -36,7 +36,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    boot.extraModulePackages = [ cfg.kernelModule ];
+    boot.extraModulePackages = with config.boot.kernelPackages; [ usbip ];
     boot.kernelModules = [ "vhci-hcd" ];
     systemd.services = (builtins.listToAttrs (map (dev: { name = "usbip-${dev.host}-${dev.device}"; value = {
           wantedBy = [ "network.target" ];

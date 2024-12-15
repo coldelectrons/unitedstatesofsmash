@@ -71,14 +71,14 @@ with lib.${namespace};
     };
 
     apps = {
-      steam = enabled;
       vivaldi = enabled;
       syncthing = enabled;
+      steam = enabled;
+      steamtinkerlaunch = enabled;
+      r2modman = enabled;
       # simula = enabled;
       # rpcs3 = enabled;
       # ubports-installer = enabled;
-      # steamtinkerlaunch = enabled;
-      # r2modman = enabled;
     };
 
     hardware = {
@@ -93,7 +93,7 @@ with lib.${namespace};
       avahi = enabled;
       printing = enabled;
       tailscale = enabled;
-      usbip = enabled // {
+      usbip = disabled // {
         devices = [
           { # omtech galvo laser
             host = "usbproxy1.localdomain";
@@ -149,7 +149,7 @@ with lib.${namespace};
   hardware.amdgpu.opencl.enable = true;
 
     # Force radv
-  environment.variables.AMD_VULKAN_ICD = "RADV";
+  # environment.variables.AMD_VULKAN_ICD = "RADV";
 
   # WiFi is typically unused on the desktop. Enable this service
   # if it's no longer only using a wired connection.

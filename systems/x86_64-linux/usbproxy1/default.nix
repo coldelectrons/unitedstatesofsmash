@@ -37,29 +37,32 @@ with lib.${namespace};
     };
 
     services = {
-      usbipd = enabled // {
+      usbip.enable = true;
+      usbipd = {
+        enable = true;
         devices = [
-          { # sigma micro keyboard
-            productid = "1c4f";
-            vendorid  = "0027";
-          }
+          # { # sigma micro keyboard
+          #   vendorid  = "1c4f";
+          #   productid = "0027";
+          # }
           { # omtech galvo laser BJJCZ USBLMCV4
-            productid = "9588";
-            vendorid  = "9899";
+            vendorid  = "9588";
+            productid = "9899";
           }
           { # grblhal teeny4
-            productid = "16c0";
-            vendorid  = "0483";
+            vendorid  = "16c0";
+            productid = "0483";
           }
-          { # Brother Industries, Ltd ADS-4700W
-            productid = "04f9";
-            vendorid  = "04d5";
-          }
-          { # HP Laserjet 1102w
-            productid = "03f0";
-            vendorid  = "102a";
-          }
+          # { # Brother Industries, Ltd ADS-4700W
+          #   vendorid  = "04d5";
+          #   productid = "04f9";
+          # }
+          # { # HP Laserjet 1102w
+          #   vendorid  = "102a";
+          #   productid = "03f0";
+          # }
         ];
+        openFirewall = true;
       };
       openssh = enabled;
       avahi = enabled;
@@ -69,6 +72,8 @@ with lib.${namespace};
       networking = enabled;
     };
   };
+
+  # networking.firewall.enable = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
     pciutils

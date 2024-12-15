@@ -17,15 +17,34 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    # Fixes issue with SteamVR not starting
+    system.activationScripts = {
+      fixSteamVR =
+        "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep /home/${user}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
+    };
+
     hardware.steam-hardware.enable = true;
+    hardware.graphics.extraPackages = with pkgs; [ monado-vulkan-layers ];
+    programs.envision.enable = true;
     # services.wivrn.enable = true; # availble starting 24.11??
+
+    services.monado = {
+      enable = true;
+      defaultRuntime = true;
+    };
+    systemd.user.services.monado.environment = {
+      STEAM_LH_ENABLE = "1";
+      XRT_COMPOSITOR_COMPUTE = "1";
+    };
+
     environment.systemPackages = with pkgs; [
       wlx-overlay-s
       steam-run
       lighthouse-steamvr
       monado
-      monado-vulkan-layers # TODO enable when 24.11
-      motoc # TODO enable when 24.11
+      monado-vulkan-layers
+      motoc
       # basalt-monado
       envision-unwrapped
       opencomposite

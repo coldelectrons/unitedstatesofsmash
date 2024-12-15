@@ -36,6 +36,7 @@ in
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = with config.boot.kernelPackages; [
       zenpower
+      usbip
     ];
   };
 

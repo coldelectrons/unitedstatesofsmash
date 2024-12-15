@@ -18,22 +18,25 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.steam.enable = true;
-    programs.steam.remotePlay.openFirewall = true;
-    programs.steam.extraPackages = with pkgs; [
-      firefox
-      mangohud
-      gamescope
-      gamemode
-    ];
+    programs.steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+        steamtinkerlaunch
+      ];
+      extraPackages = with pkgs; [
+        firefox # needed for some games that oauth/connect with website
+        mangohud
+        gamescope
+        gamemode
+      ];
+      extest.enable = true;
+      protontricks.enable = true;
+    };
 
     hardware.steam-hardware.enable = true;
 
-    # Fixes issue with SteamVR not starting
-    system.activationScripts = {
-      fixSteamVR =
-        "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep /home/${user}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
-    };
     # Enable GameCube controller support.
     services.udev.packages = [ pkgs.dolphin-emu ];
 

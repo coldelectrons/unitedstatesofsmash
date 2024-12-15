@@ -16,5 +16,11 @@ in
     enable = mkBoolOpt false "Whether or not to enable Prism Launcher.";
   };
 
-  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ prismlauncher ]; };
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      prismlauncher.override{
+        jdks = with pkgs; [ jdk17 ];
+      };
+    ];
+  };
 }
