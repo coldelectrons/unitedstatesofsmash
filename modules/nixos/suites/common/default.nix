@@ -12,6 +12,7 @@ let
   cfg = config.${namespace}.suites.common;
 in
 {
+  # Common suite is a little fatter than slim, adding stuff intended for laptops/desktops
   options.${namespace}.suites.common = with types; {
     enable = mkBoolOpt false "Whether or not to enable common configuration.";
   };
@@ -20,35 +21,34 @@ in
     environment.systemPackages = [ pkgs.plusultra.list-iommu ];
 
     plusultra = {
-      nix = enabled;
+      suites.common-slim = enabled;
 
       # TODO: Enable this once Attic is configured again.
       # cache.public = enabled;
 
       cli-apps = {
-        flake = enabled;
-        thaw = enabled;
+        btrfs = enabled;
+        extras = enabled;
+        kitty_extras = enabled;
+        monitoring = enabled;
+        networking = enabled;
       };
 
       tools = {
-        git = enabled;
-        misc = enabled;
-        fup-repl = enabled;
+        appimage-run
         comma = enabled;
+        misc = enabled;
         nix-ld = enabled;
         bottom = enabled;
+        direnv = enabled;
       };
 
       hardware = {
         audio = enabled;
-        storage = enabled;
-        networking = enabled;
       };
 
       services = {
         printing = enabled;
-        openssh = enabled;
-        tailscale = enabled;
       };
 
       security = {
@@ -57,11 +57,6 @@ in
       };
 
       system = {
-        boot = enabled;
-        fonts = enabled;
-        locale = enabled;
-        time = enabled;
-        xkb = enabled;
       };
     };
   };

@@ -15,5 +15,18 @@ in
     enable = mkEnableOption "disk-tools";
   };
 
-  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ sirikali gparted exfatprogs fatresize util-linux partition-manager dosfstools ]; };
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      sirikali
+      gparted
+      exfatprogs
+      fatresize
+      util-linux
+      partition-manager
+      dosfstools
+      ventoy-full # bootable USB solution
+      usbimager
+      rpi-imager
+    ];
+  };
 }

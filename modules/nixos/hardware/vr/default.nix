@@ -10,6 +10,8 @@ with lib;
 with lib.${namespace};
 let
   cfg = config.${namespace}.hardware.vr;
+  user = config.${namespace}.user;
+  home = config.users.users.${user.name}.home;
 in
 {
   options.${namespace}.hardware.vr = with types; {
@@ -21,12 +23,12 @@ in
     # Fixes issue with SteamVR not starting
     system.activationScripts = {
       fixSteamVR =
-        "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep /home/${user}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
+        "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep ${home}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
     };
 
     hardware.steam-hardware.enable = true;
     hardware.graphics.extraPackages = with pkgs; [ monado-vulkan-layers ];
-    programs.envision.enable = true;
+    # programs.envision.enable = true;
     # services.wivrn.enable = true; # availble starting 24.11??
 
     services.monado = {
@@ -37,8 +39,10 @@ in
       STEAM_LH_ENABLE = "1";
       XRT_COMPOSITOR_COMPUTE = "1";
     };
+    programs.steam.extraPackages = with pkgs; [ monado ]; # TODO will this work?
 
     environment.systemPackages = with pkgs; [
+      plusultra.virtualhere # for the nofio wireless adapter
       wlx-overlay-s
       steam-run
       lighthouse-steamvr
@@ -46,7 +50,6 @@ in
       monado-vulkan-layers
       motoc
       # basalt-monado
-      envision-unwrapped
       opencomposite
       # opencomposite-hand-fixes
       # opencomposite-vendored

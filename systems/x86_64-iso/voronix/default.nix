@@ -10,6 +10,10 @@ with lib.${namespace};
   plusultra = {
     nix = enabled;
 
+    archetype = {
+      server = enabled;
+    };
+
     cli-apps = {
       neovim = enabled;
       tmux = enabled;
@@ -22,12 +26,15 @@ with lib.${namespace};
     };
 
     hardware = {
-      networking = enabled;
     };
 
     services = {
-      openssh = enabled;
-      avahi = enabled;
+      klipper = enabled // {
+        kalico = enabled;
+        klippain = enabled;
+      };
+      klipperscreen = enabled;
+      fluidd = enabled;
     };
 
     security = {
@@ -36,10 +43,6 @@ with lib.${namespace};
 
     system = {
       boot = enabled;
-      fonts = enabled;
-      locale = enabled;
-      time = enabled;
-      xkb = enabled;
     };
   };
 

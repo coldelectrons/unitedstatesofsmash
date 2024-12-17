@@ -36,6 +36,7 @@ in
         gparted = enabled;
         # paperless = enabled;
         vivaldi = enabled;
+        btrfs = enabled;
       };
     };
   };

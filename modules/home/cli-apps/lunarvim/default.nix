@@ -27,6 +27,7 @@ in
         libclang
         fzf
         ripgrep
+        glow
       ];
 
       sessionVariables = {

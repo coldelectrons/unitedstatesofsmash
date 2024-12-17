@@ -13,7 +13,7 @@ let
 in
 {
   options.${namespace}.hardware.storage = with types; {
-    enable = mkBoolOpt false "Whether or not to enable support for extra storage devices.";
+    enable = mkBoolOpt false "Whether or not to enable support for extra storage devices, filesystems, and compression formats";
   };
 
   config = mkIf cfg.enable {
@@ -22,6 +22,7 @@ in
       package = pkgs.usbmuxd2;
     };
     environment.systemPackages = with pkgs; [
+      lvm2
       ntfs3g
       fuseiso
       ifuse
@@ -31,6 +32,10 @@ in
       ctmg
       util-linux
       exfatprogs
+      smartmontools
+      sshfs
+      unzip
+      unar
     ];
   };
 }

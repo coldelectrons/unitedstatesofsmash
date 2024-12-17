@@ -20,7 +20,7 @@ in
     environment.systemPackages = with pkgs; [
       prismlauncher.override{
         jdks = with pkgs; [ jdk17 ];
-      };
+      }
     ];
   };
 }

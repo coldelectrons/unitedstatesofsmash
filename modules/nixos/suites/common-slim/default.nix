@@ -12,14 +12,15 @@ let
   cfg = config.${namespace}.suites.common-slim;
 in
 {
+  # Common-slim is supposed to be a good base for headless servers and desktops
   options.${namespace}.suites.common-slim = with types; {
     enable = mkBoolOpt false "Whether or not to enable common-slim configuration.";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      pkgs.plusultra.list-iommu
-      pkgs.kitty.terminfo
+    environment.systemPackages = with pkgs; [
+      kitty.terminfo # TODO does this work?
+      foot.terminfo
     ];
 
     plusultra = {
@@ -38,7 +39,6 @@ in
         fup-repl = enabled;
         comma = enabled;
         bottom = enabled;
-        direnv = enabled;
       };
 
       hardware = {

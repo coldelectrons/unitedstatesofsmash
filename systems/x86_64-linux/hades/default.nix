@@ -27,16 +27,11 @@ with lib.${namespace};
     # Swapfile hibernate
     # resumeDevice = "${MAIN_PART}";
     # kernelParams = [ "resume_offset=${RESUME_OFFSET}" "nvidia_drm.fbdev=1" ];
-
-    # A Fedora recommendation: https://fedoraproject.org/wiki/Changes/IncreaseVmMaxMapCount
-    # Good for Windows games running through Wine or Steam
-    # kernel.sysctl."vm.max_map_count" = 1048576; # Arch default
-    kernel.sysctl."vm.max_map_count" = 2147483642; # Valve Steamdeck default
-
   };
 
   environment.systemPackages = with pkgs; [
     # vivaldi
+    plusultra.balor
   ];
 
   nix.settings.trusted-users = [ "root" "coldelectrons" "nix-ssh" ];
@@ -84,7 +79,9 @@ with lib.${namespace};
     hardware = {
       vr = enabled;
       spacenav = enabled;
-      graphics = enabled;
+      graphics = enabled // {
+        amdgpu = enabled;
+      };
       networking = enabled;
     };
 

@@ -21,7 +21,7 @@ in
       then
         fetchurl {
           url = "https://www.virtualhere.com/sites/default/files/usbclient/vhuit64";
-          hash = "sha256-kLZET/0xwgFYrSz8ReINXcFdE+lVYqszpiLOhZvSj+M=";
+          hash = "sha256-1Y4oV0KlEyEzwV/IAulwxdk9fGfQk59m/GXTR0VeAAE=";
         }
       else
         fetchurl {
