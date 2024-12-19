@@ -21,6 +21,7 @@ in
       desktop = {
         plasma6 = enabled;
 
+
         addons = {
           # wallpapers = enabled;
         };

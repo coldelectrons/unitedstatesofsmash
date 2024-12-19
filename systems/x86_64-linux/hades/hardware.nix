@@ -63,8 +63,7 @@ in
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   # NOTE: NetworkManager will handle DHCP.
-  networking.interfaces.enp39s0.useDHCP = false;
-  networking.interfaces.wlp41s0.useDHCP = false;
+  systemd.network.enable = false;
 
   hardware.enableRedistributableFirmware = true;
 

@@ -16,5 +16,12 @@ in
     enable = mkBoolOpt false "Whether or not to enable kicad.";
   };
 
-  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ kicad ]; };
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      kicad
+      kikit
+      kicadAddons.kikit
+      kicadAddons.kikit-library
+    ];
+  };
 }

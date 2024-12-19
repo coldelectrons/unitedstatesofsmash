@@ -16,5 +16,5 @@ in
     enable = mkBoolOpt false "Whether or not to enable FreeCAD.";
   };
 
-  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ freecad ]; };
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ freecad-wayland ]; };
 }

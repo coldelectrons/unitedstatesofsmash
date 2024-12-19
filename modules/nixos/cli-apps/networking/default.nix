@@ -9,10 +9,10 @@
 with lib;
 with lib.${namespace};
 let
-  cfg = config.${namespace}.cli-apps.extras;
+  cfg = config.${namespace}.cli-apps.networking;
 in
 {
-  options.${namespace}.cli-apps.extras = with types; {
+  options.${namespace}.cli-apps.networking = with types; {
     enable = mkBoolOpt false "Whether or not to enable command-line extras.";
   };
 

@@ -32,6 +32,7 @@ in
       cli-apps = {
         flake = enabled;
         thaw = enabled;
+        btrfs = enabled;
       };
 
       tools = {

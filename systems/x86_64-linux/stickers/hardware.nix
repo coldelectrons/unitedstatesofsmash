@@ -53,8 +53,7 @@ in
 
   networking.useDHCP = lib.mkDefault true;
   # NOTE: NetworkManager will handle DHCP.
-  networking.interfaces.enp39s0.useDHCP = false;
-  networking.interfaces.wlp41s0.useDHCP = false;
+  systemd.network.enable = false;
 
   hardware.enableRedistributableFirmware = true;
 

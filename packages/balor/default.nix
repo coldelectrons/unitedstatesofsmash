@@ -1,11 +1,12 @@
 {
   lib,
+  pkgs,
   python3,
   fetchFromGitLab,
 }:
-let
-  extraBuildInputs = plugins python3.pkgs;
-in
+# let
+#   extraBuildInputs = plugins python3.pkgs;
+# in
 python3.pkgs.buildPythonApplication rec {
   pname = "balor";
   version = "0.1";
@@ -24,9 +25,9 @@ python3.pkgs.buildPythonApplication rec {
   installPhase = ''
     mkdir -p $out/opt
     cp -r ./* $out/opt
-    chmod +x $out/opt/balor*.py
+    chmod +x $out/opt/balor*.py $out/opt/drawanimatedsquare.py
     makeWrapper $out/opt/balor.py $out/bin/balor --prefix PYTHONPATH : "$PYTHONPATH"
-    makeWrapper $out/opt/balor-code-debug.py $out/bin/balor-code-debug --prefix PYTHONPATH : "$PYTHONPATH"
+    makeWrapper $out/opt/balor-debug.py $out/bin/balor-debug --prefix PYTHONPATH : "$PYTHONPATH"
     makeWrapper $out/opt/balor-aligner.py $out/bin/balor-aligner --prefix PYTHONPATH : "$PYTHONPATH"
     makeWrapper $out/opt/balor-code.py $out/bin/balor-code --prefix PYTHONPATH : "$PYTHONPATH"
     makeWrapper $out/opt/balor-fiducial.py $out/bin/balor-fiducial --prefix PYTHONPATH : "$PYTHONPATH"
@@ -39,13 +40,22 @@ python3.pkgs.buildPythonApplication rec {
     makeWrapper $out/opt/drawanimatedsquare.py $out/bin/drawanimatedsquare --prefix PYTHONPATH : "$PYTHONPATH"
   '';
 
-  propogatedBuildInputs = with python3.pkgs; [
-    usb
+  buildInputs = with python3.pkgs; [
+    pyusb
     svg-path
     numpy
     pillow
     scipy
-    plusultra.gcodeparser
+    pkgs.plusultra.gcodeparser
+  ];
+
+  propogatedBuildInputs = with python3.pkgs; [
+    pyusb
+    svg-path
+    numpy
+    pillow
+    scipy
+    pkgs.plusultra.gcodeparser
   ];
 
   meta = with lib; {

@@ -12,7 +12,7 @@ let
   cfg = config.${namespace}.cli-apps.markdown;
 in
 {
-  options.${namespace}.cli-apps.extras = with types; {
+  options.${namespace}.cli-apps.markdown = with types; {
     enable = mkBoolOpt false "Whether or not to enable command-line markdown tools.";
   };
 

@@ -18,34 +18,54 @@ in
   };
 
   config = mkIf cfg.enable {
+  
     programs.steam = {
       enable = true;
-      remotePlay.openFirewall = true;
+      gamescopeSession.enable = true;
+      remotePlay.openFirewall = false;
       extraCompatPackages = with pkgs; [
         proton-ge-bin
-        steamtinkerlaunch
+        vkd3d-proton
+        steam-play-none
       ];
       extraPackages = with pkgs; [
-        firefox # needed for some games that oauth/connect with website
-        mangohud
-        gamescope
+        firefox # needed for some non-steam games that oauth/connect with website
+        xorg.libXcursor
+        xorg.libxcb 
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
         gamemode
+        dxvk_2
+        gamescope
+        mangohud
+        SDL2
+        libjpeg
+        openal
+        libglvnd
+        gtk3
+        mono
+        simpleDBus
       ];
-      extest.enable = true;
+      # extest.enable = true;
       protontricks.enable = true;
     };
 
-    hardware.steam-hardware.enable = true;
-
-    # Enable GameCube controller support.
-    services.udev.packages = [ pkgs.dolphin-emu ];
-
     environment.systemPackages = with pkgs; [
-      plusultra.steam # add desktop items
+      # plusultra.steam # add desktop items
       steam-run
-      # steamcontroller
+      steamcmd
+      steam-tui
+      steamcontroller
       sc-controller
       protonup
+      protonup-qt
     ];
 
     environment.sessionVariables = {

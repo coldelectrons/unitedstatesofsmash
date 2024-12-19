@@ -13,7 +13,7 @@ let
 in
 {
   options.${namespace}.cli-apps.proton = with types; {
-    enable = mkBoolOpt false "Whether or not to enable Proton, for use outside Steam.";
+    enable = mkBoolOpt false "Whether or not to enable Proton.";
   };
 
   config = mkIf cfg.enable {
@@ -22,6 +22,8 @@ in
       protonplus
       protontricks
       protonup-ng
+      dxvk_2
+      vkd3d-proton
     ];
   };
 }

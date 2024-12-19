@@ -12,7 +12,7 @@ let
   cfg = config.${namespace}.cli-apps.filemanagers;
 in
 {
-  options.${namespace}.cli-apps.extras = with types; {
+  options.${namespace}.cli-apps.filemanagers = with types; {
     enable = mkBoolOpt false "Whether or not to enable command-line filemanagers.";
   };
 

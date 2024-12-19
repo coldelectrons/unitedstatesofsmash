@@ -12,7 +12,7 @@ let
   cfg = config.${namespace}.cli-apps.btrfs;
 in
 {
-  options.${namespace}.cli-apps.extras = with types; {
+  options.${namespace}.cli-apps.btrfs = with types; {
     enable = mkBoolOpt false "Whether or not to enable command-line btrfs tools.";
   };
 

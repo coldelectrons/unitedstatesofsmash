@@ -1,11 +1,10 @@
 {
   lib,
-  buildPythonPackage,
+  python3,
   fetchFromGitHub,
-  setuptools,
 }:
 
-buildPythonPackage rec {
+python3.pkgs.buildPythonPackage rec {
   pname = "gcodeparser";
   version = "0.2.4";
   format = "pyproject";
@@ -14,10 +13,10 @@ buildPythonPackage rec {
     owner = "AndyEveritt";
     repo = "GcodeParser";
     rev = "${version}";
-    hash = "";
+    hash = "sha256-K4jKoiUv2DnjI7RXT7tqKF+SU/6S1d97qzNU+xyoS8U=";
   };
 
-  nativeBuildInputs = [ setuptools ];
+  nativeBuildInputs = with python3.pkgs; [ setuptools ];
 
   pythonImportsCheck = [ "gcodeparser" ];
 

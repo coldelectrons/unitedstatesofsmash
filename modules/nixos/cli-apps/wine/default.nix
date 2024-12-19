@@ -18,9 +18,11 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      winePackages.unstable
+      # winePackages.unstable
       winetricks
-      wine64Packages.unstable
+      # wine64Packages.waylandFull
+      wineWowPackages.waylandFull
+      dxvk_2
     ];
   };
 }

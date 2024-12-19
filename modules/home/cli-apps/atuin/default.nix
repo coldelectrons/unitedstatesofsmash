@@ -1,15 +1,17 @@
 {
-  lib,
+  options,
   config,
+  lib,
   pkgs,
   namespace,
   ...
 }:
+with lib;
+with lib.${namespace};
 let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.${namespace}.cli-apps.atuin;
-
 in
 {
   options.${namespace}.cli-apps.atuin = {

@@ -9,10 +9,10 @@
 with lib;
 with lib.${namespace};
 let
-  cfg = config.${namespace}.cli-apps.extras;
+  cfg = config.${namespace}.cli-apps.kitty_extras;
 in
 {
-  options.${namespace}.cli-apps.extras = with types; {
+  options.${namespace}.cli-apps.kitty_extras = with types; {
     enable = mkBoolOpt false "Whether or not to enable command-line extras for the Kitty terminal.";
   };
 
@@ -25,7 +25,7 @@ in
       tree
       tldr # better man pages
       comma # Install and run programs by sticking a , before them
-      bc dc clac# Calculators
+      bc clac# Calculators
 
       termpdfpy # graphical reader for inside kitty
       termimage # display images in the term

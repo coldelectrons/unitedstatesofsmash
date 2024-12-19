@@ -1,56 +1,57 @@
 {
   lib,
   stdenv,
+  pkgs,
   fetchurl,
-  libGL,
-  makeWrapper,
-  egl-wayland,
-  libGLU,
-  libglvnd,
-}: let
-  libpath = "$LD_LIBRARY_PATH:${
-    lib.makeLibraryPath [libglvnd egl-wayland libGL libGLU]
-  }";
-in
-  stdenv.mkDerivation rec {
-    name = "virtualhere";
-    version = "1.0.0";
+  # libGL,
+  # egl-wayland,
+  autoPatchelfHook
+}:
 
-    src =
-      if stdenv.isx86_64
-      then
-        fetchurl {
-          url = "https://www.virtualhere.com/sites/default/files/usbclient/vhuit64";
-          hash = "sha256-1Y4oV0KlEyEzwV/IAulwxdk9fGfQk59m/GXTR0VeAAE=";
-        }
-      else
-        fetchurl {
-          url = "";
-          hash = "";
-        };
+stdenv.mkDerivation rec {
+  name = "virtualhere";
+  version = "1.0.0";
 
-    dontUnpack = true;
-    dontConfigure = true;
-    dontBuild = true;
+  # TODO make selective download based on system
+  src =
+    if stdenv.isx86_64
+    then
+      fetchurl {
+        url = "https://www.virtualhere.com/sites/default/files/usbclient/vhuit64";
+        hash = "sha256-1Y4oV0KlEyEzwV/IAulwxdk9fGfQk59m/GXTR0VeAAE=";
+      }
+    else
+      fetchurl {
+        url = "";
+        hash = "";
+      };
 
-    installPhase = ''
-      runHook preInstall
+  dontUnpack = true;
+  dontConfigure = true;
+  dontBuild = true;
 
-      mkdir -p $out/bin
-      cp $src $out/bin/vhuit64
-      chmod +x $out/bin/vhuit64
+  nativeBuildInputs = [
+    autoPatchelfHook
+  ];
 
-      echo "${libpath}"
+  buildInputs = with pkgs; [
+    libGL
+    egl-wayland
+  ];
 
-      wrapProgram $out/bin/vhuit64 --set LD_LIBRARY_PATH "${libpath}"
+  sourceRoot = ".";
 
-      runHook postInstall
-    '';
+  installPhase = ''
+    runHook preInstall
+    install -m755 -D vhuit64 $out/bin/vhuit64
+    runHook postInstall
+  '';
 
-    nativeBuildInputs = [makeWrapper];
-
-    buildInputs = [
-      libGL
-      egl-wayland
-    ];
-  }
+  meta = with lib; {
+    description = "VirtualHere usb-over-ethernet UI.";
+    homepage = "https://virtualhere.com";
+    platforms = platforms.linux;
+    license = licenses.unfree;
+    maintainers = with maintainers; [ coldelectrons ];
+  };
+}

@@ -27,9 +27,7 @@ in
     };
 
     hardware.steam-hardware.enable = true;
-    hardware.graphics.extraPackages = with pkgs; [ monado-vulkan-layers ];
-    # programs.envision.enable = true;
-    # services.wivrn.enable = true; # availble starting 24.11??
+    # hardware.graphics.extraPackages = with pkgs; [ monado-vulkan-layers ]; # TODO is this causing my problems?
 
     services.monado = {
       enable = true;
@@ -39,21 +37,32 @@ in
       STEAM_LH_ENABLE = "1";
       XRT_COMPOSITOR_COMPUTE = "1";
     };
-    programs.steam.extraPackages = with pkgs; [ monado ]; # TODO will this work?
+
+    services.udev.packages = with pkgs; [ xr-hardware ];
 
     environment.systemPackages = with pkgs; [
       plusultra.virtualhere # for the nofio wireless adapter
-      wlx-overlay-s
+      # wlx-overlay-s
       steam-run
       lighthouse-steamvr
-      monado
-      monado-vulkan-layers
-      motoc
+      # motoc
       # basalt-monado
-      opencomposite
+      # opencomposite
       # opencomposite-hand-fixes
       # opencomposite-vendored
       # index_camera_passthrough # TODO doesn't seem to be available from nixpkgs-xr 20241206
+      xrgears
+      xr-hardware
+
+      stardust-xr-atmosphere
+      stardust-xr-sphereland
+      stardust-xr-protostar
+      stardust-xr-flatland
+      stardust-xr-magnetar
+      stardust-xr-phobetor
+      stardust-xr-gravity
+      stardust-xr-server
+      stardust-xr-kiara
     ];
   };
 }

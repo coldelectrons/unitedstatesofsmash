@@ -27,6 +27,7 @@ in
       # cache.public = enabled;
 
       cli-apps = {
+        filemanagers = enabled;
         btrfs = enabled;
         extras = enabled;
         kitty_extras = enabled;
@@ -35,8 +36,7 @@ in
       };
 
       tools = {
-        appimage-run
-        comma = enabled;
+        appimage-run = enabled;
         misc = enabled;
         nix-ld = enabled;
         bottom = enabled;
@@ -59,5 +59,7 @@ in
       system = {
       };
     };
+
+    security.polkit.enable = true;
   };
 }

@@ -1,3 +1,3 @@
 { channels, ... }:
 
-final: prev: { inherit (channels.unstable) freecad; }
+final: prev: { inherit (channels.unstable) freecad-wayland; }

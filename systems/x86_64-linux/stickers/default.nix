@@ -68,7 +68,6 @@ with lib.${namespace};
     };
 
     apps = {
-      # steam = enabled;
       vivaldi = enabled;
       syncthing = enabled;
     };
@@ -79,8 +78,6 @@ with lib.${namespace};
     };
 
     services = {
-      openssh = enabled;
-      avahi = enabled;
       # printing = enabled;
       tailscale = enabled;
     };
@@ -96,15 +93,9 @@ with lib.${namespace};
     };
 
     tools = {
-      git = enabled;
     };
 
     system = {
-      boot = enabled;
-      fonts = enabled;
-      locale = enabled;
-      time = enabled;
-      xkb = enabled;
     };
   };
   

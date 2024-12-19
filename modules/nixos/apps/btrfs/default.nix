@@ -12,7 +12,7 @@ let
   cfg = config.${namespace}.apps.btrfs;
 in
 {
-  options.${namespace}.apps.ardour = with types; {
+  options.${namespace}.apps.btrfs = with types; {
     enable = mkBoolOpt false "Whether or not to enable btrfs gui tools.";
   };
 

@@ -12,7 +12,7 @@ let
   cfg = config.${namespace}.cli-apps.monitoring;
 in
 {
-  options.${namespace}.cli-apps.extras = with types; {
+  options.${namespace}.cli-apps.monitoring = with types; {
     enable = mkBoolOpt false "Whether or not to enable command-line extras for TODO sort this out.";
   };
 
@@ -26,6 +26,7 @@ in
       cyme # a better lsusb
       usbview
       clinfo
+      pciutils
     ];
   };
 }

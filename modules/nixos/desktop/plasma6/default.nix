@@ -64,11 +64,6 @@ in
         qalculate-qt
         kdiskmark
         # Libraries/Utilities
-        clinfo # for kinfocenter for OpenCL page
-        glxinfo # for kinfocenter for OpenGL EGL and GLX page
-        vulkan-tools # for kinfocenter for Vulkan page
-        gpu-viewer
-        wayland-utils # for kinfocenter for Wayland page
         ffmpegthumbnailer # for video thumbnails
         linuxquota # for plasma-disks
         ktorrent
@@ -167,6 +162,8 @@ in
 
     # Required for app indicators
     services.udev.packages = with pkgs; [ solaar ];
+
+    programs.xwayland.enable = true;
 
     services.libinput.enable = true;
 
