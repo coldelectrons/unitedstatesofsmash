@@ -113,7 +113,11 @@
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
+    };
+
+    nix-snapd = {
+      url = "github:nix-community/nix-snapd";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -180,6 +184,10 @@
           # TODO: Replace plusultra.services.attic now that vault-agent
           # exists and can force override environment files.
           # attic.nixosModules.atticd
+          nix-snapd.nixosModules.default
+          {
+            services.snap.enable = true;
+          }
         ];
         systems.hosts.hades.modules = with inputs; [
           # nixos-hardware.nixosModules.framework-11th-gen-intel

@@ -76,7 +76,7 @@ in
         # Libraries/Utilities
         kdePackages.kdegraphics-thumbnailers
         ffmpegthumbs
-        xwaylandvideobridge
+        # xwaylandvideobridge # why need this??
         kdePackages.qtwayland
         strawberry-qt6
         # TODO move this to app module
