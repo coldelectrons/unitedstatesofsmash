@@ -10,8 +10,7 @@
 assert stdenv.system == "x86_64-linux";
 
 stdenv.mkDerivation {
-  name = "visualsfm";
-  version = "0.5.25";
+  name = "visualsfm-0.5.25";
 
   src = fetchurl {
     url = "http://ccwu.me/vsfm/download/VisualSFM_linux_64bit.zip";
