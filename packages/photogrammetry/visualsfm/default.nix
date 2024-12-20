@@ -9,7 +9,7 @@
 
 assert stdenv.system == "x86_64-linux";
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   name = "visualsfm";
   version = "0.5.25";
 
@@ -23,6 +23,8 @@ stdenv.mkDerivation {
     autoPatchelfHook
     stdenv.cc.cc.lib
     pkg-config 
+    pkgs.plusultra.siftgpu
+    pkgs.plusultra.cmvs-pmvs
   ];
 
   buildInputs = with pkgs; [

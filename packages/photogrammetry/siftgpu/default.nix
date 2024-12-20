@@ -9,7 +9,7 @@
 
 assert stdenv.system == "x86_64-linux";
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   name = "siftgpu";
   version = "0.5.400";
 
