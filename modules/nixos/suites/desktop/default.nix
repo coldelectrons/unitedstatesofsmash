@@ -40,5 +40,7 @@ in
         btrfs = enabled;
       };
     };
+    
+    services.snap.enable = true;
   };
 }
