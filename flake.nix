@@ -56,7 +56,7 @@
     nix-ld.url = "github:Mic92/nix-ld";
     nix-ld.inputs.nixpkgs.follows = "unstable";
 
-    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+    # nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
     
     # TODO LATER
     # Neovim
@@ -119,6 +119,9 @@
       url = "github:nix-community/nix-snapd";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-comfyui.url = "github:dyscorv/nix-comfyui";
+
   };
 
   outputs =
@@ -167,6 +170,7 @@
           # snowfall-docs.overlays.default
           # nixpkgs-news.overlays.default
           # lix-module.overlays.default
+          nix-comfyui.overlays.default
         ];
 
         systems.modules.nixos = with inputs; [

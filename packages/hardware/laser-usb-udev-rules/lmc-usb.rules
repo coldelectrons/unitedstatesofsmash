@@ -1,0 +1,7 @@
+# USBLMCv4 - no further action needed
+SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="9588", ATTR{idProduct}=="9899", MODE="0666"
+# LMCv2 variants
+# Need to upload firmware blob on connect
+# and then give non-root permisions to access
+# TODO package further
+c# SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="9588", ATTR{idProduct}=="9980", MODE="0666", RUN:=""

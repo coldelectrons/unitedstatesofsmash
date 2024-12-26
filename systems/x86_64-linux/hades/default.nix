@@ -42,7 +42,9 @@ with lib.${namespace};
       workstation = enabled;
     };
     desktop = {
-      plasma6 = enabled;  
+      plasma6 = enabled // {
+        wayland = true;
+      };
     };
     cli-apps = {
       extras = enabled;
@@ -63,7 +65,9 @@ with lib.${namespace};
       # ubports-installer = enabled;
     };
     hardware = {
-      # vr = enabled;
+      # vr = enabled // {
+      #   monadoDefaultEnable = false;
+      # };
       spacenav = enabled;
       graphics = enabled // {
         amdgpu = enabled;
@@ -86,7 +90,7 @@ with lib.${namespace};
     virtualisation.kvm = {
       enable = true;
       platform = "amd";
-    #   # RX480 when in the bottom slot:
+    #   # TODO I'm not currently using passthrough
     #   # IOMMU Group 23 23:00.0 VGA compatible controller [0300]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere [Radeon RX 470/480/570/570X/580/580X/590] [1002:67df] (rev c7)
     #   # IOMMU Group 23 23:00.1 Audio device [0403]: Advanced Micro Devices, Inc. [AMD/ATI] Ellesmere HDMI Audio [Radeon RX 470/480 / 570/580/590] [1002:aaf0]
     #   vfioIds = [

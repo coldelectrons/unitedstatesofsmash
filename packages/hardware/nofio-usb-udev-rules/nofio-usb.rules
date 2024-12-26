@@ -1,0 +1,1 @@
+KERNEL=="event[0-9]*", ATTRS{idVendor}=="04b3", ATTRS{idProduct}=="1234", MODE="0666", SYMLINK+="nofio_wireless_base"
