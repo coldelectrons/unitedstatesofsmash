@@ -15,7 +15,7 @@ let
   home = config.users.users.${user.name}.home;
   desktopItem = pkgs.makeDesktopItem {
     name = "wlx-overlay";
-    desktopName = "wlx-overlay";
+    desktopName = "WLX Overlay";
     genericName = "WLX Overlay for SteamVR";
     exec = "${pkgs.wlx-overlay-s}/bin/wlx-overlay-s --replace";
     icon = ./wlx-overlay-s.png;
@@ -59,7 +59,7 @@ in
         STEAM_LH_ENABLE = "1";
         XRT_COMPOSITOR_COMPUTE = "1";
         XRT_COMPOSITOR_SCALE_PERCENTAGE = "140";
-        WMR_HANDTRACKING = "0";
+        WMR_HANDTRACKING = "1";
       };
     };
 
@@ -67,39 +67,6 @@ in
       # why is this necessary?
       LIBMONADO_PATH = "${config.services.monado.package}/lib/libmonado.so";
     };
-
-    ${namespace}.xdg.configFile = {
-      "openxr/1/active_runtime.json".source = "${pkgs.monado}/share/openxr/1/openxr_monado.json";
-
-      "openvr/openvrpaths.vrpath".text = ''
-        {
-          "config" :
-          [
-            "${config.hm.xdg.dataHome}/Steam/config"
-          ],
-          "external_drivers" : null,
-          "jsonid" : "vrpathreg",
-          "log" :
-          [
-            "${config.hm.xdg.dataHome}/Steam/logs"
-          ],
-          "runtime" :
-          [
-            "${pkgs.opencomposite}/lib/opencomposite"
-          ],
-          "version" : 1
-        }
-      '';
-    };
-
-    ${namespace}.home.file = {
-      "${config.hm.xdg.dataHome}/monado/hand-tracking-models".source = pkgs.fetchgit {
-        url = "https://gitlab.freedesktop.org/monado/utilities/hand-tracking-models.git";
-        fetchLFS = true;
-        hash = "sha256-x/X4HyyHdQUxn3CdMbWj5cfLvV7UyQe1D01H93UCk+M=";
-      };
-    };
-
 
     programs.steam = {
       # extraCompatPackages = [
