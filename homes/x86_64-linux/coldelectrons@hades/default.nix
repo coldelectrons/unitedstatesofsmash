@@ -30,6 +30,8 @@ with lib.${namespace};
       # };
     };
 
+    apps.vr = enabled;
+
     tools = {
       git = enabled // {
         userEmail = "frithomas@gmail.com";
