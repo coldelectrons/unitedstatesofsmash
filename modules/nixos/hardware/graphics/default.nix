@@ -36,14 +36,11 @@ in
     environment.systemPackages = with pkgs; [
       vulkan-tools
       vulkan-loader
-      # vulkan-validation-layers
-      # vulkan-extension-layer
       vkdisplayinfo
       gpu-viewer
       mesa
       clinfo # for kinfocenter for OpenCL page
       glxinfo # for kinfocenter for OpenGL EGL and GLX page
-      wayland-utils # for kinfocenter for Wayland page
     ]
     ++ optionals cfg.amdgpu.enable amdpkgs;
 
@@ -52,12 +49,9 @@ in
         enable = true;
         enable32Bit = true;
         extraPackages = with pkgs; [
-          mesa
-          vkd3d
-          vkd3d-proton
           libva
-          vulkan-tools
-          vulkan-loader
+          vulkan-validation-layers
+          vulkan-extension-layer
           monado-vulkan-layers
         ] ++ optionals cfg.amdgpu.enable amdpkgs;
       };

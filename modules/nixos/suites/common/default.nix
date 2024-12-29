@@ -18,7 +18,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.plusultra.list-iommu ];
+    environment.systemPackages = with pkgs;[
+      plusultra.list-iommu
+      linux-firmware
+    ];
 
     plusultra = {
       suites.common-slim = enabled;

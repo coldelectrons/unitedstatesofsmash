@@ -13,15 +13,16 @@ let
   cfg = config.${namespace}.hardware.vr;
   user = config.${namespace}.user;
   home = config.users.users.${user.name}.home;
-  # xrpkgs = with inputs.nixpkgs-xr.packages.${pkgs.system}; [
-  xrpkgs = with pkgs; [
-      # monado
-      # opencomposite
-      # opencomposite-vendored
-      # wlx-overlay-s
-      # index_camera_passthrough
-      # proton-ge-rtsp-bin
-    ];
+  desktopItem = pkgs.makeDesktopItem {
+    name = "wlx-overlay";
+    desktopName = "wlx-overlay";
+    genericName = "WLX Overlay for SteamVR";
+    exec = "${pkgs.wlx-overlay-s}/bin/wlx-overlay-s --replace";
+    icon = ./wlx-overlay-s.png;
+    type = "Application";
+    categories = [ "Game" "VR" ];
+    terminal = false;
+  };
 in
 {
   options.${namespace}.hardware.vr = with types; {
@@ -37,16 +38,66 @@ in
         "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep ${home}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
     };
 
-    services.udev.packages = with pkgs; [ xr-hardware plusultra.nofio-usb-udev-rules ];
-
+    services.udev.packages = with pkgs; [
+      xr-hardware
+      plusultra.nofio-usb-udev-rules
+    ];
 
     services.monado = {
       enable = true;
       defaultRuntime = cfg.monadoDefaultEnable;
+      highPriority = true;
     };
-    systemd.user.services.monado.environment = {
-      STEAM_LH_ENABLE = "1";
-      XRT_COMPOSITOR_COMPUTE = "1";
+
+    systemd.user.services.monado = {
+      serviceConfig = {
+        ExecStartPost = "${lib.getExe pkgs.lighthouse-steamvr} -s ON";
+         ExecStopPost = "${lib.getExe pkgs.lighthouse-steamvr} -s OFF";
+      };
+      environment = {
+        STEAMVR_PATH = "${home}/.steam/root/steamapps/common/SteamVR";
+        STEAM_LH_ENABLE = "1";
+        XRT_COMPOSITOR_COMPUTE = "1";
+        XRT_COMPOSITOR_SCALE_PERCENTAGE = "140";
+        WMR_HANDTRACKING = "0";
+      };
+    };
+
+    environment.sessionVariables = {
+      # why is this necessary?
+      LIBMONADO_PATH = "${config.services.monado.package}/lib/libmonado.so";
+    };
+
+    ${namespace}.xdg.configFile = {
+      "openxr/1/active_runtime.json".source = "${pkgs.monado}/share/openxr/1/openxr_monado.json";
+
+      "openvr/openvrpaths.vrpath".text = ''
+        {
+          "config" :
+          [
+            "${config.hm.xdg.dataHome}/Steam/config"
+          ],
+          "external_drivers" : null,
+          "jsonid" : "vrpathreg",
+          "log" :
+          [
+            "${config.hm.xdg.dataHome}/Steam/logs"
+          ],
+          "runtime" :
+          [
+            "${pkgs.opencomposite}/lib/opencomposite"
+          ],
+          "version" : 1
+        }
+      '';
+    };
+
+    ${namespace}.home.file = {
+      "${config.hm.xdg.dataHome}/monado/hand-tracking-models".source = pkgs.fetchgit {
+        url = "https://gitlab.freedesktop.org/monado/utilities/hand-tracking-models.git";
+        fetchLFS = true;
+        hash = "sha256-x/X4HyyHdQUxn3CdMbWj5cfLvV7UyQe1D01H93UCk+M=";
+      };
     };
 
 
@@ -59,13 +110,16 @@ in
       # ];
       extraPackages = with pkgs; [
         # FIXME had a problem with steam and bluetooth, dunno if these helped
-        kdePackages.bluedevil
         hidapi
-        monado-vulkan-layers
-      ] ++ xrpkgs;
+        monado-vulkan-layers # this
+      ];
     };
 
-    hardware.graphics.extraPackages = with pkgs; [ monado-vulkan-layers ];
+    hardware.graphics.extraPackages = with pkgs; [
+      monado-vulkan-layers
+      mangohud
+      gamemode
+    ];
 
     environment.systemPackages = with pkgs; [
       # todo move nofio to it's own module
@@ -77,7 +131,7 @@ in
       libsurvive
       # motoc
       # basalt-monado
-      # xrgears
+      xrgears
       # xr-hardware
 
       stardust-xr-atmosphere
@@ -89,6 +143,17 @@ in
       stardust-xr-gravity
       stardust-xr-server
       stardust-xr-kiara
-    ] ++ xrpkgs;
+    ];
+
+    boot.kernelPatches = [
+      {
+        name = "amdgpu-ignore-ctx-privileges";
+        patch = pkgs.fetchpatch {
+          name = "cap_sys_nice_begone.patch";
+          url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+          hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+        };
+      }
+    ];
   };
 }

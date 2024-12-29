@@ -64,6 +64,7 @@ in
         qalculate-qt
         kdiskmark
         # Libraries/Utilities
+        wayland-utils # for kinfocenter for Wayland page
         ffmpegthumbnailer # for video thumbnails
         linuxquota # for plasma-disks
         ktorrent
