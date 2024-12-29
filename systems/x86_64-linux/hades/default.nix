@@ -3,6 +3,7 @@
 , lib
 , channel
 , namespace
+, inputs
 , ...
 }:
 with lib;
@@ -31,6 +32,7 @@ with lib.${namespace};
 
   environment.systemPackages = with pkgs; [
     plusultra.balor
+    inputs.sd-webui.packages.${pkgs.system}.rocm
   ];
 
   nix.settings.trusted-users = [ "root" "coldelectrons" "nix-ssh" ];
@@ -44,6 +46,9 @@ with lib.${namespace};
     desktop = {
       plasma6 = enabled // {
         wayland = true;
+        extensions = with pkgs; [
+          kdePackages.krohnkite
+        ];
       };
     };
     cli-apps = {
@@ -58,16 +63,17 @@ with lib.${namespace};
       syncthing = enabled;
       steam = enabled;
       comfyui = enabled;
-      # steamtinkerlaunch = enabled;
-      # r2modman = enabled;
+      steamtinkerlaunch = enabled;
+      r2modman = enabled;
       # simula = enabled;
       # rpcs3 = enabled;
       # ubports-installer = enabled;
     };
     hardware = {
-      # vr = enabled // {
+      vr = enabled // {
       #   monadoDefaultEnable = false;
-      # };
+      };
+      nofio-wireless = enabled;
       spacenav = enabled;
       graphics = enabled // {
         amdgpu = enabled;
@@ -117,20 +123,20 @@ with lib.${namespace};
       "gamemode"
     ];
   };
+
+  services.udev.packages = with pkgs; [ plusultra.laser-usb-udev-rules ];
   
     # Force radv
-  # environment.variables.AMD_VULKAN_ICD = "RADV";
+  environment.variables = {
+    # Don't use this per https://gitlab.com/vr-on-linux/VR-on-Linux/-/issues/23#note_1472796145
+    # AMD_VULKAN_ICD = "RADV";
+    DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1";
+    VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json";
+  };
 
   # WiFi is typically unused on the desktop. Enable this service
   # if it's no longer only using a wired connection.
   # systemd.services.network-addresses-wlp41s0.enable = false;
-
-  # Trying to use an Omtech fiber laser with linux
-  # ```Bus 001 Device 010: ID 9588:9899 BJJCZ USBLMCV4```
-  services.udev.extraRules = ''
-    SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="9588", ATTR{idProduct}=="9899", MODE="0666"
-  '';
-
 
   # something is making me wait 120 seconds, and I *hate* it
   systemd.network.wait-online.timeout = 0;

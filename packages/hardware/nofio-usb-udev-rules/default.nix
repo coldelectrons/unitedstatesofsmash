@@ -3,6 +3,7 @@
   stdenv,
   makeWrapper,
 }: 
+with lib;
  stdenv.mkDerivation {
   pname = "nofio-usb-udev-rules";
   version = "0.0.1";
@@ -21,8 +22,8 @@
 
   meta = {
     description = "udev rules for Nofio wireless link.";
-    platforms = platforms.linux;
-    license = license.mit;
-    maintainers = [ coldelectrons ];
+    platform = lib.platforms.linux;
+    license = licenses.mit;
+    # maintainers = [ coldelectrons ];
   };
-};
+}

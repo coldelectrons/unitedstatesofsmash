@@ -81,7 +81,7 @@ in
         strawberry-qt6
         # TODO move this to app module
         kdePackages.skanlite
-        paperwork
+        # paperwork
         gscan2pdf
         unpaper
         noteshrink
@@ -91,13 +91,15 @@ in
         brscan5
         brscan4
         xsane
-
+        solaar
+        
       ]
       # ++ defaultExtensions
       ++ cfg.extensions;
 
     environment.plasma6.excludePackages = with pkgs; [
       # kdePackages.elisa
+      modemmanager
     ];
 
     # TODO is this even necessary
@@ -161,7 +163,7 @@ in
     };
 
     # Required for app indicators
-    services.udev.packages = with pkgs; [ solaar ];
+    services.udev.packages = with pkgs; [ solaar logitech-udev-rules];
 
     programs.xwayland.enable = true;
 

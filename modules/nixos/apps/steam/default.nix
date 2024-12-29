@@ -4,6 +4,7 @@
   lib,
   pkgs,
   namespace,
+  inputs,
   ...
 }:
 with lib;
@@ -15,19 +16,21 @@ in
 {
   options.${namespace}.apps.steam = with types; {
     enable = mkBoolOpt false "Whether or not to enable support for Steam.";
+    enableGamescopeSession = mkBoolOpt false "Whether or not to enable Steam Gamescope session.";
   };
 
   config = mkIf cfg.enable {
   
     programs.steam = {
       enable = true;
-      gamescopeSession.enable = true;
+      gamescopeSession.enable = cfg.enableGamescopeSession;
       remotePlay.openFirewall = false;
       extraCompatPackages = with pkgs; [
         proton-ge-bin
         vkd3d-proton
         steam-play-none
       ];
+      # how is this different from programs.steam.override.extraPkgs
       extraPackages = with pkgs; [
         firefox # needed for some non-steam games that oauth/connect with website
         xorg.libXcursor
@@ -52,10 +55,20 @@ in
         gtk3
         mono
         simpleDBus
+        kdePackages.bluedevil
+        hidapi
+        curl
+        xterm
+        zenity
+        # monado-vulkan-layers
+        # wlx-overlay-s
+        # opencomposite
       ];
       # extest.enable = true;
       protontricks.enable = true;
     };
+    
+    hardware.steam-hardware.enable = true;
 
     environment.systemPackages = with pkgs; [
       # plusultra.steam # add desktop items

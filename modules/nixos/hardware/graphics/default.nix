@@ -58,6 +58,7 @@ in
           libva
           vulkan-tools
           vulkan-loader
+          monado-vulkan-layers
         ] ++ optionals cfg.amdgpu.enable amdpkgs;
       };
       amdgpu.amdvlk = mkIf cfg.amdgpu.enable {

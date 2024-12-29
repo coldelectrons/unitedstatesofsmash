@@ -168,6 +168,16 @@ in
         }
         '')
       ];
+      # TODO figure out how to set bitrate to 48000 for steamvr
+      # config.pipewire = {
+      #   "context.properties" = {
+      #     # version < 3 clients can't handle more than 16 buffers
+      #     "link.max-buffers" = 16;
+      #     "default.clock.rate" = 48000;
+      #     "default.clock.allowed-rates" = [48000];
+      #     "log.level" = 0;
+      #   };
+      # };
     };
 
     environment.etc = {

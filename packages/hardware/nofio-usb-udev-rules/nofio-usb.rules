@@ -1,1 +1,7 @@
+# TODO determine proper kernel== or whatever
 KERNEL=="event[0-9]*", ATTRS{idVendor}=="04b3", ATTRS{idProduct}=="1234", MODE="0666", SYMLINK+="nofio_wireless_base"
+KERNEL=="event[0-9]*", ATTRS{iManufacturer}=="Valve", ATTRS{iProduct}=="Index HMD", MODE="0666", SYMLINK+="valve_index_hmd"
+KERNEL=="event[0-9]*", ATTRS{iManufacturer}=="Valve", ATTRS{iProduct}=="Valve VR Radio", MODE="0666", SYMLINK+="valve_vr_radio"
+KERNEL=="event[0-9]*", ATTRS{iManufacturer}=="Valve", ATTRS{iProduct}=="Valve VR Radio & HMD Mic", MODE="0666", SYMLINK+="valve_vr_radio_mic"
+# KERNEL=="event[0-9]*", ATTRS{idVendor}=="28de", ATTRS{idProduct}=="2300", MODE="0666", SYMLINK+="valve_index_hmd"
+# KERNEL=="event[0-9]*", ATTRS{idVendor}=="28de", ATTRS{idProduct}=="2102", MODE="0666", SYMLINK+="valve_index_hmd"

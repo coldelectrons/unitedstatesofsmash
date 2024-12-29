@@ -3,6 +3,7 @@
   stdenv,
   makeWrapper,
 }: 
+with lib;
  stdenv.mkDerivation {
   pname = "lmc-usb-udev-rules";
   version = "0.0.1";
@@ -19,11 +20,11 @@
 
     install -D -m 644 $src $out/etc/udev/rules.d/70-lmc-usb.rules
 
-    # substituteInPlace $out/etc/udev/rules.d/70-lmc-usb.rules \
-    #   --replace "lmc2loader" "${lmc2loader}/bin/lmc2loader"
-
     runHook postInstall
   '';
+
+    # substituteInPlace $out/etc/udev/rules.d/70-lmc-usb.rules \
+    #   --replace "lmc2loader" "${lmc2loader}/bin/lmc2loader"
 
   # TODO package the lmc firmware uploader
 
@@ -35,8 +36,8 @@
       USBLMCv4 needs no further handling.
       LMCv2 varieties need a firmware blob uploaded.
     '';
-    platforms = platforms.linux;
-    license = license.unfree;
-    maintainers = [ coldelectrons ];
+    platform = platforms.linux;
+    license = licenses.unfree;
+    # maintainers = [ coldelectrons ];
   };
-};
+}

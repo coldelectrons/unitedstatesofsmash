@@ -57,6 +57,9 @@
     nix-ld.inputs.nixpkgs.follows = "unstable";
 
     # nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+
+    sd-webui.url = "github:Aerobreaker/stable-diffusion-webui-nix";
+    sd-webui.inputs.nixpkgs.follows = "unstable";
     
     # TODO LATER
     # Neovim
@@ -183,7 +186,7 @@
           }
           nix-ld.nixosModules.nix-ld
           lix-module.nixosModules.default
-          nixpkgs-xr.nixosModules.nixpkgs-xr
+          # nixpkgs-xr.nixosModules.nixpkgs-xr
           vault-service.nixosModules.nixos-vault-service
           # TODO: Replace plusultra.services.attic now that vault-agent
           # exists and can force override environment files.

@@ -3,6 +3,7 @@
   stdenv,
   makeWrapper,
 }: 
+with lib;
  stdenv.mkDerivation {
   pname = "spacenav-usb-udev-rules";
   version = "0.0.1";
@@ -24,8 +25,8 @@
     long_description = ''
       Udev rules that give non-root access to Connexion Spacenav 3d mice products.
     '';
-    platforms = platforms.linux;
-    license = license.mit;
-    maintainers = [ coldelectrons ];
+    platform = lib.platforms.linux;
+    license = licenses.mit;
+    # maintainers = [ coldelectrons ];
   };
-};
+}

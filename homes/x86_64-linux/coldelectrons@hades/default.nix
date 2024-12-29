@@ -42,5 +42,19 @@ with lib.${namespace};
 
   home.sessionPath = [ "$HOME/bin" ];
 
+   home.sessionVariables = {
+    EDITOR = "lvim";
+    TERM = "kitty";
+    BROWSER = "vivaldi";
+
+    # Wayland
+    NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+    XDG_CURRENT_DESKTOP = "plasma";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    XDG_SESSION_TYPE = "wayland";
+  };
+
   home.stateVersion = "24.05";
 }
