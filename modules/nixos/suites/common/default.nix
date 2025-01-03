@@ -48,7 +48,7 @@ in
 
       hardware = {
         audio = enabled;
-        firmware-update = enabled;
+        fwup = enabled;
       };
 
       services = {

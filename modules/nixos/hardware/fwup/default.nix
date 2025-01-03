@@ -9,11 +9,11 @@
 with lib;
 with lib.${namespace};
 let
-  cfg = config.${namespace}.hardware.fimware-update;
+  cfg = config.${namespace}.hardware.fwup;
 in
 {
-  options.${namespace}.hardware.fimware-update = with types; {
-    enable = mkBoolOpt false "Whether or not to enable graphics support";
+  options.${namespace}.hardware.fwup = with types; {
+    enable = mkBoolOpt false "Whether or not to enable the firmware update daemon";
   };
 
   config = mkIf cfg.enable {
