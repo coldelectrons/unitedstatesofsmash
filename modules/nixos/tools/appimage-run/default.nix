@@ -17,8 +17,14 @@ in
   };
 
   config = mkIf cfg.enable {
-    plusultra.home.configFile."wgetrc".text = "";
 
-    environment.systemPackages = with pkgs; [ appimage-run ];
+    programs.appimage = {
+      enable = true;
+      package = pkgs.appimage-run.override {
+        extraPkgs = with pkgs; [
+          
+        ];
+      };
+    };
   };
 }

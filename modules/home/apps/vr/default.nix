@@ -8,20 +8,24 @@
 let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.${namespace}.hardware.vr;
+  cfg = config.${namespace}.apps.vr;
+
+  # TODO get this from the overall config sessionVariables
+  # isn't this set over in modules/nixos/system/env?
+  xdg_data_home = "$HOME/.local/share";
 in
 {
   options.${namespace}.apps.vr = {
     enable = mkEnableOption "Enable user VR configuration";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable rec {
     home = {
       packages = with pkgs; [
       ];
 
       sessionVariables = {
-        LIBMONADO_PATH = "${config.services.monado.package}/lib/libmonado.so";
+        LIBMONADO_PATH = "${pkgs.monado}/lib/libmonado.so";
       };
 
     };

@@ -29,6 +29,7 @@ in
         proton-ge-bin
         vkd3d-proton
         steam-play-none
+        steamtinkerlaunch
       ];
       # how is this different from programs.steam.override.extraPkgs
       extraPackages = with pkgs; [
@@ -46,6 +47,7 @@ in
         keyutils
         gamemode
         dxvk_2
+        steamtinkerlaunch
         gamescope
         mangohud
         SDL2
@@ -60,9 +62,9 @@ in
         curl
         xterm
         zenity
-        # monado-vulkan-layers
-        # wlx-overlay-s
-        # opencomposite
+        monado-vulkan-layers
+        wlx-overlay-s
+        opencomposite
       ];
       # extest.enable = true;
       protontricks.enable = true;

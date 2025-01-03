@@ -25,6 +25,9 @@ in
     
 
     environment.systemPackages = with pkgs; [
+      plusultra.virtualhere
     ];
+
+    #TODO add systemd service unit and config
   };
 }

@@ -11,7 +11,7 @@
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   boot.consoleLogLevel = 0;
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [  ];
   boot.kernelModules = [
     # "kvm-intel"
   ];
@@ -45,7 +45,7 @@
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
+  # networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s20f0u7.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
   # networking.interfaces.enp10s0.useDHCP = lib.mkDefault true;
