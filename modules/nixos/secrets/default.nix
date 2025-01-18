@@ -16,16 +16,18 @@ let
   secretsFile = "${secretsDirectory}/secrets.yaml";
 
   userName = config.${namespace}.user.name;
-  userHome = config.${namespace}.user.home;
+  userHome = config.users.users.${userName}.home;
   hostName = config.networking.hostName;
 in
 {
   options.${namespace}.secrets = {
     enable = mkBoolOpt true "Whether or not to enable SOPS secrets.";
     inherit secretsFile;
+
   };
 
   config = mkIf cfg.enable {
+
     sops = {
       defaultSopsFile = "${secretsFile}";
       validateSopsFiles = false;
@@ -69,15 +71,10 @@ in
         #   mode = "0600";
         #   path = "/etc/borg/passphrase";
         # };
-        "wifi-passwords/volvogoasts" = {
+        "wifi" = {
           owner = config.users.users.${userName}.name;
           inherit (config.users.users.${userName}) group;
         };
-        "wifi-passwords/iot" = {
-          owner = config.users.users.${userName}.name;
-          inherit (config.users.users.${userName}) group;
-        };
-
       };
     };
     # The containing folders are created as root and if this is the first ~/.config/ entry,
@@ -91,7 +88,7 @@ in
       in
       ''
         mkdir -p ${ageFolder} || true
-        chown -R ${user}:${group} ${homeDirectory}/.config
+        chown -R ${user}:${group} ${ageFolder}
       '';
   };
 
