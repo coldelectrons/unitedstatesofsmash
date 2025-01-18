@@ -97,7 +97,7 @@ in
       opencomposite
       libsurvive
       # motoc
-      # basalt-monado
+      basalt-monado
       xrgears
       # xr-hardware
 

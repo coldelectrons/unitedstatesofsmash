@@ -20,6 +20,10 @@ in
     environment.systemPackages = with pkgs; [
       gallery-dl # datahoarding ftw
       yt-dlp
+      youtube-tui
+      ytmdl
+      yaydl
+      yewtube
     ];
   };
 }

@@ -38,17 +38,31 @@ in
     ];
 
     # currently, does nothing because the nixpkg makes the systemd
-    # unit depend on graphical.target, which doesn't exist for users
+    # unit depend on graphical.target, which doesn't exist for user units
     # FIXME trying this out in 24.11 20241225
     # F*%#ME 20241226 still not working
     #   The unit _exists_, but it isn't enabled or doesn't start automatically
     # hardware.spacenavd.enable = true;
+    
+    # FIXME 20250103
+    # So, this unit starts, but it's trying to create `/var/run/spnav.sock`, which
+    # it doesn't have permissions to do, becuase it's a user unit.
+    # systemd.user.services.spacenavd-user = {
+    #   description = "Daemon for the Spacenavigator 6DOF mice by 3Dconnexion";
+    #   wantedBy = ["graphical-session.target"];
+    #   serviceConfig = {
+    #     PIDFile="/var/run/user/1000/spnavd.pid"
+    #     ExecStart = "${pkgs.spacenavd}/bin/spacenavd -d -v -l syslog";
+    #   };
+    # };
 
-    systemd.user.services.spacenavd-user = {
+    # FIXME 20250103
+    systemd.services."spacenavd" = {
       description = "Daemon for the Spacenavigator 6DOF mice by 3Dconnexion";
-      wantedBy = ["graphical-session.target"];
+      wantedBy = ["multi-user.target"];
       serviceConfig = {
-        ExecStart = "${pkgs.spacenavd}/bin/spacenavd -d -l syslog";
+        PIDFile="/var/run/spnavd.pid";
+        ExecStart = "${pkgs.spacenavd}/bin/spacenavd -d -v -l syslog";
       };
     };
 

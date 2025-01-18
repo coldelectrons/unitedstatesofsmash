@@ -20,11 +20,11 @@ in
 
     programs.appimage = {
       enable = true;
-      package = pkgs.appimage-run.override {
-        extraPkgs = with pkgs; [
-          
-        ];
-      };
+      # package = pkgs.appimage-run.override {
+      #   extraPkgs = with pkgs; [
+      #     
+      #   ];
+      # };
     };
   };
 }

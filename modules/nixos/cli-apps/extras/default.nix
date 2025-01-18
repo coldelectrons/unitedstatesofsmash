@@ -45,9 +45,6 @@ in
       usbview
       clinfo
       ltex-ls # Spell checking LSP
-      gallery-dl # datahoarding ftw
-      yt-dlp
-
     ];
   };
 }

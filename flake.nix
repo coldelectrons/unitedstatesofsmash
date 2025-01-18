@@ -61,6 +61,16 @@
     sd-webui.url = "github:Aerobreaker/stable-diffusion-webui-nix";
     sd-webui.inputs.nixpkgs.follows = "unstable";
     
+    #
+    # ========= Personal Repositories =========
+    #
+    # Private secrets repo.  See https://unmovedcentre.com/posts/secrets-management
+    # Authenticate via ssh and use shallow clone
+    nix-secrets = {
+      url = "git+ssh://git@gitlab.com/superfrigidneutrinos/futile_efforts.git?ref=main&shallow=1";
+      inputs = { };
+    };
+
     # TODO LATER
     # Neovim
     # neovim.url = "github:coldelectrons/neovim";
@@ -195,20 +205,21 @@
           {
             services.snap.enable = true;
           }
+          sops-nix.nixosModules.sops
         ];
-        systems.hosts.hades.modules = with inputs; [
+        # systems.hosts.hades.modules = with inputs; [
           # nixos-hardware.nixosModules.framework-11th-gen-intel
-        ];
+        # ];
 
-          deploy = lib.mkDeploy { inherit (inputs) self; };
+        deploy = lib.mkDeploy { inherit (inputs) self; };
 
-          checks = builtins.mapAttrs
-            (
-              system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
-            )
-            inputs.deploy-rs.lib;
+        checks = builtins.mapAttrs
+          (
+            system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
+          )
+          inputs.deploy-rs.lib;
 
-          outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
+        outputs-builder = channels: { formatter = channels.nixpkgs.nixfmt-rfc-style; };
       }
     // {
       self = inputs.self;

@@ -23,6 +23,11 @@ in
       linux-firmware
     ];
 
+    hardware.firmware = with pkgs; [ linux-firmware ];
+
+    services.smartd.enable = true;
+    services.irqbalance.enable = true;
+
     plusultra = {
       suites.common-slim = enabled;
 

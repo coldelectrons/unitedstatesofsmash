@@ -48,7 +48,7 @@ rec {
                   user = "root";
                   sshUser = user;
                 }
-                // lib.optionalAttrs (host.config.${namespace}.security.doas.enable or false) { sudo = "doas -u"; };
+                // lib.optionalAttrs (host.config.${namespace}.security.sudo.enable or false) { sudo = "sudo"; };
             };
           };
         }

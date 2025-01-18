@@ -32,7 +32,14 @@ with lib.${namespace};
 
   environment.systemPackages = with pkgs; [
     plusultra.balor
-    inputs.sd-webui.packages.${pkgs.system}.rocm
+
+    media-downloader
+    yt-dlg
+    pipe-viewer
+    gtk-pipe-viewer
+    kdePackages.plasmatube
+    tartube-yt-dlp
+    invidious
   ];
 
   nix.settings.trusted-users = [ "root" "coldelectrons" "nix-ssh" ];
@@ -53,6 +60,9 @@ with lib.${namespace};
     };
     cli-apps = {
       extras = enabled;
+      downloaders = enabled;
+      messenging = enabled;
+      markdown = enabled;
     };
     security = {
       acme = enabled;
