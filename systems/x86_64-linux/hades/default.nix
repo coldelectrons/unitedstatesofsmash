@@ -40,6 +40,9 @@ with lib.${namespace};
     kdePackages.plasmatube
     tartube-yt-dlp
     invidious
+
+    nur.repos.dukzcry.stable-diffusion-cpp
+    nur.repos.dukzcry.sd-cpp-webui
   ];
 
   nix.settings.trusted-users = [ "root" "coldelectrons" "nix-ssh" ];
@@ -73,7 +76,7 @@ with lib.${namespace};
       vivaldi = enabled;
       syncthing = enabled;
       steam = enabled;
-      comfyui = enabled;
+      # comfyui = enabled;
       steamtinkerlaunch = enabled;
       r2modman = enabled;
       # simula = enabled;
@@ -136,6 +139,8 @@ with lib.${namespace};
   };
 
   services.udev.packages = with pkgs; [ plusultra.laser-usb-udev-rules ];
+
+  services.snap.enable = true;
   
     # Force radv
   environment.variables = {

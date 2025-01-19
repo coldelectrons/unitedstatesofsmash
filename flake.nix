@@ -133,7 +133,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-comfyui.url = "github:dyscorv/nix-comfyui";
+    # nix-comfyui.url = "github:dyscorv/nix-comfyui";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
 
@@ -183,7 +187,7 @@
           # snowfall-docs.overlays.default
           # nixpkgs-news.overlays.default
           # lix-module.overlays.default
-          nix-comfyui.overlays.default
+          # nix-comfyui.overlays.default
         ];
 
         systems.modules.nixos = with inputs; [
@@ -203,9 +207,10 @@
           # attic.nixosModules.atticd
           nix-snapd.nixosModules.default
           {
-            services.snap.enable = true;
+            # services.snap.enable = true;
           }
           sops-nix.nixosModules.sops
+          nur.modules.nixos.default
         ];
         # systems.hosts.hades.modules = with inputs; [
           # nixos-hardware.nixosModules.framework-11th-gen-intel
