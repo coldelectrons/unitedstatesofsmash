@@ -21,7 +21,7 @@ in
       gallery-dl # datahoarding ftw
       yt-dlp
       youtube-tui
-      ytmdl
+      # ytmdl
       yaydl
       yewtube
     ];

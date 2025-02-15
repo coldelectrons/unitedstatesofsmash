@@ -1,20 +1,18 @@
 {
   lib,
   python3,
-  fetchPypi,
-  dbus-python,
+  # fetchPypi,
 }:
-
 python3.pkgs.buildPythonPackage rec {
   pname = "mdns-publisher";
   version = "0.9.2";
 
-  src = fetchPypi {
+  src = python3.pkgs.fetchPypi {
     inherit pname version;
     sha256 = "1klgk6s2d3h2fbgfsv64p2f6lif3hd8ngbq04cvsqiq5gcm90c5j";
   };
 
-  propagatedBuildInputs = [ dbus-python ];
+  propagatedBuildInputs = with python3.pkgs; [ dbus-python ];
 
   postPatch = ''
     # Emulated from https://github.com/NixOS/nixpkgs/blob/a0dbe47318bbab7559ffbfa7c4872a517833409f/pkgs/applications/terminal-emulators/terminator/default.nix#L50

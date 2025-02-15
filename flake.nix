@@ -10,7 +10,7 @@
 
     # Lix
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -53,8 +53,9 @@
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
 
     # Run unpatched dynamically compiled binaries
-    nix-ld.url = "github:Mic92/nix-ld";
-    nix-ld.inputs.nixpkgs.follows = "unstable";
+    # 20250119 currently fails to build due to rustc 1.83??
+    # nix-ld.url = "github:nix-community/nix-ld";
+    # nix-ld.inputs.nixpkgs.follows = "unstable";
 
     # nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
 
@@ -86,9 +87,6 @@
     # Binary Cache
     attic = {
       url = "github:zhaofengli/attic";
-
-      # FIXME: A specific version of Rust is needed right now or
-      # the build fails. Re-enable this after some time has passed.
       inputs.nixpkgs.follows = "unstable";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
@@ -198,7 +196,7 @@
             # home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup"; # Set backup file extension
           }
-          nix-ld.nixosModules.nix-ld
+          # nix-ld.nixosModules.nix-ld
           lix-module.nixosModules.default
           # nixpkgs-xr.nixosModules.nixpkgs-xr
           vault-service.nixosModules.nixos-vault-service

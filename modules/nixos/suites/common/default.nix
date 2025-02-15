@@ -46,7 +46,7 @@ in
       tools = {
         appimage-run = enabled;
         misc = enabled;
-        nix-ld = enabled;
+        # nix-ld = enabled;
         bottom = enabled;
         direnv = enabled;
       };

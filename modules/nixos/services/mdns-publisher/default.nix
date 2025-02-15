@@ -18,10 +18,10 @@ with lib;
 {
   options.${namespace}.services.mdns-publisher = {
     enable = lib.mkEnableOption "Enable mdns publishing of list of domains.";
-    domain = mkOption {
-      type = types.str;
-      default = "local";
-    };
+    # domain = mkOption {
+    #   type = types.str;
+    #   default = "local";
+    # };
     names = mkOption {
       type = with types; listOf str;
       default = [ ];

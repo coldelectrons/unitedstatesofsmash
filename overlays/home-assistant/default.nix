@@ -1,4 +1,4 @@
-{ channels, ... }:
+{ channels, inputs, ... }:
 
 final: prev:
 
@@ -8,5 +8,5 @@ final: prev:
   disabledModules = [
     "services/home-automation/home-assistant.nix"
   ];
-  imports = [ channels.unstable/nixos/modules/services/home-automation/home-assistant.nix ];
+  imports = [ "${channels.unstable}/nixos/modules/services/home-automation/home-assistant.nix" ];
 }

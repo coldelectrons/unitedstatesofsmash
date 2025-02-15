@@ -43,9 +43,19 @@ with lib.${namespace};
 
     nur.repos.dukzcry.stable-diffusion-cpp
     nur.repos.dukzcry.sd-cpp-webui
+
+    oterm
+    alpaca
+
+    super-slicer-beta
+
   ];
 
-  nix.settings.trusted-users = [ "root" "coldelectrons" "nix-ssh" ];
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-rocm;
+    acceleration = "rocm";
+  };
 
   plusultra = {
     nix = enabled;
@@ -94,6 +104,7 @@ with lib.${namespace};
       };
     };
     services = {
+      esphome = enabled;
       # usbip = enabled // {
       #   devices = [
       #     { # omtech galvo laser
@@ -120,6 +131,9 @@ with lib.${namespace};
     #   machineUnits = [ "machine-qemu\\x2d1\\x2dwin10.scope" ];
     };
     system = {
+      # iot-network = enabled // {
+      #   interface = "enp4s0";
+      # };
     };
 
     user.extraGroups = [ 
