@@ -4,6 +4,7 @@
   lib,
   pkgs,
   namespace,
+  inputs,
   ...
 }:
 with lib;
@@ -16,5 +17,11 @@ in
     enable = mkBoolOpt false "Whether or not to enable prusaslicer.";
   };
 
-  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ prusa-slicer ]; };
+  config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      # prusa-slicer
+      inputs.unstable.legacyPackages."${pkgs.system}".prusa-slicer
+      # inputs.unstable.prusa-slicer
+    ];
+  };
 }

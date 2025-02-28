@@ -25,9 +25,19 @@ in
     
 
     environment.systemPackages = with pkgs; [
-      plusultra.virtualhere
+      # plusultra.virtualhere
+      plusultra.virtualhere-cli
     ];
 
     #TODO add systemd service unit and config
+    systemd.services."nofio-wireless" = {
+      description = "Daemon for the Nofio Virtualhere claptrap";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
+      serviceConfig = {
+        PIDFile="/var/run/nofio-wireless.pid";
+        ExecStart = "${pkgs.plusultra.virtualhere-cli}/bin/vhclientx86_64 -n";
+      };
+    };
   };
 }

@@ -19,7 +19,7 @@ in
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
 
     initrd = {
       availableKernelModules = [
@@ -29,14 +29,15 @@ in
         "usbhid"
         "usb_storage"
         "sd_mod"
+        "vhci-hcd"
       ];
       kernelModules = [ "amdgpu" "tun" ];
       systemd.enable = true;
     };
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = with config.boot.kernelPackages; [
-      zenpower
       usbip
+      v4l2loopback
     ];
   };
 

@@ -73,7 +73,7 @@ in
         # };
         "wifi" = {
           owner = config.users.users.${userName}.name;
-          inherit (config.users.users.${userName}) group;
+          group = config.users.users.${userName}.group;
         };
       };
     };

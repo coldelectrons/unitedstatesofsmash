@@ -26,6 +26,7 @@ in
     };
 
     programs.gamemode.enable = true;
+    programs.gamemode.enableRenice = true;
 
     boot.kernel.sysctl = {
       # SteamOS/Fedora default

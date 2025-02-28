@@ -30,9 +30,9 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      comfyuiPackages.comfyui-with-extensions
+      # comfyuiPackages.comfyui-with-extensions
       # my-comfyui
-      comfyuiPackages.krita-with-extensions
+      # comfyuiPackages.krita-with-extensions
     ];
   };
 }

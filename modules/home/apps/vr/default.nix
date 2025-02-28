@@ -12,11 +12,13 @@ let
 
   # TODO get this from the overall config sessionVariables
   # isn't this set over in modules/nixos/system/env?
-  xdg_data_home = "$HOME/.local/share";
+  # userHome = config.${namespace}.user.home;
+  xdg_data_home = ".local/share";
 in
 {
   options.${namespace}.apps.vr = {
     enable = mkEnableOption "Enable user VR configuration";
+    handTrackingModels = mkEnableOption "Fetch and install Monado hand tracking models";
   };
 
   config = mkIf cfg.enable rec {
@@ -54,7 +56,7 @@ in
       '';
     };
 
-    home.file = {
+    home.file = mkIf cfg.handTrackingModels {
       "${xdg_data_home}/monado/hand-tracking-models".source = pkgs.fetchgit {
         url = "https://gitlab.freedesktop.org/monado/utilities/hand-tracking-models.git";
         fetchLFS = true;

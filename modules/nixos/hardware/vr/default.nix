@@ -50,16 +50,18 @@ in
     };
 
     systemd.user.services.monado = {
-      serviceConfig = {
-        ExecStartPost = "${lib.getExe pkgs.lighthouse-steamvr} -s ON";
-         ExecStopPost = "${lib.getExe pkgs.lighthouse-steamvr} -s OFF";
-      };
+      # serviceConfig = {
+      #   ExecStartPost = "${lib.getExe pkgs.lighthouse-steamvr} -s ON";
+      #    ExecStopPost = "${lib.getExe pkgs.lighthouse-steamvr} -s OFF";
+      # };
       environment = {
         STEAMVR_PATH = "${home}/.steam/root/steamapps/common/SteamVR";
         STEAM_LH_ENABLE = "1";
         XRT_COMPOSITOR_COMPUTE = "1";
         XRT_COMPOSITOR_SCALE_PERCENTAGE = "140";
         WMR_HANDTRACKING = "1";
+        AMD_VULKAN_ICD = "RADV";
+        VIT_SYSTEM_LIBRARY_PATH = "${pkgs.basalt-monado}/lib/libbasalt.so";
       };
     };
 
@@ -79,27 +81,32 @@ in
         # FIXME had a problem with steam and bluetooth, dunno if these helped
         hidapi
         monado-vulkan-layers # this
+        opencomposite
+        monado
       ];
     };
 
     hardware.graphics.extraPackages = with pkgs; [
       monado-vulkan-layers
-      mangohud
-      gamemode
+      # mangohud
+      # gamemode
     ];
 
     environment.systemPackages = with pkgs; [
-      # todo move nofio to it's own module
-      plusultra.virtualhere # for the nofio wireless adapter
       lighthouse-steamvr
       monado-vulkan-layers
       wlx-overlay-s
       opencomposite
       libsurvive
+      envision
       # motoc
       basalt-monado
       xrgears
-      # xr-hardware
+      xrizer
+      xr-hardware
+      corectrl
+      gamemode
+      openxr-loader
 
       stardust-xr-atmosphere
       stardust-xr-sphereland
@@ -112,15 +119,16 @@ in
       stardust-xr-kiara
     ];
 
-    boot.kernelPatches = [
-      {
-        name = "amdgpu-ignore-ctx-privileges";
-        patch = pkgs.fetchpatch {
-          name = "cap_sys_nice_begone.patch";
-          url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
-          hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
-        };
-      }
-    ];
+    
+    # boot.kernelPatches = [
+    #   {
+    #     name = "amdgpu-ignore-ctx-privileges";
+    #     patch = pkgs.fetchpatch {
+    #       name = "cap_sys_nice_begone.patch";
+    #       url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+    #       hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+    #     };
+    #   }
+    # ];
   };
 }

@@ -49,6 +49,15 @@ with lib.${namespace};
 
     super-slicer-beta
 
+    cameractrls
+    v4l-utils
+    webcamoid
+    cheese
+
+    python311Packages.pip
+    virtualenv
+
+    tor-browser
   ];
 
   services.ollama = {
@@ -86,6 +95,7 @@ with lib.${namespace};
       vivaldi = enabled;
       syncthing = enabled;
       steam = enabled;
+      # steam.enableGamescopeSession = true;
       # comfyui = enabled;
       steamtinkerlaunch = enabled;
       r2modman = enabled;
@@ -95,7 +105,7 @@ with lib.${namespace};
     };
     hardware = {
       vr = enabled // {
-      #   monadoDefaultEnable = false;
+        monadoDefaultEnable = true;
       };
       nofio-wireless = enabled;
       spacenav = enabled;
@@ -105,8 +115,8 @@ with lib.${namespace};
     };
     services = {
       esphome = enabled;
-      # usbip = enabled // {
-      #   devices = [
+      usbip = enabled // {
+        devices = [
       #     { # omtech galvo laser
       #       host = "usbproxy1.localdomain";
       #       device = "9588:9899";
@@ -115,8 +125,12 @@ with lib.${namespace};
       #       host = "usbproxy1.local";
       #       device = "16c0:0483";
       #     }
-      #   ];
-      # };
+      #     { # nofio-wireless - is this possible to do directly in linux?
+      #       host = "192.168.3.1:7575";
+      #       device = "04b3:1234"; # IBM Corp nofio wireless base
+      #     }
+        ];
+      };
     };
     virtualisation.kvm = {
       enable = true;
@@ -161,7 +175,7 @@ with lib.${namespace};
     # Don't use this per https://gitlab.com/vr-on-linux/VR-on-Linux/-/issues/23#note_1472796145
     # AMD_VULKAN_ICD = "RADV";
     DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1";
-    VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json";
+    VK_ICD_FILENAMES="/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json:/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json";
   };
 
   # WiFi is typically unused on the desktop. Enable this service

@@ -204,9 +204,6 @@
           # exists and can force override environment files.
           # attic.nixosModules.atticd
           nix-snapd.nixosModules.default
-          {
-            # services.snap.enable = true;
-          }
           sops-nix.nixosModules.sops
           nur.modules.nixos.default
         ];
