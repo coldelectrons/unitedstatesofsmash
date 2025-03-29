@@ -3,7 +3,8 @@
 
   inputs = {
     # NixPkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     # NixPkgs Unstable
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -29,10 +30,6 @@
     snowfall-lib.url = "github:snowfallorg/lib?ref=v3.0.3";
     snowfall-lib.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Avalanche
-    avalanche.url = "github:snowfallorg/avalanche";
-    avalanche.inputs.nixpkgs.follows = "unstable";
-
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake?ref=v1.4.1";
     flake.inputs.nixpkgs.follows = "unstable";
@@ -57,7 +54,8 @@
     # nix-ld.url = "github:nix-community/nix-ld";
     # nix-ld.inputs.nixpkgs.follows = "unstable";
 
-    # nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+    nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+    nixpkgs-xr.inputs.nixpkgs.follows = "nixpkgs";
 
     sd-webui.url = "github:Aerobreaker/stable-diffusion-webui-nix";
     sd-webui.inputs.nixpkgs.follows = "unstable";
@@ -174,7 +172,6 @@
         };
 
         overlays = with inputs; [
-          avalanche.overlays.default
           # neovim.overlays.default
           # tmux.overlay
           flake.overlays.default
@@ -189,7 +186,6 @@
         ];
 
         systems.modules.nixos = with inputs; [
-          avalanche.nixosModules."avalanche/desktop"
           home-manager.nixosModules.home-manager
           {
             # home-manager.useGlobalPkgs = true;
@@ -198,7 +194,7 @@
           }
           # nix-ld.nixosModules.nix-ld
           lix-module.nixosModules.default
-          # nixpkgs-xr.nixosModules.nixpkgs-xr
+          nixpkgs-xr.nixosModules.nixpkgs-xr
           vault-service.nixosModules.nixos-vault-service
           # TODO: Replace plusultra.services.attic now that vault-agent
           # exists and can force override environment files.
