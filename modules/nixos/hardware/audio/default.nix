@@ -204,7 +204,7 @@ in
       # '';
     };
 
-    hardware.pulseaudio.enable = mkForce false;
+    services.pulseaudio.enable = mkForce false;
 
     environment.systemPackages =
       with pkgs;

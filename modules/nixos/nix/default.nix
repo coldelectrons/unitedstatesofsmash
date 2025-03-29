@@ -63,6 +63,7 @@ in
       nix-output-monitor
       # flake-checker # FIXME 20241126 fails to build with 24.11
       snowfallorg.drift
+      nurl
     ];
 
     nix =

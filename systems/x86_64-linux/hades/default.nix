@@ -57,8 +57,32 @@ with lib.${namespace};
     python311Packages.pip
     virtualenv
 
+    librewolf
     tor-browser
+    arti
+
+    plusultra.rcu-dev
+    epr
+    bk
+
+    openshot-qt
+    lightworks
+    flowblade
+    olive-editor
+    shotcut
+    pitivi
+    kdePackages.kdenlive
   ];
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-ndi
+      obs-vaapi
+      obs-teleport
+    ];
+  };
 
   services.ollama = {
     enable = true;
@@ -145,6 +169,15 @@ with lib.${namespace};
     #   machineUnits = [ "machine-qemu\\x2d1\\x2dwin10.scope" ];
     };
     system = {
+      fonts = enabled // {
+        fonts = with pkgs.nerd-fonts; [
+          fira-code
+          fira-mono
+          meslo-lg
+          hack
+          symbols-only
+        ];
+      };
       # iot-network = enabled // {
       #   interface = "enp4s0";
       # };

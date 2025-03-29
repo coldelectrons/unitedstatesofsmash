@@ -96,6 +96,15 @@ with lib.${namespace};
     };
 
     system = {
+      fonts = enabled // {
+        fonts = with pkgs.nerd-fonts; [
+          fira-code
+          fira-mono
+          meslo-lg
+          hack
+          symbols-only
+        ];
+      };
     };
   };
   

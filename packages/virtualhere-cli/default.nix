@@ -3,8 +3,7 @@
   stdenv,
   pkgs,
   fetchurl,
-  # libGL,
-  # egl-wayland,
+  config,
   autoPatchelfHook
 }:
 stdenv.mkDerivation rec {
@@ -13,12 +12,15 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://www.virtualhere.com/sites/default/files/usbclient/vhclientx86_64";
-    hash = "sha256-1264hwyv5f4ip3s4r1y8kqvsn357q2rrsb9n3z6z5hizixk14ap3";
+    sha256 = "1264hwyv5f4ip3s4r1y8kqvsn357q2rrsb9n3z6z5hizixk14ap3";
   };
 
   dontUnpack = true;
   dontConfigure = true;
   dontBuild = true;
+
+  # TODO how to make this depend on the utilities in the following package
+  buildInputs = [ pkgs.linuxKernel.packages.linux_xanmod.usbip ]; 
 
   sourceRoot = ".";
 

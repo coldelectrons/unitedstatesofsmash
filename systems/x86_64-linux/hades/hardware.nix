@@ -19,7 +19,7 @@ in
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
+    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_stable;
 
     initrd = {
       availableKernelModules = [
@@ -38,6 +38,11 @@ in
     extraModulePackages = with config.boot.kernelPackages; [
       usbip
       v4l2loopback
+      iio-utils
+      fanout
+      evdi
+      cpupower
+      shufflecake
     ];
   };
 

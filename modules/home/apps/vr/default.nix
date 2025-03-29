@@ -19,6 +19,7 @@ in
   options.${namespace}.apps.vr = {
     enable = mkEnableOption "Enable user VR configuration";
     handTrackingModels = mkEnableOption "Fetch and install Monado hand tracking models";
+    # nofiowireless = mkEnableOption "add config file for Nofio Wireless virtualhere claptrap";
   };
 
   config = mkIf cfg.enable rec {
@@ -54,6 +55,7 @@ in
           "version" : 1
         }
       '';
+
     };
 
     home.file = mkIf cfg.handTrackingModels {

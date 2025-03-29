@@ -62,9 +62,6 @@ in
         curl
         xterm
         zenity
-        monado-vulkan-layers
-        wlx-overlay-s
-        opencomposite
       ];
       # extest.enable = true;
       protontricks.enable = true;

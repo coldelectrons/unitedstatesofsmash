@@ -22,7 +22,7 @@ in
       exfatprogs
       fatresize
       util-linux
-      partition-manager
+      kdePackages.partitionmanager
       dosfstools
       ventoy-full # bootable USB solution
       usbimager

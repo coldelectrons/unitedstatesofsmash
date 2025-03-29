@@ -27,22 +27,9 @@ in
     
 
     fonts.packages =
-      with pkgs;
+      with pkgs.nerd-fonts;
       [
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-cjk-serif
-        noto-fonts-emoji
-        # https://sw.kovidgoyal.net/kitty/faq/#kitty-is-not-able-to-use-my-favorite-font
-        (nerdfonts.override { fonts = [ "Hack" "NerdFontsSymbolsOnly" ]; })
-        fira-code
-        fira-code-symbols
-        fira-code-nerdfont
-        hack-font
-        meslo-lg
-        meslo-lgs-nf
-        corefonts
-        vistafonts
+        noto
       ]
       ++ cfg.fonts;
   };

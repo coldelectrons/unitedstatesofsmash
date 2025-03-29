@@ -30,57 +30,74 @@ in
       enable = true;
       package = haPkg;
       configWritable = true;
+      configDir = "/etc/home-assistant";
+      lovelaceConfig = null;
       config = {
         default_config = { };
-        http = {
-          # server_host = "127.0.0.1";
-          server_host = "0.0.0.0";
-          use_x_forwarded_for = true;
-          trusted_proxies = [ "::1" "127.0.0.1" ];
-        };
-        # automation = "!include automations.yaml";
-        # scene = "!include scenes.yaml";
-        # mqtt = "!include mqtt.yaml";
+      #   http = {
+      #     # server_host = "127.0.0.1";
+      #     server_host = "0.0.0.0";
+      #     use_x_forwarded_for = true;
+      #     trusted_proxies = [ "::1" "127.0.0.1" ];
+      #   };
+        "automation ui" = "!include automations.yaml";
+        "scene ui" = "!include scenes.yaml";
+      #   # mqtt = "!include mqtt.yaml";
         logger = {
           default = "info";
         };
+        recorder.db_url = "postgresql://@/hass";
       };
       # extraPackages = with pkgs; [ psycopg2 ];
       extraPackages = python3packages:
         with python3packages; [
           # postgresql support
           psycopg2
+          numpy
+          hassil
+          aioesphomeapi
+          # esphome-dashboard-api
+          zeroconf
+          ssdp
         ];
-
       extraComponents = [
-        "blueprint"
-        "bluetooth"
-        "bluetooth_adapters"
-        "bluetooth_le_tracker"
-        "bluetooth_tracker"
-        "mqtt"
+        "default_config"
         "esphome"
-        "hue"
+        "bluetooth"
+        # "hue"
+        "usb"
+        "mobile_app"
+        "zeroconf"
+        "ssdp"
+        "sun"
+        "automation"
+        "emoncms"
+        "emoncms_history"
+      ];
+      customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
+        card-mod
+        button-card
+        light-entity-card
       ];
     };
 
-
-    services.home-assistant.config.homeassistant.auth_providers = [
-      # { type = "homeassistant"; }
-      {
-        type = "trusted_networks";
-        trusted_networks = [ "192.168.1.0/24" ];
-        allow_bypass_login = true;
-      }
+    systemd.tmpfiles.rules = [
+      "f ${config.services.home-assistant.configDir}/automations.yaml 0755 hass hass"
+      "f ${config.services.home-assistant.configDir}/scenes.yaml 0755 hass hass"
     ];
+    # services.home-assistant.config.homeassistant.auth_providers = [
+    #   { type = "homeassistant"; }
+    #   {
+    #     type = "trusted_networks";
+    #     trusted_networks = [ "192.168.1.0/24" ];
+    #     allow_bypass_login = true;
+    #   }
+    # ];
 
     # systemd.services.home-assistant.preStart = ''
     #   ${pkgs.nix}/bin/nix eval --raw -f ${config.sops.secrets."services/bn-smarthome/hass-mqtt-yaml.nix".path} yaml > /var/lib/hass/mqtt.yaml
     # '';
 
-    services.home-assistant.config = {
-      recorder.db_url = "postgresql://@/hass";
-    };
     services.postgresql = {
       enable = true;
       package = pkgs.postgresql_16;

@@ -34,8 +34,8 @@ in
 
     # Fixes issue with SteamVR not starting
     system.activationScripts = {
-      fixSteamVR =
-        "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep ${home}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
+      fixSteamVR = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep ${home}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
+      # fixMonadoVR = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+eip ${monado}/usr/bin/monado-service";
     };
 
     services.udev.packages = with pkgs; [
@@ -81,8 +81,9 @@ in
         # FIXME had a problem with steam and bluetooth, dunno if these helped
         hidapi
         monado-vulkan-layers # this
-        opencomposite
         monado
+        opencomposite
+        wlx-overlay-s
       ];
     };
 

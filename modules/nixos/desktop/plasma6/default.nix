@@ -67,16 +67,16 @@ in
         wayland-utils # for kinfocenter for Wayland page
         ffmpegthumbnailer # for video thumbnails
         linuxquota # for plasma-disks
-        ktorrent
-        kfind
-        filelight
-        skanpage # Scanner
+        kdePackages.ktorrent
+        kdePackages.kfind
+        kdePackages.filelight
+        kdePackages.skanpage # Scanner
         kdePackages.print-manager
         # plasma-welcome # Welcome screen
 
         # Libraries/Utilities
         kdePackages.kdegraphics-thumbnailers
-        ffmpegthumbs
+        kdePackages.ffmpegthumbs
         # xwaylandvideobridge # why need this??
         kdePackages.qtwayland
         strawberry-qt6
