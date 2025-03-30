@@ -1,7 +1,7 @@
 {
   lib,
   python3,
-  freecad-wayland,
+  freecad,
   fetchFromGitHub,
   pkgs
 }:
@@ -152,7 +152,7 @@ let
     hash = "sha256-H840it8uelXxtBdQxUBvVuvZK3p+KIn26NcoI5SZh2I=";
   };
 
-  freecad-customized = pkgs.plusultra.freecad-wayland.customize {
+  freecad-customized = pkgs.plusultra.freecad.customize {
     modules = [
       btl
       cables
@@ -171,15 +171,15 @@ let
       threadprofile
       reinforcement
       quetzal
-      nodes
+      # nodes
       ribbon
       inventorloader
     ];
     pythons = [
       (ps: with ps; [
         requests pyjwt tzlocal 
-        qtpy pkgs.plusultra.awkward # Nodes
-        pkgs.plusultra.pyqt-node-editor # Nodes
+        # qtpy pkgs.plusultra.awkward # Nodes
+        # pkgs.plusultra.pyqt-node-editor # Nodes
         xlrd xlwt olefile # InventorLoader
         # xlutils # InventorLoader, but isn't currently in nixpkgs
       ])

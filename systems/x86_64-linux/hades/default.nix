@@ -72,6 +72,8 @@ with lib.${namespace};
     shotcut
     pitivi
     kdePackages.kdenlive
+
+    hydrus
   ];
 
   programs.obs-studio = {
@@ -126,6 +128,7 @@ with lib.${namespace};
       # simula = enabled;
       # rpcs3 = enabled;
       # ubports-installer = enabled;
+      # freecad = enabled;
     };
     hardware = {
       vr = enabled // {
