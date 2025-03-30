@@ -1,33 +1,34 @@
 {
   lib,
-  fetchFromGitLab,
-  buildPythonPackage,
-  qt5,
-  pyqt5,
+  # fetchFromGitLab,
+  python3Packages,
+  # qt5,
+  # pyqt5,
+  # setuptools,
 }:
 
-buildPythonPackage rec {
+python3Packages.buildPythonPackage rec {
   pname = "pyqt-node-editor";
   version = "v0.9.14";
-  pyproject = true;
+  # pyproject = true;
 
-  src = fetchFromGitLab {
+  src = lib.fetchFromGitLab {
     owner = "pavel.krupala";
     repo = "pyqt-node-editor";
     tag = version;
     hash = "";
   };
 
-  nativeBuildInputs = [
-    setuptools
+  # nativeBuildInputs = [
+    # setuptools
     # qt5.wrapQtAppsHook
-  ];
+  # ];
 
-  propagatedBuildInputs = [
+  propagatedBuildInputs = with python3Packages; [
     qtpy
   ];
 
-  nativeCheckInputs = [ pyqt5 ];
+  nativeCheckInputs = with python3Packages; [ qtpy pyqt5 ];
 
   # dontWrapQtApps = true;
 

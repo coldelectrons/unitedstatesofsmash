@@ -26,6 +26,7 @@ in
         video = enabled;
         social = enabled;
         media = enabled;
+        cadcam = enabled;
       };
 
       tools = {
