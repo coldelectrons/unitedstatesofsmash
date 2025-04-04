@@ -60,6 +60,8 @@ with lib.${namespace};
     cli-apps = {
       extras = enabled;
       # gurk-rs = enabled;
+      downloaders = enabled;
+      markdown = enabled;
     };
 
     security = {

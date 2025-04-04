@@ -18,7 +18,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      gallery-dl # datahoarding ftw
+      # gallery-dl # 20250330 failed in unstable
       yt-dlp
       youtube-tui
       # ytmdl

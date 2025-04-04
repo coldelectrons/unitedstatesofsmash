@@ -28,6 +28,11 @@ in
         fzf
         ripgrep
         glow
+        nil
+        nixd
+        markdown-oxide
+        marksman
+        systemd-language-server
       ];
 
       sessionVariables = {

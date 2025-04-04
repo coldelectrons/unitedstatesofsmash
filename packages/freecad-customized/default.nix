@@ -91,12 +91,12 @@ let
     rev = "2a7710e27da3ff91852a8e678df2160d2a0dbe87";
     hash = "sha256-nFc43p1E9v6nkd58tWcscF6soKh/3sZzZGeBaGQSU8s=";
   };
-  partslibrary = fetchFromGitHub {
-    owner = "FreeCAD";
-    repo = "FreeCAD-library";
-    rev = "8a6a19e1bfdaa85c2f368a20a803af6c4b51c43f";
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5=";
-  };
+  # partslibrary = fetchFromGitHub {
+  #   owner = "FreeCAD";
+  #   repo = "FreeCAD-library";
+  #   rev = "8a6a19e1bfdaa85c2f368a20a803af6c4b51c43f";
+  #   hash = "sha256-3yC6ZgwvAc+dZ9mJSy/S28/OCASsWaPdGzMML5xbnbc=";
+  # };
   lattice2 = fetchFromGitHub {
     owner = "DeepSOIC";
     repo = "Lattice2";
@@ -152,7 +152,7 @@ let
     hash = "sha256-H840it8uelXxtBdQxUBvVuvZK3p+KIn26NcoI5SZh2I=";
   };
 
-  freecad-customized = pkgs.plusultra.freecad.customize {
+  freecad-customized = pkgs.freecad.customize {
     modules = [
       btl
       cables
@@ -164,7 +164,7 @@ let
       freegrid
       workfeature
       sheetmetal
-      partslibrary
+      # partslibrary # this is just too big to bother with right now
       lattice2
       gears
       fasteners

@@ -11,6 +11,7 @@ with lib.${namespace};
 {
   imports = [ ./hardware.nix ];
 
+  networking.hostName = "heavy"; # Define your hostname.
   # Resolve an issue with hades's wired connections failing sometimes due to weird
   # DHCP issues. I'm not quite sure why this is the case, but I have found that the
   # problem can be resolved by stopping dhcpcd, restarting Network Manager, and then
@@ -20,6 +21,7 @@ with lib.${namespace};
 
 
   boot = {
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
     binfmt.emulatedSystems = [ "aarch64-linux" "i686-linux" ];
     consoleLogLevel = 0;
     kernelParams = [ 
@@ -28,85 +30,43 @@ with lib.${namespace};
     # Swapfile hibernate
     # resumeDevice = "${MAIN_PART}";
     # kernelParams = [ "resume_offset=${RESUME_OFFSET}" "nvidia_drm.fbdev=1" ];
+    supportedFilesystems = [ "zfs" ];
+    zfs.forceImportRoot = false;
+    zfs.extraPools = [ "utank" "vtank" "utank2024" ];
+    zfs.devNodes = "/dev/disk/by-partuuid/";
   };
-
-  environment.systemPackages = with pkgs; [
-    plusultra.balor
-
-    media-downloader
-    yt-dlg
-    pipe-viewer
-    gtk-pipe-viewer
-    kdePackages.plasmatube
-    tartube-yt-dlp
-    invidious
-
-    nur.repos.dukzcry.stable-diffusion-cpp
-    nur.repos.dukzcry.sd-cpp-webui
-
-    oterm
-    alpaca
-
-    super-slicer-beta
-
-    cameractrls
-    v4l-utils
-    webcamoid
-    cheese
-
-    python311Packages.pip
-    virtualenv
-
-    librewolf
-    tor-browser
-    arti
-
-    plusultra.rcu-dev
-    epr
-    bk
-
-    openshot-qt
-    lightworks
-    flowblade
-    olive-editor
-    shotcut
-    pitivi
-    kdePackages.kdenlive
-
-  ];
 
   services.ursever.enable = true;
 
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      wlrobs
-      obs-ndi
-      obs-vaapi
-      obs-teleport
-    ];
-  };
+  environment.systemPackages = with pkgs; [
+    zfs
+    zfsnap
+    linux-firmware
+    zenstates
+    amdctl
+  ];
 
-  services.ollama = {
+  services.zfs.autoScrub = {
     enable = true;
-    package = pkgs.ollama-rocm;
-    acceleration = "rocm";
+    interval = "monthly";
   };
+  networking.hostId = "137dbeef";
 
   plusultra = {
     nix = enabled;
+    user.sandwitch = enabled;
+
     archetypes = {
-      gaming = enabled;
-      workstation = enabled;
+      server = enabled;
     };
-    desktop = {
-      plasma6 = enabled // {
-        wayland = true;
-        extensions = with pkgs; [
-          kdePackages.krohnkite
-        ];
-      };
-    };
+    # desktop = {
+    #   plasma6 = enabled // {
+    #     wayland = true;
+    #     extensions = with pkgs; [
+    #       kdePackages.krohnkite
+    #     ];
+    #   };
+    # };
     cli-apps = {
       extras = enabled;
       downloaders = enabled;
@@ -119,46 +79,12 @@ with lib.${namespace};
       sops = enabled;
     };
     apps = {
-      vivaldi = enabled;
-      syncthing = enabled;
-      steam = enabled;
-      # steam.enableGamescopeSession = true;
-      # comfyui = enabled;
-      steamtinkerlaunch = enabled;
-      r2modman = enabled;
-      # simula = enabled;
-      # rpcs3 = enabled;
-      # ubports-installer = enabled;
-      # freecad = enabled;
+      # vivaldi = enabled;
+      # syncthing = enabled;
     };
     hardware = {
-      vr = enabled // {
-        monadoDefaultEnable = true;
-      };
-      nofio-wireless = enabled;
-      spacenav = enabled;
-      graphics = enabled // {
-        amdgpu = enabled;
-      };
     };
     services = {
-      esphome = enabled;
-      usbip = enabled // {
-        devices = [
-      #     { # omtech galvo laser
-      #       host = "usbproxy1.localdomain";
-      #       device = "9588:9899";
-      #     }
-      #     { # grblhal teensy4
-      #       host = "usbproxy1.local";
-      #       device = "16c0:0483";
-      #     }
-      #     { # nofio-wireless - is this possible to do directly in linux?
-      #       host = "192.168.3.1:7575";
-      #       device = "04b3:1234"; # IBM Corp nofio wireless base
-      #     }
-        ];
-      };
     };
     virtualisation.kvm = {
       enable = true;
@@ -173,15 +99,6 @@ with lib.${namespace};
     #   machineUnits = [ "machine-qemu\\x2d1\\x2dwin10.scope" ];
     };
     system = {
-      fonts = enabled // {
-        fonts = with pkgs.nerd-fonts; [
-          fira-code
-          fira-mono
-          meslo-lg
-          hack
-          symbols-only
-        ];
-      };
       # iot-network = enabled // {
       #   interface = "enp4s0";
       # };
@@ -212,7 +129,7 @@ with lib.${namespace};
     # Don't use this per https://gitlab.com/vr-on-linux/VR-on-Linux/-/issues/23#note_1472796145
     # AMD_VULKAN_ICD = "RADV";
     DISABLE_LAYER_AMD_SWITCHABLE_GRAPHICS_1="1";
-    VK_ICD_FILENAMES="/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json:/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json";
+    VK_ICD_FILENAMES="/usr/share/vulkan/icd.d/radeon_icd.i686.json:/usr/share/vulkan/icd.d/radeon_icd.x86_64.json";
   };
 
   # WiFi is typically unused on the desktop. Enable this service
