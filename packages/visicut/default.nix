@@ -2,11 +2,11 @@
 
 stdenv.mkDerivation rec {
   pname = "VisiCut";
-  version = "2.1";
+  version = "2.1-12-g1357f643";
 
   src = fetchzip {
-    url = "https://download.visicut.org/files/master/All/${pname}-${version}.zip";
-    sha256 = "sha256-gviwJYYNFLv9w27mLbti2BD+08pd1B/bEIluf11IVM8=";
+    url = "https://github.com/t-oster/VisiCut/releases/download/continuous/${pname}-${version}.zip";
+    sha256 = "sha256-b84OlXmiuQ/irmE78S5Yp2s8xgIaWJKOXmQ785o8S2Y=";
   };
 
   nativeBuildInputs = [ makeWrapper wrapGAppsHook ];
@@ -27,6 +27,7 @@ stdenv.mkDerivation rec {
 [Desktop Entry]
 Name=VisiCut
 Comment=A userfriendly tool to create, save and send Jobs to a Lasercutter
+Comment[de]=Ein benutzerfreundliches Tool zum Erstellen, Speichern und Senden von Jobs an einen Lasercutter
 Exec=$out/bin/VisiCut.Linux %F
 Icon=visicut
 Terminal=false

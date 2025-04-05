@@ -73,7 +73,6 @@ with lib.${namespace};
     pitivi
     kdePackages.kdenlive
 
-    stash
     porn-vault
 
     plusultra.visicut

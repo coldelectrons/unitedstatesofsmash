@@ -36,7 +36,7 @@ with lib.${namespace};
     zfs.devNodes = "/dev/disk/by-partuuid/";
   };
 
-  services.ursever.enable = true;
+  services.urserver.enable = true;
 
   environment.systemPackages = with pkgs; [
     zfs
@@ -54,7 +54,6 @@ with lib.${namespace};
 
   plusultra = {
     nix = enabled;
-    user.sandwitch = enabled;
 
     archetypes = {
       server = enabled;
