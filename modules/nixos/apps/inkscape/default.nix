@@ -18,8 +18,15 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      inkscape-with-extensions
+      ( inkscape-with-extensions.override {
+          inkscapeExtensions = with pkgs.inkscape-extensions; [
+            inkcut
+            hexmap
+            applytransforms
+          ];
+      })
       google-fonts
+      plotutils
     ];
   };
 }

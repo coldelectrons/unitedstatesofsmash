@@ -35,7 +35,7 @@ in
     # Fixes issue with SteamVR not starting
     system.activationScripts = {
       fixSteamVR = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep ${home}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
-      # fixMonadoVR = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+eip ${monado}/usr/bin/monado-service";
+      fixMonadoVR = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+eip ${pkgs.monado}/bin/monado-service";
     };
 
     services.udev.packages = with pkgs; [
@@ -57,6 +57,8 @@ in
       environment = {
         STEAMVR_PATH = "${home}/.steam/root/steamapps/common/SteamVR";
         STEAM_LH_ENABLE = "1";
+        SURVIVE_GLOBALSCENESOLVER = "0";
+        SURVIVE_TIMECODE_OFFSET_MS = "-6.94";
         XRT_COMPOSITOR_COMPUTE = "1";
         XRT_COMPOSITOR_SCALE_PERCENTAGE = "140";
         WMR_HANDTRACKING = "1";
@@ -89,8 +91,6 @@ in
 
     hardware.graphics.extraPackages = with pkgs; [
       monado-vulkan-layers
-      # mangohud
-      # gamemode
     ];
 
     environment.systemPackages = with pkgs; [

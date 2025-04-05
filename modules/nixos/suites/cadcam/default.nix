@@ -19,6 +19,7 @@ in
   config = mkIf cfg.enable {
     plusultra = {
       apps = {
+        inkscape = enabled;
         freecad = enabled;
         kicad = enabled;
         prusaslicer = enabled;

@@ -73,9 +73,13 @@ with lib.${namespace};
     pitivi
     kdePackages.kdenlive
 
+    stash
+    porn-vault
+
+    plusultra.visicut
   ];
 
-  services.ursever.enable = true;
+  services.urserver.enable = true;
 
   programs.obs-studio = {
     enable = true;
