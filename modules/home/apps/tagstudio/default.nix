@@ -20,5 +20,7 @@ in
       packages = with pkgs; [
         inputs.tagstudio.packages.${pkgs.stdenv.hostPlatform.system}.tagstudio
       ];
+    };
+  };
 }
 

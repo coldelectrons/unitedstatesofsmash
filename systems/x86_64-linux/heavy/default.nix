@@ -52,6 +52,44 @@ with lib.${namespace};
   };
   networking.hostId = "137dbeef";
 
+  services.porn-vault = {
+    enable = true;
+    autoStart = true;
+    openFirewall = true;
+    settings = {
+      import = {
+        videos = [
+          {
+            path = "/utank2024/vault/movies";
+            include = [ ];
+            exclude = [ ];
+            extensions = [
+              ".mp4"
+              ".mov"
+              ".webm"
+              ".flv"
+            ];
+            enable = true;
+          }
+        ];
+        images = [
+          {
+            path = "/utank2024/vault/images";
+            include = [ ];
+            exclude = [ ];
+            extensions = [
+              ".png"
+              ".jpg"
+              ".jpeg"
+              ".gif"
+            ];
+            enable = true;
+          }
+        ];
+      };
+    };
+  };
+
   plusultra = {
     nix = enabled;
 
