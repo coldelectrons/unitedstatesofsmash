@@ -18,7 +18,6 @@ with lib.${namespace};
   # condition when the system is coming up that causes this.
   networking.dhcpcd.enable = false;
 
-
   boot = {
     binfmt.emulatedSystems = [ "aarch64-linux" "i686-linux" ];
     consoleLogLevel = 0;
@@ -29,6 +28,7 @@ with lib.${namespace};
     # resumeDevice = "${MAIN_PART}";
     # kernelParams = [ "resume_offset=${RESUME_OFFSET}" "nvidia_drm.fbdev=1" ];
   };
+
 
   environment.systemPackages = with pkgs; [
     plusultra.balor
@@ -76,6 +76,8 @@ with lib.${namespace};
     porn-vault
 
     plusultra.visicut
+
+    inputs.umu.packages.${system}.default
   ];
 
   services.urserver.enable = true;
@@ -95,6 +97,9 @@ with lib.${namespace};
     package = pkgs.ollama-rocm;
     acceleration = "rocm";
   };
+
+  i18n.supportedLocales = [ "all" ];
+
 
   plusultra = {
     nix = enabled;
@@ -146,8 +151,8 @@ with lib.${namespace};
     };
     services = {
       esphome = enabled;
-      usbip = enabled // {
-        devices = [
+      # usbip = enabled // {
+        # devices = [
       #     { # omtech galvo laser
       #       host = "usbproxy1.localdomain";
       #       device = "9588:9899";
@@ -160,7 +165,8 @@ with lib.${namespace};
       #       host = "192.168.3.1:7575";
       #       device = "04b3:1234"; # IBM Corp nofio wireless base
       #     }
-        ];
+        # ];
+        nofio-usbip = enabled;
       };
     };
     virtualisation.kvm = {
@@ -185,9 +191,9 @@ with lib.${namespace};
           symbols-only
         ];
       };
-      # iot-network = enabled // {
-      #   interface = "enp4s0";
-      # };
+      iot-network = enabled // {
+        interface = "enp4s0";
+      };
     };
 
     user.extraGroups = [ 

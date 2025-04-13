@@ -62,6 +62,8 @@ in
         curl
         xterm
         zenity
+        python311
+        python311Packages.pygobject3 # steam-runtime-launch-options complains about missing python3[gi,gtk3]
       ];
       # extest.enable = true;
       protontricks.enable = true;
@@ -78,6 +80,7 @@ in
       sc-controller
       protonup
       protonup-qt
+      umu-launcher
     ];
 
     environment.sessionVariables = {

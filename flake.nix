@@ -17,7 +17,7 @@
 
     # Home Manager
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "unstable";
 
     # Hardware Configuration
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -139,6 +139,11 @@
       url = "github:TagStudioDev/TagStudio";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    umu.url = "github:Open-Wine-Components/umu-launcher?dir=packaging/nix";
+    umu.inputs.nixpkgs.follows = "nixpkgs";
+
+
   };
 
   outputs =
@@ -192,8 +197,8 @@
         systems.modules.nixos = with inputs; [
           home-manager.nixosModules.home-manager
           {
-            # home-manager.useGlobalPkgs = true;
-            # home-manager.useUserPackages = true;
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup"; # Set backup file extension
           }
           # nix-ld.nixosModules.nix-ld
@@ -210,6 +215,22 @@
         # systems.hosts.hades.modules = with inputs; [
           # nixos-hardware.nixosModules.framework-11th-gen-intel
         # ];
+
+        # Add modules to all homes.
+        # homes.modules = with inputs; [
+        #   home-manager.homeModules.home-manager
+        #     # my-input.homeModules.my-module
+        # ];
+
+        # Add modules to a specific home.
+        # homes.users."my-user@my-host".modules = with inputs; [
+        #     # my-input.homeModules.my-module
+        # ];
+
+        # Add modules to a specific home.
+        # homes.users."my-user@my-host".specialArgs = {
+        #     my-custom-value = "my-value";
+        # };
 
         deploy = lib.mkDeploy { inherit (inputs) self; };
 

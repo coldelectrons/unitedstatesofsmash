@@ -754,15 +754,15 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs"
+          "unstable"
         ]
       },
       "locked": {
-        "lastModified": 1743295846,
-        "narHash": "sha256-hKKz07d4RV9gzxzE5Qu3RQWX8a7XpzRrP5timoxoGRQ=",
+        "lastModified": 1743948087,
+        "narHash": "sha256-B6cIi2ScgVSROPPlTti6len+TdR0K25B9R3oKvbw3M8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "717030011980e9eb31eb8ce011261dd532bce92c",
+        "rev": "ef3b2a6b602c3f1a80c6897d6de3ee62339a3eb7",
         "type": "github"
       },
       "original": {
@@ -1205,6 +1205,7 @@
         "sops-nix": "sops-nix_2",
         "tagstudio": "tagstudio",
         "thaw": "thaw",
+        "umu": "umu",
         "unstable": "unstable_2",
         "vault-service": "vault-service",
         "yubikey-guide": "yubikey-guide"
@@ -1624,6 +1625,28 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "umu": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "packaging/nix",
+        "lastModified": 1743524226,
+        "narHash": "sha256-af5xqPTOE3u+tsavSAuuuYgsGFMAq8sJYJTTr2V+tRw=",
+        "owner": "Open-Wine-Components",
+        "repo": "umu-launcher",
+        "rev": "5fd075b7ece7fc1b22e8c5151b1804fc3939dbe3",
+        "type": "github"
+      },
+      "original": {
+        "dir": "packaging/nix",
+        "owner": "Open-Wine-Components",
+        "repo": "umu-launcher",
         "type": "github"
       }
     },

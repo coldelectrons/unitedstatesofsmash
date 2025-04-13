@@ -35,7 +35,7 @@ in
     # Fixes issue with SteamVR not starting
     system.activationScripts = {
       fixSteamVR = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep ${home}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
-      fixMonadoVR = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+eip ${pkgs.monado}/bin/monado-service";
+      # fixMonadoVR = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+eip ${pkgs.monado}/bin/monado-service"; # not needed with monado.highPriority
     };
 
     services.udev.packages = with pkgs; [
@@ -44,6 +44,7 @@ in
     ];
 
     services.monado = {
+      package = inputs.nixpkgs-xr.packages.${pkgs.system}.monado;
       enable = true;
       defaultRuntime = cfg.monadoDefaultEnable;
       highPriority = true;
@@ -57,19 +58,22 @@ in
       environment = {
         STEAMVR_PATH = "${home}/.steam/root/steamapps/common/SteamVR";
         STEAM_LH_ENABLE = "1";
-        SURVIVE_GLOBALSCENESOLVER = "0";
-        SURVIVE_TIMECODE_OFFSET_MS = "-6.94";
+        # 20250413 current monado nixpkg says SURVIVE_ variables aren't needed?
+        # SURVIVE_GLOBALSCENESOLVER = "0";
+        # SURVIVE_TIMECODE_OFFSET_MS = "-6.94";
         XRT_COMPOSITOR_COMPUTE = "1";
         XRT_COMPOSITOR_SCALE_PERCENTAGE = "140";
-        WMR_HANDTRACKING = "1";
+        WMR_HANDTRACKING = "0"; # Index doesn't do handtracking, and the cameras don't exactly work
         AMD_VULKAN_ICD = "RADV";
-        VIT_SYSTEM_LIBRARY_PATH = "${pkgs.basalt-monado}/lib/libbasalt.so";
       };
     };
 
     environment.sessionVariables = {
-      # why is this necessary?
-      LIBMONADO_PATH = "${config.services.monado.package}/lib/libmonado.so";
+      # why is this necessary? which one is more correct?
+      # LIBMONADO_PATH = "${config.services.monado.package}/lib/libmonado.so";
+      LIBMONADO_PATH = "${pkgs.monado}/lib/libmonado.so";
+      XR_RUNTIME_JSON = "$XDG_CONFIG_HOME/openxr/1/active_runtime.json";
+      PRESSURE_VESSEL_FILESYSTEMS_RW = "$XDG_RUNTIME_DIR/monado_comp_ipc";
     };
 
     programs.steam = {
@@ -82,29 +86,28 @@ in
       extraPackages = with pkgs; [
         # FIXME had a problem with steam and bluetooth, dunno if these helped
         hidapi
-        monado-vulkan-layers # this
         monado
         opencomposite
-        wlx-overlay-s
       ];
     };
 
     hardware.graphics.extraPackages = with pkgs; [
-      monado-vulkan-layers
     ];
+
+    programs.envision.enable = true;
 
     environment.systemPackages = with pkgs; [
       lighthouse-steamvr
-      monado-vulkan-layers
+      inputs.nixpkgs-xr.packages.${pkgs.system}.index_camera_passthrough
+      # monado-vulkan-layers
       wlx-overlay-s
       opencomposite
       libsurvive
-      envision
       # motoc
-      basalt-monado
+      # basalt-monado
       xrgears
       xrizer
-      xr-hardware
+      # xr-hardware
       corectrl
       gamemode
       openxr-loader
@@ -116,7 +119,8 @@ in
       stardust-xr-magnetar
       stardust-xr-phobetor
       stardust-xr-gravity
-      stardust-xr-server
+      # stardust-xr-server # 20250412 has error not finding libuuid when opening active_runtime.json
+      plusultra.stardust-xr-server
       stardust-xr-kiara
     ];
 
