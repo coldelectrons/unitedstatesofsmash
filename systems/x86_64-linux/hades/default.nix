@@ -24,7 +24,7 @@ with lib.${namespace};
     kernelParams = [ 
     ];                                                                                                                                   
     # plymouth.enable = true;
-    # Swapfile hibernate
+# Swapfile hibernate
     # resumeDevice = "${MAIN_PART}";
     # kernelParams = [ "resume_offset=${RESUME_OFFSET}" "nvidia_drm.fbdev=1" ];
   };
@@ -142,6 +142,19 @@ with lib.${namespace};
     hardware = {
       vr = enabled // {
         monadoDefaultEnable = true;
+        valve-index = enabled // {
+          audio = {
+            card = "alsa_card.pci-0000_11_00.1";
+            profile = "output:hdmi-stereo-extra1";
+            # TODO the correct value can only be had after getting the headset working once, see
+            # https://github.com/ValveSoftware/SteamVR-for-Linux/issues/215
+            # IIUC the index turns on the microphone once the audio output is enabled
+            # so this needs a temporary value of system mic in
+            # source = "alsa_input.pci-0000_13_00.4.analog-stereo";
+            source = "alsa_input.usb-Valve_Corporation_Valve_VR_Radio___HMD_Mic_C911701E1B-LYM-01.mono-fallback";
+            sink = "alsa_output.pci-0000_11_00.1.hdmi-output-1";
+          };
+        };
       };
       nofio-wireless = enabled;
       spacenav = enabled;
@@ -151,6 +164,7 @@ with lib.${namespace};
     };
     services = {
       esphome = enabled;
+      nofio-usbip = enabled;
       # usbip = enabled // {
         # devices = [
       #     { # omtech galvo laser
@@ -166,8 +180,7 @@ with lib.${namespace};
       #       device = "04b3:1234"; # IBM Corp nofio wireless base
       #     }
         # ];
-        nofio-usbip = enabled;
-      };
+      # };
     };
     virtualisation.kvm = {
       enable = true;
@@ -191,9 +204,9 @@ with lib.${namespace};
           symbols-only
         ];
       };
-      iot-network = enabled // {
-        interface = "enp4s0";
-      };
+      # iot-network = enabled // { # 20250413 Don't need this right now, using NM
+      #   interface = "enp4s0";
+      # };
     };
 
     user.extraGroups = [ 
