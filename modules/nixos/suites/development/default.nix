@@ -39,7 +39,7 @@ in
       inherit apps cli-apps;
 
       tools = {
-        attic = enabled;
+        # attic = enabled;
         direnv = enabled;
         http = enabled;
         # qmk = enabled;

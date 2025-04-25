@@ -15,6 +15,6 @@ in
     enable = mkEnableOption "signal desktop messaging";
   };
 
-  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ signal-desktop ]; };
+  config = mkIf cfg.enable { environment.systemPackages = with pkgs; [ signal-desktop-bin ]; };
   # TODO add gurk-rs, but that needs an overlay for unstable version
 }

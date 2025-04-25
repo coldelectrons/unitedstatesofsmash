@@ -77,7 +77,7 @@ with lib.${namespace};
 
     plusultra.visicut
 
-    inputs.umu.packages.${system}.default
+    # inputs.umu.packages.${system}.default
   ];
 
   services.urserver.enable = true;

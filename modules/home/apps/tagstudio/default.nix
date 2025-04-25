@@ -3,6 +3,7 @@
   config,
   pkgs,
   namespace,
+  inputs,
   ...
 }:
 let
@@ -18,7 +19,7 @@ in
   config = mkIf cfg.enable rec {
     home = {
       packages = with pkgs; [
-        inputs.tagstudio.packages.${pkgs.stdenv.hostPlatform.system}.tagstudio
+        inputs.tagstudio.packages.${pkgs.system}.tagstudio
       ];
     };
   };

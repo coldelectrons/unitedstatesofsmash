@@ -49,11 +49,39 @@ in
 
   config = mkIf cfg.enable {
 
-    # Fixes issue with SteamVR not starting
     system.activationScripts = {
-      # TODO is this necessary when using Monadao? I suppose it can't hurt
+      # TODO is this necessary when using Monado? I suppose it can't hurt
+      # Fixes issue with SteamVR not starting
       fixSteamVR = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+ep ${home}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
     };
+
+    programs.nix-ld.enable = true;
+    # programs.nix-ld.libraries = with pkgs; [
+    #   # the defaults, because I'm not certain how to add or append TODO FIXME
+    #   zlib
+    #   zstd
+    #   stdenv.cc.cc
+    #   curl
+    #   openssl
+    #   attr
+    #   libssh
+    #   bzip2
+    #   libxml2
+    #   acl
+    #   libsodium
+    #   util-linux
+    #   xz
+    #   systemd
+    #   # additional
+    #   bash
+    #   openvr
+    #   firefox
+    #   steam
+    #   steam-run
+    #   monado
+    #   opencomposite
+    #   libuuid 
+    # ];
 
     services.udev.packages = with pkgs; [
       # xr-hardware
@@ -135,7 +163,7 @@ in
         # is 300 and OXR_VIEWPORT_SCALE_PERCENTAGE is 33, the game will render
         # at 100% and the monado runtime (wlx-s-overlay etc..) will render at
         # 300%
-        OXR_VIEWPORT_SCALE_PERCENTAGE=100
+        # OXR_VIEWPORT_SCALE_PERCENTAGE=100;
 
         # If using Lact on an AMD GPU can set GAMEMODE_CUSTOM_ARGS=vr when using
         # gamemoderun command to automatically enable the VR power profile
@@ -282,7 +310,7 @@ in
             hash = "sha256-Wx4BBHjNyuboDVQt8yV0tKQNDny4EDwRBtMSk9XHNVA=";
           }
         );
-        categories = [ "Games" "X-VR" ];
+        categories = [ "Game" "X-VR" ];
       })
       (pkgs.makeDesktopItem {
         name = "stop monado";
@@ -300,13 +328,12 @@ in
             hash = "sha256-Wx4BBHjNyuboDVQt8yV0tKQNDny4EDwRBtMSk9XHNVA=";
           }
         );
-        categories = [ "Games" "X-VR" ];
+        categories = [ "Game" "X-VR" ];
       })
       (pkgs.makeDesktopItem {
         name = "start monado/opencomposite";
         desktopName = "Start Monado/Opencomposite";
         type = "Application";
-        exec = "${systemctl} start --user monado";
         exec = getExe (writeShellScriptBin "start-monado-opencomposite" ''
               rm -rf  "$XDG_CONFIG_HOME/openvr/openvrpaths.vrpath"
               ln -sf  "$XDG_CONFIG_HOME/openvr/openvrpaths.vrpath.opencomposite" "$XDG_CONFIG_HOME/openvr/openvrpaths.vrpath"
@@ -319,7 +346,7 @@ in
             hash = "sha256-Wx4BBHjNyuboDVQt8yV0tKQNDny4EDwRBtMSk9XHNVA=";
           }
         );
-        categories = [ "Games" "X-VR" ];
+        categories = [ "Game" "X-VR" ];
       })
       (pkgs.makeDesktopItem {
         name = "start-vr";
@@ -327,7 +354,7 @@ in
         type = "Application";
         exec = "${systemctl} start --user valve-index";
         icon = "applications-system";
-        categories = [ "Games" "X-VR" ];
+        categories = [ "Game" "X-VR" ];
       })
       (pkgs.makeDesktopItem {
         name = "stop-vr";
@@ -335,7 +362,7 @@ in
         type = "Application";
         exec = "${systemctl} stop --user valve-index";
         icon = "applications-system";
-        categories = [ "Games" "X-VR" ];
+        categories = [ "Game" "X-VR" ];
       })
       (pkgs.makeDesktopItem {
         name = "wlx-overlay";
@@ -344,7 +371,7 @@ in
         exec = "${pkgs.wlx-overlay-s}/bin/wlx-overlay-s --replace";
         icon = ./wlx-overlay-s.png;
         type = "Application";
-        categories = [ "Games" "X-VR" ];
+        categories = [ "Game" "X-VR" ];
         terminal = false;
       })
     ];

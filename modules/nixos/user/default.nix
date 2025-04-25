@@ -160,6 +160,8 @@ in
       # However, if you add multiple users you'll need to change this
       # so each user has their own unique uid (or leave it out for the
       # system to select).
+      # TODO Does this only apply to users made using the snowfallorg portion of this config?
+      # I would think that if you really wanted users for special uses, you could still use regular config bits
       uid = 1000;
 
       extraGroups = [ "steamcmd" ] ++ cfg.extraGroups;

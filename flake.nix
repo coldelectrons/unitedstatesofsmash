@@ -192,6 +192,7 @@
           # nixpkgs-news.overlays.default
           # lix-module.overlays.default
           # nix-comfyui.overlays.default
+          inputs.umu.overlays.default
         ];
 
         systems.modules.nixos = with inputs; [

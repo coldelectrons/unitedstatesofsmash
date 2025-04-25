@@ -9,7 +9,7 @@
         * VH uses port 7575, which is not the default for usbip
         * I don't know the USB VID:PID that VH is using
         * If VH _is_ working, maybe Monado isn't picking up those devices?
-        * VirtualHere documentation/forums is contradictory: It says is uses usbip on linux, but the author also says in one forum reply that he wrote his own better protocol[^1].
+        * VirtualHere documentation/forums is contradictory: It says it uses usbip on linux, but the author also says in one forum reply that he wrote his own better protocol[^1].
         * The VH client is closed source, and I don't know enough yet to package the GUI client
   * Steam games
     * I've not made this a high priority.
@@ -28,7 +28,7 @@
 - [ ] Start working in branches/merges in git instead of spamming commits like a crazy person.
     - [ ] Make the branches rename the Nixos generation they build to help discern them
 - [ ] ~~Beat Steam like a little bitch~~ Make Steam tell me what's wrong.
-- [ ] Get VR working with the Index
+- [x] Get VR working with the Index
     - [ ] Move the Nofio stuff to it's own branch
     - [ ] Make Steam use Monado/Opencomposite
         - [ ] Get Alyx working
