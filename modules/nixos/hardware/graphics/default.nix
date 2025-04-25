@@ -132,16 +132,29 @@ in
   # WARN: Disable this if you experience flickering or general instability
   # https://wiki.archlinux.org/title/AMDGPU#Boot_parameter
     boot.kernelParams = mkIf cfg.amdgpu.enable [ "amdgpu.ppfeaturemask=0xffffffff" ];
-
-    boot.kernelPatches = mkIf cfg.amdgpu.enable [
-      {
-        name = "amdgpu-ignore-ctx-privileges";
-        patch = pkgs.fetchpatch {
-          name = "cap_sys_nice_begone.patch";
-          url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
-          hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
-        };
-      }
+    
+    boot.extraModulePackages = mkIf cfg.amdgpu.enable [
+      (pkgs.plusultra.amdgpu-kernel-module.overrideAttrs (_: {
+        kernel = config.boot.kernelPackages.kernel;
+        patches = [
+          (pkgs.fetchpatch {
+            name = "cap_sys_nice_begone.patch";
+            url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+            hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+          })
+        ];
+      }))
     ];
+
+    # boot.kernelPatches = mkIf cfg.amdgpu.enable [
+    #   {
+    #     name = "amdgpu-ignore-ctx-privileges";
+    #     patch = pkgs.fetchpatch {
+    #       name = "cap_sys_nice_begone.patch";
+    #       url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+    #       hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+    #     };
+    #   }
+    # ];
   };
 }
