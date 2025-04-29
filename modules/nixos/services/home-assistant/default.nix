@@ -64,7 +64,7 @@ in
         "default_config"
         "esphome"
         "bluetooth"
-        # "hue"
+        "hue"
         "usb"
         "mobile_app"
         "zeroconf"
@@ -74,10 +74,16 @@ in
         "emoncms"
         "emoncms_history"
       ];
+      # For some reason, my configuration.yaml gets these with an absolute "/local/nixos-lovelace-ui-modules/xxxx"
+      # but they are linked into ${configDir}/www/nixos-lovelace-ui-modules/xxxx
+      # XXX WTF
       customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
         card-mod
         button-card
         light-entity-card
+        mushroom
+        template-entity-row
+        bubble-card
       ];
     };
 

@@ -19,7 +19,8 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      onlyoffice-editors
+      libreoffice
+      onlyoffice-desktopeditors
       gnumeric
       pyspread
     ];

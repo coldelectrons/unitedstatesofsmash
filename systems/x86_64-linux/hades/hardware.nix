@@ -8,6 +8,7 @@
 }:
 let
   inherit (inputs) nixos-hardware;
+  kpackage = pkgs.linuxKernel.packages.linux_xanmod_stable;
 in
 {
   imports = with nixos-hardware.nixosModules; [
@@ -19,7 +20,7 @@ in
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_stable;
+    kernelPackages = kpackage;
 
     initrd = {
       availableKernelModules = [
@@ -43,6 +44,16 @@ in
       evdi
       cpupower
       shufflecake
+      ((pkgs.plusultra.amdgpu-kernel-module.override{ kernel = kpackage.kernel; }).overrideAttrs (_: {
+        # kernel = kpackage.kernel;
+        patches = [
+          (pkgs.fetchpatch {
+            name = "cap_sys_nice_begone.patch";
+            url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+            hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+          })
+        ];
+      }))
     ];
   };
 

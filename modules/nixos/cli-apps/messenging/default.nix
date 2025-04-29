@@ -18,9 +18,9 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      signald
-      signal-export
-      scli
+      # signald
+      # signal-export
+      # scli
     ];
   };
 }

@@ -1,4 +1,11 @@
-{ lib, stdenv, fetchzip, makeWrapper, wrapGAppsHook, glib, jdk11 }:
+{   lib
+  , stdenv
+  , fetchzip
+  , makeWrapper
+  , wrapGAppsHook
+  , glib
+  , jdk21
+}:
 
 stdenv.mkDerivation rec {
   pname = "VisiCut";
@@ -10,7 +17,7 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [ makeWrapper wrapGAppsHook ];
-  buildInputs = [ glib jdk11 ];
+  buildInputs = [ glib jdk21 ];
 
   dontWrapGApps = true;
 
@@ -43,7 +50,7 @@ StartupNotify=true" > $out/share/applications/VisiCut.desktop
   # populated in installPhase yet.
   postFixup = ''
     makeWrapper \
-        ${jdk11}/bin/java \
+        ${jdk21}/bin/java \
         $out/bin/${pname}.Linux \
         --add-flags "-Xms256m -Xmx2048m -jar $out/share/${pname}/Visicut.jar" \
         "''${gappsWrapperArgs[@]}"

@@ -47,7 +47,7 @@ with lib.${namespace};
     apps.vr = enabled // {
       handTrackingModels = enabled;
     };
-    apps.tagstudio = enabled;
+    # apps.tagstudio = enabled;
 
     tools = {
       git = enabled // {
@@ -62,6 +62,7 @@ with lib.${namespace};
   home.packages = with pkgs; [
     pipx
     bash
+    pipeworld
   ];
 
   programs.gallery-dl = {

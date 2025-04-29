@@ -123,6 +123,7 @@ with lib.${namespace};
       server = enabled;
     };
     cli-apps = {
+      filemanagers = enabled;
       extras = enabled;
     };
     security = {

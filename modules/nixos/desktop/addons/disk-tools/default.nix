@@ -17,7 +17,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      sirikali
+      # sirikali # 20250426 fails due to xmlrpc
       gparted
       exfatprogs
       fatresize

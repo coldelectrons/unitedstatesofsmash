@@ -85,7 +85,7 @@ in
 
     services.udev.packages = with pkgs; [
       # xr-hardware
-      # plusultra.nofio-usb-udev-rules
+      plusultra.nofio-usb-udev-rules
     ];
 
     # hardware.alsa.cardAliases = mkIf cfg.valve-index.enable {

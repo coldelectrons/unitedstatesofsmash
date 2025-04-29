@@ -30,14 +30,14 @@ in
   config = mkIf cfg.enable rec {
     home = {
       packages = with pkgs; [
-        (pkgs.writeShellApplication {
-          name = "vrpathreg-steamvr-monado";
-          checkPhase = "";
-          runtimeInputs = with pkgs; [ steam-run steam monado ];
-          text = ''
-            ${pkgs.steam-run}/bin/steam-run ~/.local/share/Steam/steamapps/common/SteamVR/bin/vrpathreg.sh adddriver ${pkgs.monado}/share/steamvr-monado
-          '';
-        )
+        ( pkgs.writeShellApplication {
+            name = "vrpathreg-steamvr-monado";
+            checkPhase = "";
+            runtimeInputs = with pkgs; [ steam-run steam monado ];
+            text = ''
+              ${pkgs.steam-run}/bin/steam-run ~/.local/share/Steam/steamapps/common/SteamVR/bin/vrpathreg.sh adddriver ${pkgs.monado}/share/steamvr-monado
+            '';
+        })
       ];
 
       sessionVariables = {

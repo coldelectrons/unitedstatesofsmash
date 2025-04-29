@@ -11,6 +11,13 @@
         * If VH _is_ working, maybe Monado isn't picking up those devices?
         * VirtualHere documentation/forums is contradictory: It says it uses usbip on linux, but the author also says in one forum reply that he wrote his own better protocol[^1].
         * The VH client is closed source, and I don't know enough yet to package the GUI client
+      * Further testing:
+        I can run `vhclientx86_64` CLI as a daemon
+        It finds the base after the usb network starts
+        using the LIST command shows:
+          name      vh address      server host:port
+        `IMRNext (2a3613f855a1) (imr-nofio1:7575)`
+        However, it does not see or add any devices, nor does `AUTO USE HUB,IMRNext` do anything:
   * Steam games
     * I've not made this a high priority.
     * Since switching to Plasma6/wayland, making games run has become even more of a chore.

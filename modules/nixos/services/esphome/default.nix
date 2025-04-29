@@ -11,10 +11,7 @@ with lib.${namespace};
 let
   cfg = config.${namespace}.services.esphome;
 
-  # esphome updated to 2024.12.2 just days after
-  # nixos 24.11 released, leaving stable with esphome 2024.11.3
-  # but 2024.12.2 is in unstable
-  ehPkg = inputs.unstable.legacyPackages."${pkgs.system}".esphome;
+  # ehPkg = inputs.unstable.legacyPackages."${pkgs.system}".esphome;
 
   roleName = "esphome";
   domainName = "local";
@@ -27,14 +24,12 @@ in
 
   config = mkIf cfg.enable {
 
-    environment.systemPackages = [ ehPkg ];
-
     services.esphome = {
       enable = true;
       address = "0.0.0.0";
       enableUnixSocket = cfg.proxy;
       openFirewall = true;
-      package = ehPkg;
+      # package = ehPkg;
     };
 
     networking.firewall = {

@@ -37,7 +37,7 @@ in
         # paperless = enabled;
         vivaldi = enabled;
         btrfs = enabled;
-        spreadsheets = enabled;
+        spreadsheet = enabled;
       };
     };
     

@@ -35,7 +35,7 @@
     flake.inputs.nixpkgs.follows = "unstable";
 
     # Snowfall Thaw
-    thaw.url = "github:snowfallorg/thaw?ref=v1.0.7";
+    # thaw.url = "github:snowfallorg/thaw?ref=v1.0.7";
 
     # Snowfall Drift
     drift.url = "github:snowfallorg/drift";
@@ -184,7 +184,7 @@
           # neovim.overlays.default
           # tmux.overlay
           flake.overlays.default
-          thaw.overlays.default
+          # thaw.overlays.default
           drift.overlays.default
           icehouse.overlays.default
           attic.overlays.default
