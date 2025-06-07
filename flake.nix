@@ -6,18 +6,18 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
-    # NixPkgs Unstable
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # NixPkgs stable
+    stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     # Lix
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Home Manager
     home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "unstable";
+    home-manager.inputs.nixpkgs.follows = "stable";
 
     # Hardware Configuration
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -32,7 +32,7 @@
 
     # Snowfall Flake
     flake.url = "github:snowfallorg/flake?ref=v1.4.1";
-    flake.inputs.nixpkgs.follows = "unstable";
+    flake.inputs.nixpkgs.follows = "nixpkgs";
 
     # Snowfall Thaw
     # thaw.url = "github:snowfallorg/thaw?ref=v1.0.7";
@@ -43,7 +43,7 @@
 
     # Comma
     comma.url = "github:nix-community/comma";
-    comma.inputs.nixpkgs.follows = "unstable";
+    comma.inputs.nixpkgs.follows = "nixpkgs";
 
     # System Deployment
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -57,9 +57,6 @@
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
     nixpkgs-xr.inputs.nixpkgs.follows = "nixpkgs";
 
-    sd-webui.url = "github:Aerobreaker/stable-diffusion-webui-nix";
-    sd-webui.inputs.nixpkgs.follows = "unstable";
-    
     #
     # ========= Personal Repositories =========
     #
@@ -85,8 +82,8 @@
     # Binary Cache
     attic = {
       url = "github:zhaofengli/attic";
-      inputs.nixpkgs.follows = "unstable";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "stable";
     };
 
     # Vault Integration

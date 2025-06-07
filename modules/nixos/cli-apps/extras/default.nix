@@ -35,6 +35,7 @@ in
       fd # Better find
       diffsitter # Better diff
       jq # JSON pretty printer and manipulator
+      dysk # a better df
 
       gnugrep gnused
       pandoc

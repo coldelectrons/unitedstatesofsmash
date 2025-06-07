@@ -20,7 +20,7 @@ in
   config = mkIf cfg.enable {
 
     systemd.network = {
-      enable = true;
+      # enable = true;
 
       netdevs = {
         "20-vlan2" = {

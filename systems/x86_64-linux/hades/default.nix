@@ -67,15 +67,22 @@ with lib.${namespace};
 
     openshot-qt
     lightworks
-    flowblade
+flowblade
     olive-editor
     shotcut
     pitivi
     kdePackages.kdenlive
 
+    kdePackages.kasts
+
+
     porn-vault
 
     plusultra.visicut
+
+    teensy-loader-cli
+    
+    kew # terminal music player
 
     # inputs.umu.packages.${system}.default
   ];
@@ -210,6 +217,7 @@ with lib.${namespace};
     };
 
     user.extraGroups = [ 
+      "esphome"
       "networkmanager"
       "wheel"
       "input"

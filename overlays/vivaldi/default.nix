@@ -8,6 +8,6 @@ final: prev:
     proprietaryCodecs = true;
     enableWidevine = true;
     nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [
-      channels.unstable.kdePackages.wrapQtAppsHook ];
+      channels.nixpkgs.kdePackages.wrapQtAppsHook ];
   }));
 }

@@ -18,9 +18,10 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      # gallery-dl # 20250330 failed in unstable
+      gallery-dl # 20250330 failed in unstable
       yt-dlp
       youtube-tui
+      tartube-yt-dlp
       # ytmdl
       yaydl
       yewtube

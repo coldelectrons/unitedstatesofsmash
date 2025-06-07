@@ -24,7 +24,7 @@ in
       util-linux
       kdePackages.partitionmanager
       dosfstools
-      ventoy-full # bootable USB solution
+      # ventoy-full # bootable USB solution, 2025-05 marked insecure
       usbimager
       rpi-imager
     ];

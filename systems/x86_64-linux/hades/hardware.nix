@@ -43,7 +43,7 @@ in
       fanout
       evdi
       cpupower
-      shufflecake
+      # shufflecake
       ((pkgs.plusultra.amdgpu-kernel-module.override{ kernel = kpackage.kernel; }).overrideAttrs (_: {
         # kernel = kpackage.kernel;
         patches = [
