@@ -38,11 +38,7 @@ with lib.${namespace};
     pipe-viewer
     gtk-pipe-viewer
     kdePackages.plasmatube
-    tartube-yt-dlp
     invidious
-
-    nur.repos.dukzcry.stable-diffusion-cpp
-    nur.repos.dukzcry.sd-cpp-webui
 
     oterm
     alpaca
@@ -61,7 +57,6 @@ with lib.${namespace};
     tor-browser
     arti
 
-    plusultra.rcu-dev
     epr
     bk
 
@@ -121,6 +116,9 @@ flowblade
           kdePackages.krohnkite
         ];
       };
+    };
+    suites = {
+      ereader = enabled;
     };
     cli-apps = {
       extras = enabled;

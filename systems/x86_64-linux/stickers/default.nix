@@ -56,6 +56,7 @@ with lib.${namespace};
       common = enabled;
       desktop = enabled;
       media = enabled;
+      ereader = enabled;
     };
 
     cli-apps = {
