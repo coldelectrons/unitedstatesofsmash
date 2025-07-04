@@ -21,6 +21,10 @@
 python3Packages.buildPythonApplication rec {
   pname = "rcu";
   version = "2025.001s";
+  # The source file needs to be downloaded from the link you get when purchasing
+  # and then you need to add the file to the nix store
+  # ➜ nix-store --add-fixed sha256 rcu-d2025.001s-source.tar.gz
+  # this is one of the ways using NixOS gets to be awkward
 
   format = "other";
 
@@ -190,7 +194,7 @@ python3Packages.buildPythonApplication rec {
     description = "All-in-one offline/local management software for reMarkable e-paper tablets";
     homepage = "http://www.davisr.me/projects/rcu/";
     license = lib.licenses.agpl3Plus;
-    maintainers = with lib.maintainers; [ OPNA2608 ];
+    maintainers = with lib.maintainers; [  ];
     hydraPlatforms = [ ]; # requireFile used as src
   };
 }

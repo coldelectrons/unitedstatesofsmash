@@ -37,7 +37,6 @@ with lib.${namespace};
     dbmonster
     ifwifi
     loramon
-    home-assistant-cli
     htop
     bottom
     iw
@@ -135,7 +134,6 @@ with lib.${namespace};
     hardware = {
     };
     services = {
-      home-assistant = enabled;
       # esphome = enabled;
       mdns-publisher = enabled // {
         names = [

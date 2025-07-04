@@ -2,7 +2,7 @@
   lib,
   writeText,
   writeShellApplication,
-  substituteAll,
+  replaceVarsWith,
   gum,
   inputs,
   hosts ? { },
@@ -13,7 +13,7 @@ let
   inherit (lib) mapAttrsToList concatStringsSep;
   inherit (lib.${namespace}) override-meta;
 
-  substitute = args: builtins.readFile (substituteAll args);
+  substitute = args: builtins.readFile (replaceVarsWith args);
 
   formatted-hosts = mapAttrsToList (name: host: "${name},${host.pkgs.system}") hosts;
 
@@ -27,9 +27,10 @@ let
 
     text = substitute {
       src = ./nixos-hosts.sh;
-
-      help = ./help;
-      hosts = if hosts == { } then "" else hosts-csv;
+      replacements = {
+        help = ./help;
+        hosts = if hosts == { } then "" else hosts-csv;
+      };
     };
 
     checkPhase = "";

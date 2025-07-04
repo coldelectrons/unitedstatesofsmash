@@ -55,6 +55,7 @@ with lib.${namespace};
     suites = {
       common = enabled;
       desktop = enabled;
+      media = enabled;
     };
 
     cli-apps = {

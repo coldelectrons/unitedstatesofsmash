@@ -275,7 +275,9 @@ in
       monado-vulkan-layers
     ];
 
-    programs.envision.enable = true;
+    programs.envision = {
+      enable = true;
+    };
 
     environment.systemPackages = with pkgs; [
       lighthouse-steamvr
@@ -293,6 +295,7 @@ in
       corectrl
       gamemode
       openxr-loader
+      libusb1
 
       (pkgs.makeDesktopItem {
         name = "start monado/steamvr";
