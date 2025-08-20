@@ -61,9 +61,13 @@ in
       nix-index
       nix-prefetch-git
       nix-output-monitor
-      # flake-checker # FIXME 20241126 fails to build with 24.11
+      flake-checker # FIXME 20241126 fails to build with 24.11
       snowfallorg.drift
+      snowfallorg.flake
       nurl
+      neovim
+      htop
+      wget
     ];
 
     nix =

@@ -31,6 +31,8 @@ with lib.${namespace};
 
   environment.systemPackages = with pkgs; [
     # vivaldi
+    plusultra.neovim
+    neovide
   ];
 
   nix.settings.trusted-users = [ "root" "coldelectrons"];

@@ -20,6 +20,8 @@ python3.pkgs.buildPythonPackage rec {
   '';
 
   doCheck = false;
+  pyproject = true;
+  build-system = [ python3.pkgs.setuptools ];
 
   meta = with lib; {
     homepage = "https://github.com/carlosefr/mdns-publisher";

@@ -157,10 +157,6 @@ with lib.${namespace};
     ];
   };
 
-  services.udev.packages = with pkgs; [ plusultra.laser-usb-udev-rules ];
-
-  services.snap.enable = true;
-  
     # Force radv
   environment.variables = {
     # Don't use this per https://gitlab.com/vr-on-linux/VR-on-Linux/-/issues/23#note_1472796145

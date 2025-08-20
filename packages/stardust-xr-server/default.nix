@@ -1,18 +1,18 @@
-{
-  lib,
-  fetchFromGitHub,
-  nix-update-script,
-  rustPlatform,
-  cmake,
-  cpm-cmake,
-  fontconfig,
-  libGL,
-  libxkbcommon,
-  libgbm,
-  openxr-loader,
-  pkg-config,
-  xorg,
-  libuuid,
+{ lib
+, fetchFromGitHub
+, nix-update-script
+, rustPlatform
+, cmake
+, cpm-cmake
+, fontconfig
+, libGL
+, libxkbcommon
+, libgbm
+, openxr-loader
+, pkg-config
+, xorg
+, libuuid
+,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -26,7 +26,6 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-sCatpWDdy7NFWOWUARjN3fZMDVviX2iV79G0HTxfYZU=";
   };
 
-  useFetchCargoVendor = true;
   cargoHash = "sha256-jCtMCZG3ku30tabTnVdGfgcLl5DoqhkJpLKPPliJgDU=";
 
   nativeBuildInputs = [

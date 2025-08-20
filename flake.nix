@@ -10,9 +10,16 @@
     stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     # Lix
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
+    lix = {
+      #url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
+      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    lix-module = {
+      #url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.lix.follows = "lix";
     };
 
     # Home Manager
@@ -71,8 +78,8 @@
 
     # TODO LATER
     # Neovim
-    # neovim.url = "github:coldelectrons/neovim";
-    # neovim.inputs.nixpkgs.follows = "unstable";
+    neovim.url = "github:coldelectrons/neovim";
+    neovim.inputs.nixpkgs.follows = "nixpkgs";
 
     # Tmux
     # tmux.url = "github:coldelectrons/tmux";
@@ -192,6 +199,7 @@
           # lix-module.overlays.default
           # nix-comfyui.overlays.default
           inputs.umu.overlays.default
+          neovim.overlays.default
         ];
 
         systems.modules.nixos = with inputs; [
