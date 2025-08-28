@@ -62,7 +62,7 @@ with lib.${namespace};
 
     openshot-qt
     lightworks
-flowblade
+    flowblade
     olive-editor
     shotcut
     pitivi
@@ -80,6 +80,11 @@ flowblade
     kew # terminal music player
 
     # inputs.umu.packages.${system}.default
+
+    luanti
+
+    geeqie
+
   ];
 
   services.urserver.enable = true;

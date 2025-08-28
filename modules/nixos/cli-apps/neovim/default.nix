@@ -23,7 +23,7 @@ in
       # page
       # TODO see what Jake did for his neovim
       # plusultra.neovim
-      neovim
+      plusultra.neovim
     ];
 
     environment.variables = {

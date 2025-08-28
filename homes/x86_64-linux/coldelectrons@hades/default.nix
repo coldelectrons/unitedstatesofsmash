@@ -62,7 +62,6 @@ with lib.${namespace};
   home.packages = with pkgs; [
     pipx
     bash
-    pipeworld
   ];
 
   programs.gallery-dl = {
@@ -75,7 +74,7 @@ with lib.${namespace};
   home.sessionPath = [ "$HOME/bin" ];
 
    home.sessionVariables = {
-    EDITOR = "lvim";
+    EDITOR = "nvim";
     TERM = "kitty";
     BROWSER = "vivaldi";
 

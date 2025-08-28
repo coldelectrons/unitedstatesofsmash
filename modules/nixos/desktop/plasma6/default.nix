@@ -79,7 +79,7 @@ in
         kdePackages.ffmpegthumbs
         # xwaylandvideobridge # why need this??
         kdePackages.qtwayland
-        strawberry-qt6
+        # strawberry-qt6
         # TODO move this to app module
         kdePackages.skanlite
         # paperwork
